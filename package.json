@@ -7,13 +7,16 @@
     "start": "next start",
     "lint": "next lint",
     "start:dev": "next dev",
-    "generate": "graphql-codegen --config codegen.yml --watch",
+    "generate": "cross-env DOTENV_CONFIG_PATH=.env.local graphql-codegen -r dotenv/config --config codegen.yml --watch",
     "dev": "concurrently \"npm:start:dev\" \"npm:generate\""
   },
   "dependencies": {
+    "@apollo/client": "^3.3.21",
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
     "next": "11.0.1",

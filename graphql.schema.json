@@ -5811,39 +5811,6 @@
             "deprecationReason": null
           },
           {
-            "name": "place",
-            "description": null,
-            "args": [
-              {
-                "name": "locales",
-                "description": "Allows to optionally override locale filtering behaviour in the query's subtree.\n\nNote that `place` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument will overwrite any existing locale filtering defined in the query's tree for the subtree.",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "Locale",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Place",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "people",
             "description": null,
             "args": [
@@ -5973,12 +5940,12 @@
             "deprecationReason": null
           },
           {
-            "name": "pricing",
+            "name": "place",
             "description": null,
             "args": [
               {
                 "name": "locales",
-                "description": "Allows to optionally override locale filtering behaviour in the query's subtree.\n\nNote that `pricing` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument will overwrite any existing locale filtering defined in the query's tree for the subtree.",
+                "description": "Allows to optionally override locale filtering behaviour in the query's subtree.\n\nNote that `place` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument will overwrite any existing locale filtering defined in the query's tree for the subtree.",
                 "type": {
                   "kind": "LIST",
                   "name": null,
@@ -5999,7 +5966,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Pricing",
+              "name": "Place",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6033,6 +6000,39 @@
             "type": {
               "kind": "OBJECT",
               "name": "Place",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pricing",
+            "description": null,
+            "args": [
+              {
+                "name": "locales",
+                "description": "Allows to optionally override locale filtering behaviour in the query's subtree.\n\nNote that `pricing` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument will overwrite any existing locale filtering defined in the query's tree for the subtree.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "Locale",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Pricing",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6344,18 +6344,6 @@
             "deprecationReason": null
           },
           {
-            "name": "place",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PlaceCreateOneInlineInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "people",
             "description": null,
             "type": {
@@ -6368,11 +6356,11 @@
             "deprecationReason": null
           },
           {
-            "name": "pricing",
+            "name": "place",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PricingCreateOneInlineInput",
+              "name": "PlaceCreateOneInlineInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -6385,6 +6373,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PlaceCreateOneInlineInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pricing",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PricingCreateOneInlineInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -7508,18 +7508,6 @@
             "deprecationReason": null
           },
           {
-            "name": "place",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PlaceWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "people_every",
             "description": null,
             "type": {
@@ -7556,11 +7544,11 @@
             "deprecationReason": null
           },
           {
-            "name": "pricing",
+            "name": "place",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PricingWhereInput",
+              "name": "PlaceWhereInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -7573,6 +7561,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PlaceWhereInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pricing",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PricingWhereInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -7927,18 +7927,6 @@
             "deprecationReason": null
           },
           {
-            "name": "place",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PlaceUpdateOneInlineInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "people",
             "description": null,
             "type": {
@@ -7951,11 +7939,11 @@
             "deprecationReason": null
           },
           {
-            "name": "pricing",
+            "name": "place",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PricingUpdateOneInlineInput",
+              "name": "PlaceUpdateOneInlineInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -7968,6 +7956,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PlaceUpdateOneInlineInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pricing",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PricingUpdateOneInlineInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9443,18 +9443,6 @@
             "deprecationReason": null
           },
           {
-            "name": "place",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PlaceWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "people_every",
             "description": null,
             "type": {
@@ -9491,11 +9479,11 @@
             "deprecationReason": null
           },
           {
-            "name": "pricing",
+            "name": "place",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PricingWhereInput",
+              "name": "PlaceWhereInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9508,6 +9496,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PlaceWhereInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pricing",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PricingWhereInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -24474,7 +24474,7 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
+            "name": "address",
             "description": null,
             "args": [],
             "type": {
@@ -24490,7 +24490,7 @@
             "deprecationReason": null
           },
           {
-            "name": "address",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
@@ -24983,7 +24983,7 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
+            "name": "address",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -24999,7 +24999,7 @@
             "deprecationReason": null
           },
           {
-            "name": "address",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -25875,142 +25875,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not",
-            "description": "All values that are not equal to given value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_in",
-            "description": "All values that are contained in given list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_in",
-            "description": "All values that are not contained in given list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_contains",
-            "description": "All values containing the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_contains",
-            "description": "All values not containing the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_starts_with",
-            "description": "All values starting with the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_starts_with",
-            "description": "All values not starting with the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_ends_with",
-            "description": "All values ending with the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_ends_with",
-            "description": "All values not ending with the given string",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "address",
             "description": null,
             "type": {
@@ -26136,6 +26000,142 @@
           },
           {
             "name": "address_not_ends_with",
+            "description": "All values not ending with the given string",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not",
+            "description": "All values that are not equal to given value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_in",
+            "description": "All values that are contained in given list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_in",
+            "description": "All values that are not contained in given list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_contains",
+            "description": "All values containing the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_contains",
+            "description": "All values not containing the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_starts_with",
+            "description": "All values starting with the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_starts_with",
+            "description": "All values not starting with the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_ends_with",
+            "description": "All values ending with the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_ends_with",
             "description": "All values not ending with the given string",
             "type": {
               "kind": "SCALAR",
@@ -26292,18 +26292,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "address_ASC",
             "description": null,
             "isDeprecated": false,
@@ -26311,6 +26299,18 @@
           },
           {
             "name": "address_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -26349,7 +26349,7 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
+            "name": "address",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -26361,7 +26361,7 @@
             "deprecationReason": null
           },
           {
-            "name": "address",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -26595,7 +26595,7 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
+            "name": "address",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -26607,7 +26607,7 @@
             "deprecationReason": null
           },
           {
-            "name": "address",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -27565,142 +27565,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not",
-            "description": "All values that are not equal to given value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_in",
-            "description": "All values that are contained in given list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_in",
-            "description": "All values that are not contained in given list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_contains",
-            "description": "All values containing the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_contains",
-            "description": "All values not containing the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_starts_with",
-            "description": "All values starting with the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_starts_with",
-            "description": "All values not starting with the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_ends_with",
-            "description": "All values ending with the given string.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description_not_ends_with",
-            "description": "All values not ending with the given string",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "address",
             "description": null,
             "type": {
@@ -27826,6 +27690,142 @@
           },
           {
             "name": "address_not_ends_with",
+            "description": "All values not ending with the given string",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not",
+            "description": "All values that are not equal to given value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_in",
+            "description": "All values that are contained in given list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_in",
+            "description": "All values that are not contained in given list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_contains",
+            "description": "All values containing the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_contains",
+            "description": "All values not containing the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_starts_with",
+            "description": "All values starting with the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_starts_with",
+            "description": "All values not starting with the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_ends_with",
+            "description": "All values ending with the given string.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description_not_ends_with",
             "description": "All values not ending with the given string",
             "type": {
               "kind": "SCALAR",

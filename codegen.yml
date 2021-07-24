@@ -1,5 +1,8 @@
 overwrite: true
-schema: "https://api-us-east-1.graphcms.com/v2/cklwld2ufkgpf01yw34u04cmp/master"
+schema:
+  - ${GRAPH_CMS_ENDPOINT_URL}:
+      headers:
+        Authorization: "Bearer ${GRAPH_CMS_AUTH_TOKEN}"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.tsx:
