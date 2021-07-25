@@ -1,5 +1,12 @@
 import { FunctionComponent } from "react";
-import { Box, Container, Grid, GridItem, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Grid,
+  GridItem,
+  Icon,
+  VisuallyHidden,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { IconType } from "react-icons";
 import Link, { LinkProps } from "./Link";
@@ -27,27 +34,18 @@ const Layout: FunctionComponent<LayoutProps> = ({
 }) => {
   return (
     <Box>
-      <Grid
-        shadow="sm"
-        autoFlow="column"
-        justifyItems="center"
-        alignItems="center"
-        as="nav"
-      >
-        <GridItem justifySelf="start">
-          <Link variant="navigation" {...logoLink}>
-            <Image src={logoLink.imageSrc} width={50} height={50} />
-          </Link>
-        </GridItem>
+      <Grid shadow="sm" autoFlow="column">
+        <Link justifySelf="start" variant="navigation" {...logoLink}>
+          <Image src={logoLink.imageSrc} width={50} height={50} />
+        </Link>
         <Grid
           gap={10}
           autoFlow="column"
           justifySelf="stretch"
           justifyContent="space-between"
           overflowX="auto"
-          height="full"
         >
-          <Grid autoFlow="column" gap={{ base: 2, md: 10 }}>
+          <Grid as="nav" autoFlow="column" gap={{ base: 2, md: 10 }}>
             {centerLinks.map((link) => (
               <Link variant="navigation" {...link}>
                 <Icon as={link.icon} />
@@ -57,19 +55,15 @@ const Layout: FunctionComponent<LayoutProps> = ({
           </Grid>
           <Grid autoFlow="column" justifySelf="end">
             {rightLinks.map((link) => (
-              <Link
-                variant="navigation"
-                aria-label={link.text}
-                isExternal
-                {...link}
-              >
+              <Link variant="navigation" isExternal {...link}>
+                <VisuallyHidden>{link.text}</VisuallyHidden>
                 <Icon as={link.icon} />
               </Link>
             ))}
           </Grid>
         </Grid>
       </Grid>
-      <Container maxWidth="4xl">{children}</Container>
+      <Box>{children}</Box>
     </Box>
   );
 };
