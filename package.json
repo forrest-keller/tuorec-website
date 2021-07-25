@@ -4,11 +4,16 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "prestart": "npm run gen",
     "start": "next start",
     "lint": "next lint",
     "start:dev": "next dev",
-    "generate": "cross-env DOTENV_CONFIG_PATH=.env.local graphql-codegen -r dotenv/config --config codegen.yml --watch",
-    "dev": "concurrently \"npm:start:dev\" \"npm:generate\""
+    "gen": "npm run gen:graphql && npm run gen:chakraui",
+    "gen:graphql": "cross-env DOTENV_CONFIG_PATH=.env.local graphql-codegen -r dotenv/config --config codegen.yml",
+    "gen:chakraui": "chakra-cli tokens ./src/utilities/theme",
+    "gen:watch": "npm run gen:watch:graphql && npm run gen:chakraui",
+    "gen:watch:graphql": "npm run gen:graphql --watch",
+    "dev": "concurrently \"npm:start:dev\" \"npm:gen:watch\""
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
@@ -21,9 +26,11 @@
     "graphql": "^15.5.1",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0"
   },
   "devDependencies": {
+    "@chakra-ui/cli": "^1.5.0",
     "@graphql-codegen/cli": "1.21.7",
     "@graphql-codegen/introspection": "1.18.2",
     "@graphql-codegen/typescript": "1.23.0",
