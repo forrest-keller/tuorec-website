@@ -10,7 +10,7 @@ const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <ChakraProvider theme={theme}>
       <Layout
-        logoLink={{ imageSrc: "/favicon.ico", href: "/" }}
+        logoLink={{ imageSrc: "/logo.webp", href: "/" }}
         centerLinks={[
           { text: "Gear", icon: GiBoots, href: "/products" },
           { text: "Events", icon: GiCalendar, href: "/events" },

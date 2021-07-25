@@ -34,7 +34,11 @@ const Layout: FunctionComponent<LayoutProps> = ({
 }) => {
   return (
     <Box>
-      <Grid shadow="sm" autoFlow="column">
+      <Grid
+        shadow="sm"
+        autoFlow="column"
+        paddingX={{ base: "initial", md: 10 }}
+      >
         <Link justifySelf="start" variant="navigation" {...logoLink}>
           <Image src={logoLink.imageSrc} width={50} height={50} />
         </Link>
