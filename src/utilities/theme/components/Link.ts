@@ -11,6 +11,9 @@ const link: ComponentStyleConfig = {
     _hover: {
       color: `${colorScheme}.400`,
     },
+    _focus: {
+      color: `${colorScheme}.400`,
+    },
   }),
   variants: {
     primary: {},
@@ -19,6 +22,9 @@ const link: ComponentStyleConfig = {
       fontSize: "xl",
       fontWeight: "bold",
       color: `blackAlpha.700`,
+      _hover: {
+        textDecoration: "none",
+      },
     }),
   },
   defaultProps: {
