@@ -5,3 +5,5 @@ export * from "./product";
 export * from "./product-list";
 export * from "./card";
 export * from "./rich-text";
+export * from "./post";
+export * from "./posts-list";

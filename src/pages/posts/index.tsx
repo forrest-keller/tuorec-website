@@ -1,5 +1,5 @@
 import { Container, Grid, Heading } from "@chakra-ui/react";
-import { PostsList } from "components/posts-list";
+import { PostsList } from "components";
 import { PostOrderByInput, usePostsListQuery } from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
