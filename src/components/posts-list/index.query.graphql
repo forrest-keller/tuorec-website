@@ -1,0 +1,13 @@
+query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
+  postsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
+    edges {
+      cursor
+      node {
+        ...Post
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}

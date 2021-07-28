@@ -2,7 +2,7 @@ import { SystemStyleObjectRecord } from "@chakra-ui/react";
 
 export const layerStyles: SystemStyleObjectRecord = {
   card: {
-    shadow: "md",
+    shadow: "sm",
     rounded: "sm",
     padding: 5,
   },
