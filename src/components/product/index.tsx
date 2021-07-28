@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FunctionComponent } from "react";
 
 export const Product: FunctionComponent<ProductFragment> = ({
+  id,
   name,
   description,
   pricings,
@@ -14,6 +15,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
 }) => {
   return (
     <Card
+      href={`/product/${id}`}
       title={name}
       description={description}
       photo={
@@ -25,7 +27,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
           layout="responsive"
         />
       }
-      rightElements={pricings.map((pricing) => (
+      topRightElements={pricings.map((pricing) => (
         <Pricing {...pricing} />
       ))}
     />

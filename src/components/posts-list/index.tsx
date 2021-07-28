@@ -28,9 +28,7 @@ export const PostsList: FunctionComponent<PostsListProps> = ({
   return (
     <Grid gap={5}>
       {data?.postsConnection.edges.map(({ node }) => (
-        <SlideFade in={true}>
-          <Post key={node.id} {...node} />
-        </SlideFade>
+        <Post key={node.id} {...node} />
       ))}
       {data?.postsConnection.pageInfo.hasNextPage ? (
         <Skeleton ref={sentryRef} height="200px" />

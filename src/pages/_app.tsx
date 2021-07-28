@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
-import { GiBoots, GiCalendar, GiMailbox } from "react-icons/gi";
+import { GiBoots, GiCalendar, GiCampingTent, GiMailbox } from "react-icons/gi";
 import { AiFillFacebook, AiFillInstagram, AiFillMail } from "react-icons/ai";
 import { ApolloProvider } from "@apollo/client";
 import { Layout } from "components";
@@ -13,7 +13,12 @@ const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
         <Layout
           logoLink={{ imageSrc: "/logo.webp", href: "/" }}
           centerLinks={[
-            { key: "gear", text: "Gear", icon: GiBoots, href: "/products" },
+            {
+              key: "gear",
+              text: "Gear",
+              icon: GiCampingTent,
+              href: "/products",
+            },
             {
               key: "events",
               text: "Events",

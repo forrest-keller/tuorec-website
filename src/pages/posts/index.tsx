@@ -30,7 +30,7 @@ const PostsPage = () => {
     <Container>
       <Grid gap={10}>
         <Heading variant="h1" as="h1">
-          Gear
+          Posts
         </Heading>
         <PostsList
           postsListQueryHookResult={postsListQueryResult}

@@ -36,9 +36,7 @@ export const ProductList: FunctionComponent<ProductListProps> = ({
   return (
     <Grid gap={5}>
       {data?.productsConnection.edges.map(({ node }) => (
-        <SlideFade in={true}>
-          <Product key={node.id} {...node} />
-        </SlideFade>
+        <Product key={node.id} {...node} />
       ))}
       {data?.productsConnection.pageInfo.hasNextPage ? (
         <Skeleton ref={sentryRef} height="200px" />
