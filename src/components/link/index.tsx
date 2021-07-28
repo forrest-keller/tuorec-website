@@ -9,7 +9,7 @@ export interface LinkProps
   extends Omit<ChakraLinkProps, "as" | "href">,
     Omit<NextLinkProps, "passHref"> {}
 
-const Link: FunctionComponent<LinkProps> = ({
+export const Link: FunctionComponent<LinkProps> = ({
   href,
   as,
   children,
@@ -21,5 +21,3 @@ const Link: FunctionComponent<LinkProps> = ({
     </NextLink>
   );
 };
-
-export default Link;

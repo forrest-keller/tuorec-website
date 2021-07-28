@@ -9,25 +9,25 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { IconType } from "react-icons";
-import Link, { LinkProps } from "./Link";
+import { Link, LinkProps } from "../link";
 
-interface LayoutLink extends LinkProps {
+export interface LayoutLink extends LinkProps {
   text: string;
   icon: IconType;
 }
 
-interface LayoutLogoLink extends LinkProps {
+export interface LayoutLogoLink extends LinkProps {
   imageSrc: string;
 }
 
-interface LayoutProps {
+export interface LayoutProps {
   logoLink: LayoutLogoLink;
   centerLinks: LayoutLink[];
   rightLinks: LayoutLink[];
 }
 
-const Layout: FunctionComponent<LayoutProps> = ({
-  logoLink,
+export const Layout: FunctionComponent<LayoutProps> = ({
+  logoLink: { imageSrc: logoLinkImageSrc, ...logoLinkRest },
   centerLinks,
   rightLinks,
   children,
@@ -39,8 +39,8 @@ const Layout: FunctionComponent<LayoutProps> = ({
         autoFlow="column"
         paddingX={{ base: "initial", md: 10 }}
       >
-        <Link justifySelf="start" variant="navigation" {...logoLink}>
-          <Image src={logoLink.imageSrc} width={50} height={50} />
+        <Link justifySelf="start" variant="navigation" {...logoLinkRest}>
+          <Image src={logoLinkImageSrc} width={50} height={50} />
         </Link>
         <Grid
           gap={10}
@@ -50,18 +50,18 @@ const Layout: FunctionComponent<LayoutProps> = ({
           overflowX="auto"
         >
           <Grid as="nav" autoFlow="column" gap={{ base: 2, md: 10 }}>
-            {centerLinks.map((link) => (
-              <Link variant="navigation" {...link}>
-                <Icon as={link.icon} />
-                {link.text}
+            {centerLinks.map(({ key, icon, text, ...rest }) => (
+              <Link key={key} variant="navigation" {...rest}>
+                <Icon as={icon} />
+                {text}
               </Link>
             ))}
           </Grid>
           <Grid autoFlow="column" justifySelf="end">
-            {rightLinks.map((link) => (
-              <Link variant="navigation" isExternal {...link}>
-                <VisuallyHidden>{link.text}</VisuallyHidden>
-                <Icon as={link.icon} />
+            {rightLinks.map(({ key, text, icon, ...rest }) => (
+              <Link key={key} variant="navigation" isExternal {...rest}>
+                <VisuallyHidden>{text}</VisuallyHidden>
+                <Icon as={icon} />
               </Link>
             ))}
           </Grid>
@@ -71,6 +71,3 @@ const Layout: FunctionComponent<LayoutProps> = ({
     </Box>
   );
 };
-
-export default Layout;
-export type { LayoutProps };

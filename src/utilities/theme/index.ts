@@ -4,9 +4,10 @@ import {
   withDefaultColorScheme,
 } from "@chakra-ui/react";
 import components from "./components";
+import { layerStyles } from "./layerStyles";
 
-const theme = extendTheme(
-  { components },
+export const theme = extendTheme(
+  { components, layerStyles },
   withDefaultColorScheme({ colorScheme: "green" })
 );
 

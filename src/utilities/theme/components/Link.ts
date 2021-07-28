@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-const link: ComponentStyleConfig = {
+export const Link: ComponentStyleConfig = {
   baseStyle: ({ colorScheme }) => ({
     display: "grid",
     gridAutoFlow: "column",
@@ -31,5 +31,3 @@ const link: ComponentStyleConfig = {
     variant: "primary",
   },
 };
-
-export default link;

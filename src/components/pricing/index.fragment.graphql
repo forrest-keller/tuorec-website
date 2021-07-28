@@ -1,0 +1,5 @@
+fragment Pricing on Pricing {
+  id
+  price
+  period
+}
