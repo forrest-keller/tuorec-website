@@ -86,6 +86,7 @@ export type Asset = Node & {
   photoPerson: Array<Person>;
   photosPlace: Array<Place>;
   photoProduct: Array<Product>;
+  photoPost: Array<Post>;
   /** List of Asset versions */
   history: Array<Version>;
   /** Get the url for the asset with provided transformations applied. */
@@ -184,6 +185,19 @@ export type AssetPhotoProductArgs = {
 
 
 /** Asset system model */
+export type AssetPhotoPostArgs = {
+  where?: Maybe<PostWhereInput>;
+  orderBy?: Maybe<PostOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+/** Asset system model */
 export type AssetHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
@@ -225,6 +239,7 @@ export type AssetCreateInput = {
   photoPerson?: Maybe<PersonCreateManyInlineInput>;
   photosPlace?: Maybe<PlaceCreateManyInlineInput>;
   photoProduct?: Maybe<ProductCreateManyInlineInput>;
+  photoPost?: Maybe<PostCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: Maybe<AssetCreateLocalizationsInput>;
 };
@@ -360,6 +375,9 @@ export type AssetManyWhereInput = {
   photoProduct_every?: Maybe<ProductWhereInput>;
   photoProduct_some?: Maybe<ProductWhereInput>;
   photoProduct_none?: Maybe<ProductWhereInput>;
+  photoPost_every?: Maybe<PostWhereInput>;
+  photoPost_some?: Maybe<PostWhereInput>;
+  photoPost_none?: Maybe<PostWhereInput>;
 };
 
 export enum AssetOrderByInput {
@@ -403,6 +421,7 @@ export type AssetUpdateInput = {
   photoPerson?: Maybe<PersonUpdateManyInlineInput>;
   photosPlace?: Maybe<PlaceUpdateManyInlineInput>;
   photoProduct?: Maybe<ProductUpdateManyInlineInput>;
+  photoPost?: Maybe<PostUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: Maybe<AssetUpdateLocalizationsInput>;
 };
@@ -713,6 +732,9 @@ export type AssetWhereInput = {
   photoProduct_every?: Maybe<ProductWhereInput>;
   photoProduct_some?: Maybe<ProductWhereInput>;
   photoProduct_none?: Maybe<ProductWhereInput>;
+  photoPost_every?: Maybe<PostWhereInput>;
+  photoPost_some?: Maybe<PostWhereInput>;
+  photoPost_none?: Maybe<PostWhereInput>;
 };
 
 /** References Asset record uniquely */
@@ -4021,6 +4043,7 @@ export type Post = Node & {
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   title: Scalars['String'];
+  description: Scalars['String'];
   content: PostContentRichText;
   /** User that created this document */
   createdBy?: Maybe<User>;
@@ -4028,6 +4051,8 @@ export type Post = Node & {
   updatedBy?: Maybe<User>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
+  photo: Asset;
+  displayLocations: Array<WebsiteLocations>;
   /** List of Post versions */
   history: Array<Version>;
 };
@@ -4051,6 +4076,11 @@ export type PostUpdatedByArgs = {
 
 
 export type PostPublishedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type PostPhotoArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
@@ -4098,7 +4128,10 @@ export type PostCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   title: Scalars['String'];
+  description: Scalars['String'];
   content: Scalars['RichTextAST'];
+  photo: AssetCreateOneInlineInput;
+  displayLocations?: Maybe<Array<WebsiteLocations>>;
 };
 
 export type PostCreateManyInlineInput = {
@@ -4217,9 +4250,39 @@ export type PostManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
+  photo?: Maybe<AssetWhereInput>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  displayLocations?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  displayLocations_not?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  displayLocations_contains_all?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  displayLocations_contains_some?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  displayLocations_contains_none?: Maybe<Array<WebsiteLocations>>;
 };
 
 export enum PostOrderByInput {
@@ -4232,12 +4295,19 @@ export enum PostOrderByInput {
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  DisplayLocationsAsc = 'displayLocations_ASC',
+  DisplayLocationsDesc = 'displayLocations_DESC'
 }
 
 export type PostUpdateInput = {
   title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
+  photo?: Maybe<AssetUpdateOneInlineInput>;
+  displayLocations?: Maybe<Array<WebsiteLocations>>;
 };
 
 export type PostUpdateManyInlineInput = {
@@ -4259,7 +4329,9 @@ export type PostUpdateManyInlineInput = {
 
 export type PostUpdateManyInput = {
   title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
+  displayLocations?: Maybe<Array<WebsiteLocations>>;
 };
 
 export type PostUpdateManyWithNestedWhereInput = {
@@ -4398,9 +4470,39 @@ export type PostWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
+  photo?: Maybe<AssetWhereInput>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  displayLocations?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  displayLocations_not?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  displayLocations_contains_all?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  displayLocations_contains_some?: Maybe<Array<WebsiteLocations>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  displayLocations_contains_none?: Maybe<Array<WebsiteLocations>>;
 };
 
 /** References Post record uniquely */
@@ -4430,7 +4532,7 @@ export type Pricing = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   /** Ex: $5 per day */
-  period?: Maybe<TimePeriod>;
+  period?: Maybe<TimePeriods>;
   /** List of Pricing versions */
   history: Array<Version>;
 };
@@ -4487,7 +4589,7 @@ export type PricingCreateInput = {
   price: Scalars['Float'];
   ckri22ju50nor01z1eg7e0ozn?: Maybe<ProductCreateManyInlineInput>;
   ckri2yveq0q1l01xsdys4ev3n?: Maybe<EventCreateManyInlineInput>;
-  period?: Maybe<TimePeriod>;
+  period?: Maybe<TimePeriods>;
 };
 
 export type PricingCreateManyInlineInput = {
@@ -4605,13 +4707,13 @@ export type PricingManyWhereInput = {
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
-  period?: Maybe<TimePeriod>;
+  period?: Maybe<TimePeriods>;
   /** All values that are not equal to given value. */
-  period_not?: Maybe<TimePeriod>;
+  period_not?: Maybe<TimePeriods>;
   /** All values that are contained in given list. */
-  period_in?: Maybe<Array<TimePeriod>>;
+  period_in?: Maybe<Array<TimePeriods>>;
   /** All values that are not contained in given list. */
-  period_not_in?: Maybe<Array<TimePeriod>>;
+  period_not_in?: Maybe<Array<TimePeriods>>;
 };
 
 export enum PricingOrderByInput {
@@ -4633,7 +4735,7 @@ export type PricingUpdateInput = {
   price?: Maybe<Scalars['Float']>;
   ckri22ju50nor01z1eg7e0ozn?: Maybe<ProductUpdateManyInlineInput>;
   ckri2yveq0q1l01xsdys4ev3n?: Maybe<EventUpdateManyInlineInput>;
-  period?: Maybe<TimePeriod>;
+  period?: Maybe<TimePeriods>;
 };
 
 export type PricingUpdateManyInlineInput = {
@@ -4655,7 +4757,7 @@ export type PricingUpdateManyInlineInput = {
 
 export type PricingUpdateManyInput = {
   price?: Maybe<Scalars['Float']>;
-  period?: Maybe<TimePeriod>;
+  period?: Maybe<TimePeriods>;
 };
 
 export type PricingUpdateManyWithNestedWhereInput = {
@@ -4793,13 +4895,13 @@ export type PricingWhereInput = {
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
-  period?: Maybe<TimePeriod>;
+  period?: Maybe<TimePeriods>;
   /** All values that are not equal to given value. */
-  period_not?: Maybe<TimePeriod>;
+  period_not?: Maybe<TimePeriods>;
   /** All values that are contained in given list. */
-  period_in?: Maybe<Array<TimePeriod>>;
+  period_in?: Maybe<Array<TimePeriods>>;
   /** All values that are not contained in given list. */
-  period_not_in?: Maybe<Array<TimePeriod>>;
+  period_not_in?: Maybe<Array<TimePeriods>>;
 };
 
 /** References Pricing record uniquely */
@@ -4823,6 +4925,7 @@ export type Product = Node & {
   publishedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   content: ProductContentRichText;
+  description: Scalars['String'];
   /** User that created this document */
   createdBy?: Maybe<User>;
   /** User that last updated this document */
@@ -4919,6 +5022,7 @@ export type ProductCreateInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   content: Scalars['RichTextAST'];
+  description: Scalars['String'];
   photo: AssetCreateOneInlineInput;
   pricings?: Maybe<PricingCreateManyInlineInput>;
 };
@@ -5039,6 +5143,25 @@ export type ProductManyWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
@@ -5058,12 +5181,15 @@ export enum ProductOrderByInput {
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC'
+  NameDesc = 'name_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC'
 }
 
 export type ProductUpdateInput = {
   name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
+  description?: Maybe<Scalars['String']>;
   photo?: Maybe<AssetUpdateOneInlineInput>;
   pricings?: Maybe<PricingUpdateManyInlineInput>;
 };
@@ -5088,6 +5214,7 @@ export type ProductUpdateManyInlineInput = {
 export type ProductUpdateManyInput = {
   name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
+  description?: Maybe<Scalars['String']>;
 };
 
 export type ProductUpdateManyWithNestedWhereInput = {
@@ -5226,6 +5353,25 @@ export type ProductWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
@@ -5714,7 +5860,7 @@ export enum SystemDateTimeFieldVariation {
   Combined = 'COMBINED'
 }
 
-export enum TimePeriod {
+export enum TimePeriods {
   Hour = 'hour',
   Day = 'day',
   Week = 'week'
@@ -6106,6 +6252,14 @@ export type VersionWhereInput = {
   revision: Scalars['Int'];
 };
 
+export enum WebsiteLocations {
+  Home = 'home',
+  Gear = 'gear',
+  Events = 'events',
+  Posts = 'posts',
+  Banner = 'banner'
+}
+
 export enum _FilterKind {
   Search = 'search',
   And = 'AND',
@@ -6183,6 +6337,40 @@ export enum _SystemDateTimeFieldVariation {
   Combined = 'combined'
 }
 
+export type PostFragment = (
+  { __typename?: 'Post' }
+  & Pick<Post, 'id' | 'title' | 'description'>
+  & { photo: (
+    { __typename?: 'Asset' }
+    & Pick<Asset, 'url'>
+  ) }
+);
+
+export type PostsListQueryVariables = Exact<{
+  first: Scalars['Int'];
+  skip: Scalars['Int'];
+  orderBy: PostOrderByInput;
+}>;
+
+
+export type PostsListQuery = (
+  { __typename?: 'Query' }
+  & { postsConnection: (
+    { __typename?: 'PostConnection' }
+    & { edges: Array<(
+      { __typename?: 'PostEdge' }
+      & Pick<PostEdge, 'cursor'>
+      & { node: (
+        { __typename?: 'Post' }
+        & PostFragment
+      ) }
+    )>, pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage'>
+    ) }
+  ) }
+);
+
 export type PricingFragment = (
   { __typename?: 'Pricing' }
   & Pick<Pricing, 'id' | 'price' | 'period'>
@@ -6215,16 +6403,13 @@ export type ProductListQuery = (
 
 export type ProductFragment = (
   { __typename?: 'Product' }
-  & Pick<Product, 'id' | 'name'>
+  & Pick<Product, 'id' | 'name' | 'description'>
   & { pricings: Array<(
     { __typename?: 'Pricing' }
     & PricingFragment
   )>, photo: (
     { __typename?: 'Asset' }
     & Pick<Asset, 'url'>
-  ), content: (
-    { __typename?: 'ProductContentRichText' }
-    & Pick<ProductContentRichText, 'json'>
   ) }
 );
 
@@ -6526,7 +6711,7 @@ export type ResolversTypes = {
   RichTextAST: ResolverTypeWrapper<Scalars['RichTextAST']>;
   Stage: Stage;
   SystemDateTimeFieldVariation: SystemDateTimeFieldVariation;
-  TimePeriod: TimePeriod;
+  TimePeriods: TimePeriods;
   UnpublishLocaleInput: UnpublishLocaleInput;
   User: ResolverTypeWrapper<User>;
   UserConnectInput: UserConnectInput;
@@ -6543,6 +6728,7 @@ export type ResolversTypes = {
   UserWhereUniqueInput: UserWhereUniqueInput;
   Version: ResolverTypeWrapper<Version>;
   VersionWhereInput: VersionWhereInput;
+  WebsiteLocations: WebsiteLocations;
   _FilterKind: _FilterKind;
   _MutationInputFieldKind: _MutationInputFieldKind;
   _MutationKind: _MutationKind;
@@ -6871,6 +7057,7 @@ export type AssetResolvers<ContextType = any, ParentType extends ResolversParent
   photoPerson?: Resolver<Array<ResolversTypes['Person']>, ParentType, ContextType, RequireFields<AssetPhotoPersonArgs, never>>;
   photosPlace?: Resolver<Array<ResolversTypes['Place']>, ParentType, ContextType, RequireFields<AssetPhotosPlaceArgs, never>>;
   photoProduct?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<AssetPhotoProductArgs, never>>;
+  photoPost?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<AssetPhotoPostArgs, never>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<AssetHistoryArgs, 'limit' | 'skip'>>;
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<AssetUrlArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -7262,10 +7449,13 @@ export type PostResolvers<ContextType = any, ParentType extends ResolversParentT
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['PostContentRichText'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<PostCreatedByArgs, never>>;
   updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<PostUpdatedByArgs, never>>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<PostPublishedByArgs, never>>;
+  photo?: Resolver<ResolversTypes['Asset'], ParentType, ContextType, RequireFields<PostPhotoArgs, never>>;
+  displayLocations?: Resolver<Array<ResolversTypes['WebsiteLocations']>, ParentType, ContextType>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<PostHistoryArgs, 'limit' | 'skip'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -7308,7 +7498,7 @@ export type PricingResolvers<ContextType = any, ParentType extends ResolversPare
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<PricingCreatedByArgs, never>>;
   updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<PricingUpdatedByArgs, never>>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<PricingPublishedByArgs, never>>;
-  period?: Resolver<Maybe<ResolversTypes['TimePeriod']>, ParentType, ContextType>;
+  period?: Resolver<Maybe<ResolversTypes['TimePeriods']>, ParentType, ContextType>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<PricingHistoryArgs, 'limit' | 'skip'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -7335,6 +7525,7 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['ProductContentRichText'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<ProductCreatedByArgs, never>>;
   updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<ProductUpdatedByArgs, never>>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<ProductPublishedByArgs, never>>;
@@ -7554,6 +7745,16 @@ export type DirectiveResolvers<ContextType = any> = {
  * Use "DirectiveResolvers" root object instead. If you wish to get "IDirectiveResolvers", add "typesPrefix: I" to your config.
  */
 export type IDirectiveResolvers<ContextType = any> = DirectiveResolvers<ContextType>;
+export const PostFragmentDoc = gql`
+    fragment Post on Post {
+  id
+  title
+  description
+  photo {
+    url
+  }
+}
+    `;
 export const PricingFragmentDoc = gql`
     fragment Pricing on Pricing {
   id
@@ -7565,17 +7766,60 @@ export const ProductFragmentDoc = gql`
     fragment Product on Product {
   id
   name
+  description
   pricings {
     ...Pricing
   }
   photo {
     url
   }
-  content {
-    json
-  }
 }
     ${PricingFragmentDoc}`;
+export const PostsListDocument = gql`
+    query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
+  postsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
+    edges {
+      cursor
+      node {
+        ...Post
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+    ${PostFragmentDoc}`;
+
+/**
+ * __usePostsListQuery__
+ *
+ * To run a query within a React component, call `usePostsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsListQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function usePostsListQuery(baseOptions: Apollo.QueryHookOptions<PostsListQuery, PostsListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PostsListQuery, PostsListQueryVariables>(PostsListDocument, options);
+      }
+export function usePostsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsListQuery, PostsListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PostsListQuery, PostsListQueryVariables>(PostsListDocument, options);
+        }
+export type PostsListQueryHookResult = ReturnType<typeof usePostsListQuery>;
+export type PostsListLazyQueryHookResult = ReturnType<typeof usePostsListLazyQuery>;
+export type PostsListQueryResult = Apollo.QueryResult<PostsListQuery, PostsListQueryVariables>;
 export const ProductListDocument = gql`
     query ProductList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
   productsConnection(first: $first, skip: $skip, orderBy: $orderBy) {

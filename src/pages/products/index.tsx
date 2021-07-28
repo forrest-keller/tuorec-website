@@ -1,15 +1,13 @@
-import { Container, Grid, Heading, Spinner } from "@chakra-ui/react";
+import { Container, Grid, Heading } from "@chakra-ui/react";
 import { ProductList } from "components";
 import { ProductOrderByInput, useProductListQuery } from "generated";
-import { useEffect } from "react";
-import { useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const ProductsPage = () => {
   const productListQueryResult = useProductListQuery({
     variables: {
       orderBy: ProductOrderByInput.UpdatedAtDesc,
-      first: 5,
+      first: 10,
       skip: 0,
     },
   });

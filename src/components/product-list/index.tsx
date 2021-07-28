@@ -3,6 +3,7 @@ import {
   Grid,
   GridItem,
   Skeleton,
+  SlideFade,
   Spinner,
   Text,
 } from "@chakra-ui/react";
@@ -20,8 +21,6 @@ export const ProductList: FunctionComponent<ProductListProps> = ({
   productListQueryHookResult: { loading, error, data },
   useInfiniteScrollHookResult: [sentryRef],
 }) => {
-  console.log(data?.productsConnection.pageInfo);
-
   if (loading) {
     return <Skeleton />;
   }
@@ -37,7 +36,9 @@ export const ProductList: FunctionComponent<ProductListProps> = ({
   return (
     <Grid gap={5}>
       {data?.productsConnection.edges.map(({ node }) => (
-        <Product key={node.id} {...node} />
+        <SlideFade in={true}>
+          <Product key={node.id} {...node} />
+        </SlideFade>
       ))}
       {data?.productsConnection.pageInfo.hasNextPage ? (
         <Skeleton ref={sentryRef} height="200px" />
