@@ -5,6 +5,7 @@ import {
   Heading,
   LinkBox,
   LinkOverlay,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import RoutingLink from "next/link";
@@ -13,11 +14,11 @@ import { FunctionComponent, ReactElement } from "react";
 export interface CardProps {
   href: string;
   title: string;
-  overTitleText?: string;
-  underTitleText?: string;
   description: string;
   photo: ReactElement;
   topRightElements?: ReactElement[];
+  overTitleElements?: ReactElement[];
+  underTitleElements?: ReactElement[];
 }
 
 export const Card: FunctionComponent<CardProps> = ({
@@ -25,8 +26,8 @@ export const Card: FunctionComponent<CardProps> = ({
   photo,
   description,
   topRightElements,
-  overTitleText,
-  underTitleText,
+  overTitleElements,
+  underTitleElements,
   href,
 }) => {
   return (
@@ -38,15 +39,15 @@ export const Card: FunctionComponent<CardProps> = ({
           templateColumns={{ sm: "1fr 3fr" }}
         >
           <GridItem>{photo}</GridItem>
-          <Box>
-            <Grid autoFlow={{ md: "column" }}>
-              <Box>
-                <Text color="blackAlpha.600">{overTitleText}</Text>
-                <Heading variant="h3" as="h2">
+          <Stack>
+            <Grid autoFlow={{ md: "column" }} gap={{ md: 5 }}>
+              <Stack>
+                <Stack direction="row">{overTitleElements}</Stack>
+                <Heading variant="h4" as="h2">
                   <LinkOverlay href={href}>{title}</LinkOverlay>
                 </Heading>
-                <Text>{underTitleText}</Text>
-              </Box>
+                <Stack direction="row">{underTitleElements}</Stack>
+              </Stack>
               <Grid
                 justifySelf={{ md: "right" }}
                 autoFlow="column"
@@ -57,7 +58,7 @@ export const Card: FunctionComponent<CardProps> = ({
               </Grid>
             </Grid>
             <Text>{description}</Text>
-          </Box>
+          </Stack>
         </Grid>
       </LinkBox>
     </RoutingLink>
