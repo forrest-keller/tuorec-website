@@ -1,0 +1,21 @@
+fragment Event on Event {
+  id
+  name
+  description
+  activities
+  startTime
+  endTime
+  photo {
+    url
+  }
+  pricing {
+    ...Pricing
+  }
+  place {
+    name
+    description
+    photos {
+      url
+    }
+  }
+}

@@ -1,0 +1,23 @@
+query EventsList(
+  $first: Int!
+  $skip: Int!
+  $orderBy: EventOrderByInput!
+  $startTimeAfter: DateTime!
+) {
+  eventsConnection(
+    first: $first
+    skip: $skip
+    orderBy: $orderBy
+    where: { startTime_gt: $startTimeAfter }
+  ) {
+    edges {
+      cursor
+      node {
+        ...Event
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}

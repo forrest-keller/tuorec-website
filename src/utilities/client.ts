@@ -1,8 +1,4 @@
 import { ApolloClient, FieldPolicy, InMemoryCache } from "@apollo/client";
-import {
-  offsetLimitPagination,
-  relayStylePagination,
-} from "@apollo/client/utilities";
 import { Aggregate, Maybe, PageInfo } from "generated/graphql";
 
 export interface ConnectionResult<T = unknown> {
@@ -27,6 +23,8 @@ export const client = new ApolloClient({
       Query: {
         fields: {
           productsConnection: mergeConnection(),
+          postsConnection: mergeConnection(),
+          eventsConnection: mergeConnection(),
         },
       },
     },

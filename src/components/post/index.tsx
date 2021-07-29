@@ -5,6 +5,7 @@ import { FunctionComponent } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { sentenceCase } from "change-case";
+import { Text } from "@chakra-ui/react";
 
 dayjs.extend(relativeTime);
 
@@ -15,12 +16,14 @@ export const Post: FunctionComponent<PostFragment> = ({
   description,
   createdAt,
 }) => {
+  const createdAtText = `${sentenceCase(dayjs().to(createdAt))}, ${dayjs(
+    createdAt
+  ).format("MMM D YYYY")}`;
+
   return (
     <Card
       href={`/posts/${id}`}
-      overTitleText={`${sentenceCase(dayjs().to(createdAt))}, ${dayjs(
-        createdAt
-      ).format("MMM D YYYY")}`}
+      overTitleElements={[<Text variant="subtle">{createdAtText}</Text>]}
       title={title}
       description={description}
       photo={

@@ -8,7 +8,7 @@ export const Pricing: FunctionComponent<PricingFragment> = ({
 }) => {
   return (
     <Stat>
-      <StatNumber>{`$${price.toFixed(2)}`}</StatNumber>
+      <StatNumber>{price > 0 ? `$${price.toFixed(2)}` : "Free"}</StatNumber>
       {period ? <StatHelpText>{`Per ${period}`}</StatHelpText> : null}
     </Stat>
   );

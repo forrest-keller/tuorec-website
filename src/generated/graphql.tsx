@@ -87,6 +87,7 @@ export type Asset = Node & {
   photosPlace: Array<Place>;
   photoProduct: Array<Product>;
   photoPost: Array<Post>;
+  photoEvent: Array<Event>;
   /** List of Asset versions */
   history: Array<Version>;
   /** Get the url for the asset with provided transformations applied. */
@@ -198,6 +199,19 @@ export type AssetPhotoPostArgs = {
 
 
 /** Asset system model */
+export type AssetPhotoEventArgs = {
+  where?: Maybe<EventWhereInput>;
+  orderBy?: Maybe<EventOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+/** Asset system model */
 export type AssetHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
@@ -240,6 +254,7 @@ export type AssetCreateInput = {
   photosPlace?: Maybe<PlaceCreateManyInlineInput>;
   photoProduct?: Maybe<ProductCreateManyInlineInput>;
   photoPost?: Maybe<PostCreateManyInlineInput>;
+  photoEvent?: Maybe<EventCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: Maybe<AssetCreateLocalizationsInput>;
 };
@@ -378,6 +393,9 @@ export type AssetManyWhereInput = {
   photoPost_every?: Maybe<PostWhereInput>;
   photoPost_some?: Maybe<PostWhereInput>;
   photoPost_none?: Maybe<PostWhereInput>;
+  photoEvent_every?: Maybe<EventWhereInput>;
+  photoEvent_some?: Maybe<EventWhereInput>;
+  photoEvent_none?: Maybe<EventWhereInput>;
 };
 
 export enum AssetOrderByInput {
@@ -422,6 +440,7 @@ export type AssetUpdateInput = {
   photosPlace?: Maybe<PlaceUpdateManyInlineInput>;
   photoProduct?: Maybe<ProductUpdateManyInlineInput>;
   photoPost?: Maybe<PostUpdateManyInlineInput>;
+  photoEvent?: Maybe<EventUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: Maybe<AssetUpdateLocalizationsInput>;
 };
@@ -735,6 +754,9 @@ export type AssetWhereInput = {
   photoPost_every?: Maybe<PostWhereInput>;
   photoPost_some?: Maybe<PostWhereInput>;
   photoPost_none?: Maybe<PostWhereInput>;
+  photoEvent_every?: Maybe<EventWhereInput>;
+  photoEvent_some?: Maybe<EventWhereInput>;
+  photoEvent_none?: Maybe<EventWhereInput>;
 };
 
 /** References Asset record uniquely */
@@ -853,8 +875,10 @@ export type Event = Node & {
   updatedAt: Scalars['DateTime'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
-  /** Leave blank unless needed. Overrides generated name from activity types and location. */
+  /** OPTIONAL: Generates name from activities and location by default. */
   name?: Maybe<Scalars['String']>;
+  /** OPTIONAL: Uses place description by default. */
+  description?: Maybe<Scalars['String']>;
   content: EventContentRichText;
   startTime: Scalars['DateTime'];
   endTime: Scalars['DateTime'];
@@ -864,6 +888,8 @@ export type Event = Node & {
   updatedBy?: Maybe<User>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
+  /** OPTIONAL: Uses first location photo by default. */
+  photo?: Maybe<Asset>;
   people: Array<Person>;
   place?: Maybe<Place>;
   meetingPlace?: Maybe<Place>;
@@ -893,6 +919,11 @@ export type EventUpdatedByArgs = {
 
 
 export type EventPublishedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type EventPhotoArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
@@ -967,9 +998,11 @@ export type EventCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content: Scalars['RichTextAST'];
   startTime: Scalars['DateTime'];
   endTime: Scalars['DateTime'];
+  photo?: Maybe<AssetCreateOneInlineInput>;
   people?: Maybe<PersonCreateManyInlineInput>;
   place?: Maybe<PlaceCreateOneInlineInput>;
   meetingPlace?: Maybe<PlaceCreateOneInlineInput>;
@@ -1094,6 +1127,25 @@ export type EventManyWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   startTime?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   startTime_not?: Maybe<Scalars['DateTime']>;
@@ -1127,6 +1179,7 @@ export type EventManyWhereInput = {
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
+  photo?: Maybe<AssetWhereInput>;
   people_every?: Maybe<PersonWhereInput>;
   people_some?: Maybe<PersonWhereInput>;
   people_none?: Maybe<PersonWhereInput>;
@@ -1163,6 +1216,8 @@ export enum EventOrderByInput {
   PublishedAtDesc = 'publishedAt_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
   StartTimeAsc = 'startTime_ASC',
   StartTimeDesc = 'startTime_DESC',
   EndTimeAsc = 'endTime_ASC',
@@ -1179,9 +1234,11 @@ export enum EventTypes {
 
 export type EventUpdateInput = {
   name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
   startTime?: Maybe<Scalars['DateTime']>;
   endTime?: Maybe<Scalars['DateTime']>;
+  photo?: Maybe<AssetUpdateOneInlineInput>;
   people?: Maybe<PersonUpdateManyInlineInput>;
   place?: Maybe<PlaceUpdateOneInlineInput>;
   meetingPlace?: Maybe<PlaceUpdateOneInlineInput>;
@@ -1209,6 +1266,7 @@ export type EventUpdateManyInlineInput = {
 
 export type EventUpdateManyInput = {
   name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
   startTime?: Maybe<Scalars['DateTime']>;
   endTime?: Maybe<Scalars['DateTime']>;
@@ -1352,6 +1410,25 @@ export type EventWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   startTime?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   startTime_not?: Maybe<Scalars['DateTime']>;
@@ -1385,6 +1462,7 @@ export type EventWhereInput = {
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
+  photo?: Maybe<AssetWhereInput>;
   people_every?: Maybe<PersonWhereInput>;
   people_some?: Maybe<PersonWhereInput>;
   people_none?: Maybe<PersonWhereInput>;
@@ -3568,6 +3646,7 @@ export type Place = Node & {
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
+  description: Scalars['String'];
   content: PlaceContentRichText;
   location: Location;
   address: Scalars['String'];
@@ -3660,6 +3739,7 @@ export type PlaceCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
+  description: Scalars['String'];
   content: Scalars['RichTextAST'];
   location: LocationInput;
   address: Scalars['String'];
@@ -3784,6 +3864,25 @@ export type PlaceManyWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   address_not?: Maybe<Scalars['String']>;
@@ -3822,12 +3921,15 @@ export enum PlaceOrderByInput {
   PublishedAtDesc = 'publishedAt_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
   AddressAsc = 'address_ASC',
   AddressDesc = 'address_DESC'
 }
 
 export type PlaceUpdateInput = {
   name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
   location?: Maybe<LocationInput>;
   address?: Maybe<Scalars['String']>;
@@ -3855,6 +3957,7 @@ export type PlaceUpdateManyInlineInput = {
 
 export type PlaceUpdateManyInput = {
   name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
   location?: Maybe<LocationInput>;
   address?: Maybe<Scalars['String']>;
@@ -3996,6 +4099,25 @@ export type PlaceWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   address_not?: Maybe<Scalars['String']>;
@@ -4924,8 +5046,8 @@ export type Product = Node & {
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  content: ProductContentRichText;
   description: Scalars['String'];
+  content: ProductContentRichText;
   /** User that created this document */
   createdBy?: Maybe<User>;
   /** User that last updated this document */
@@ -5021,8 +5143,8 @@ export type ProductCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  content: Scalars['RichTextAST'];
   description: Scalars['String'];
+  content: Scalars['RichTextAST'];
   photo: AssetCreateOneInlineInput;
   pricings?: Maybe<PricingCreateManyInlineInput>;
 };
@@ -5188,8 +5310,8 @@ export enum ProductOrderByInput {
 
 export type ProductUpdateInput = {
   name?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['RichTextAST']>;
   description?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['RichTextAST']>;
   photo?: Maybe<AssetUpdateOneInlineInput>;
   pricings?: Maybe<PricingUpdateManyInlineInput>;
 };
@@ -5213,8 +5335,8 @@ export type ProductUpdateManyInlineInput = {
 
 export type ProductUpdateManyInput = {
   name?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['RichTextAST']>;
   description?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['RichTextAST']>;
 };
 
 export type ProductUpdateManyWithNestedWhereInput = {
@@ -6337,6 +6459,51 @@ export enum _SystemDateTimeFieldVariation {
   Combined = 'combined'
 }
 
+export type EventFragment = (
+  { __typename?: 'Event' }
+  & Pick<Event, 'id' | 'name' | 'description' | 'activities' | 'startTime' | 'endTime'>
+  & { photo?: Maybe<(
+    { __typename?: 'Asset' }
+    & Pick<Asset, 'url'>
+  )>, pricing?: Maybe<(
+    { __typename?: 'Pricing' }
+    & PricingFragment
+  )>, place?: Maybe<(
+    { __typename?: 'Place' }
+    & Pick<Place, 'name' | 'description'>
+    & { photos: Array<(
+      { __typename?: 'Asset' }
+      & Pick<Asset, 'url'>
+    )> }
+  )> }
+);
+
+export type EventsListQueryVariables = Exact<{
+  first: Scalars['Int'];
+  skip: Scalars['Int'];
+  orderBy: EventOrderByInput;
+  startTimeAfter: Scalars['DateTime'];
+}>;
+
+
+export type EventsListQuery = (
+  { __typename?: 'Query' }
+  & { eventsConnection: (
+    { __typename?: 'EventConnection' }
+    & { edges: Array<(
+      { __typename?: 'EventEdge' }
+      & Pick<EventEdge, 'cursor'>
+      & { node: (
+        { __typename?: 'Event' }
+        & EventFragment
+      ) }
+    )>, pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage'>
+    ) }
+  ) }
+);
+
 export type PostFragment = (
   { __typename?: 'Post' }
   & Pick<Post, 'id' | 'title' | 'description' | 'createdAt'>
@@ -7058,6 +7225,7 @@ export type AssetResolvers<ContextType = any, ParentType extends ResolversParent
   photosPlace?: Resolver<Array<ResolversTypes['Place']>, ParentType, ContextType, RequireFields<AssetPhotosPlaceArgs, never>>;
   photoProduct?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<AssetPhotoProductArgs, never>>;
   photoPost?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<AssetPhotoPostArgs, never>>;
+  photoEvent?: Resolver<Array<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<AssetPhotoEventArgs, never>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<AssetHistoryArgs, 'limit' | 'skip'>>;
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<AssetUrlArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -7113,12 +7281,14 @@ export type EventResolvers<ContextType = any, ParentType extends ResolversParent
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   content?: Resolver<ResolversTypes['EventContentRichText'], ParentType, ContextType>;
   startTime?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   endTime?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<EventCreatedByArgs, never>>;
   updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<EventUpdatedByArgs, never>>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<EventPublishedByArgs, never>>;
+  photo?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<EventPhotoArgs, never>>;
   people?: Resolver<Array<ResolversTypes['Person']>, ParentType, ContextType, RequireFields<EventPeopleArgs, never>>;
   place?: Resolver<Maybe<ResolversTypes['Place']>, ParentType, ContextType, RequireFields<EventPlaceArgs, never>>;
   meetingPlace?: Resolver<Maybe<ResolversTypes['Place']>, ParentType, ContextType, RequireFields<EventMeetingPlaceArgs, never>>;
@@ -7403,6 +7573,7 @@ export type PlaceResolvers<ContextType = any, ParentType extends ResolversParent
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['PlaceContentRichText'], ParentType, ContextType>;
   location?: Resolver<ResolversTypes['Location'], ParentType, ContextType>;
   address?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -7524,8 +7695,8 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  content?: Resolver<ResolversTypes['ProductContentRichText'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['ProductContentRichText'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<ProductCreatedByArgs, never>>;
   updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<ProductUpdatedByArgs, never>>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<ProductPublishedByArgs, never>>;
@@ -7745,6 +7916,36 @@ export type DirectiveResolvers<ContextType = any> = {
  * Use "DirectiveResolvers" root object instead. If you wish to get "IDirectiveResolvers", add "typesPrefix: I" to your config.
  */
 export type IDirectiveResolvers<ContextType = any> = DirectiveResolvers<ContextType>;
+export const PricingFragmentDoc = gql`
+    fragment Pricing on Pricing {
+  id
+  price
+  period
+}
+    `;
+export const EventFragmentDoc = gql`
+    fragment Event on Event {
+  id
+  name
+  description
+  activities
+  startTime
+  endTime
+  photo {
+    url
+  }
+  pricing {
+    ...Pricing
+  }
+  place {
+    name
+    description
+    photos {
+      url
+    }
+  }
+}
+    ${PricingFragmentDoc}`;
 export const PostFragmentDoc = gql`
     fragment Post on Post {
   id
@@ -7754,13 +7955,6 @@ export const PostFragmentDoc = gql`
   photo {
     url
   }
-}
-    `;
-export const PricingFragmentDoc = gql`
-    fragment Pricing on Pricing {
-  id
-  price
-  period
 }
     `;
 export const ProductFragmentDoc = gql`
@@ -7776,6 +7970,57 @@ export const ProductFragmentDoc = gql`
   }
 }
     ${PricingFragmentDoc}`;
+export const EventsListDocument = gql`
+    query EventsList($first: Int!, $skip: Int!, $orderBy: EventOrderByInput!, $startTimeAfter: DateTime!) {
+  eventsConnection(
+    first: $first
+    skip: $skip
+    orderBy: $orderBy
+    where: {startTime_gt: $startTimeAfter}
+  ) {
+    edges {
+      cursor
+      node {
+        ...Event
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+    ${EventFragmentDoc}`;
+
+/**
+ * __useEventsListQuery__
+ *
+ * To run a query within a React component, call `useEventsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEventsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEventsListQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
+ *      startTimeAfter: // value for 'startTimeAfter'
+ *   },
+ * });
+ */
+export function useEventsListQuery(baseOptions: Apollo.QueryHookOptions<EventsListQuery, EventsListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EventsListQuery, EventsListQueryVariables>(EventsListDocument, options);
+      }
+export function useEventsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EventsListQuery, EventsListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EventsListQuery, EventsListQueryVariables>(EventsListDocument, options);
+        }
+export type EventsListQueryHookResult = ReturnType<typeof useEventsListQuery>;
+export type EventsListLazyQueryHookResult = ReturnType<typeof useEventsListLazyQuery>;
+export type EventsListQueryResult = Apollo.QueryResult<EventsListQuery, EventsListQueryVariables>;
 export const PostsListDocument = gql`
     query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
   postsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
