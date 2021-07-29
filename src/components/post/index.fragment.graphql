@@ -2,6 +2,7 @@ fragment Post on Post {
   id
   title
   description
+  createdAt
   photo {
     url
   }

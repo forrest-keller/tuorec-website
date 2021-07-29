@@ -6339,7 +6339,7 @@ export enum _SystemDateTimeFieldVariation {
 
 export type PostFragment = (
   { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'title' | 'description'>
+  & Pick<Post, 'id' | 'title' | 'description' | 'createdAt'>
   & { photo: (
     { __typename?: 'Asset' }
     & Pick<Asset, 'url'>
@@ -7750,6 +7750,7 @@ export const PostFragmentDoc = gql`
   id
   title
   description
+  createdAt
   photo {
     url
   }

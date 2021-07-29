@@ -13,6 +13,8 @@ import { FunctionComponent, ReactElement } from "react";
 export interface CardProps {
   href: string;
   title: string;
+  overTitleText?: string;
+  underTitleText?: string;
   description: string;
   photo: ReactElement;
   topRightElements?: ReactElement[];
@@ -23,6 +25,8 @@ export const Card: FunctionComponent<CardProps> = ({
   photo,
   description,
   topRightElements,
+  overTitleText,
+  underTitleText,
   href,
 }) => {
   return (
@@ -36,9 +40,13 @@ export const Card: FunctionComponent<CardProps> = ({
           <GridItem>{photo}</GridItem>
           <Box>
             <Grid autoFlow={{ md: "column" }}>
-              <Heading variant="h3" as="h2">
-                <LinkOverlay href={href}>{title}</LinkOverlay>
-              </Heading>
+              <Box>
+                <Text color="blackAlpha.600">{overTitleText}</Text>
+                <Heading variant="h3" as="h2">
+                  <LinkOverlay href={href}>{title}</LinkOverlay>
+                </Heading>
+                <Text>{underTitleText}</Text>
+              </Box>
               <Grid
                 justifySelf={{ md: "right" }}
                 autoFlow="column"
