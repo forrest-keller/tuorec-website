@@ -23,12 +23,17 @@ export const Post: FunctionComponent<PostFragment> = ({
   return (
     <Card
       href={`/posts/${id}`}
-      overTitleElements={[<Text variant="subtle">{createdAtText}</Text>]}
+      overTitleElements={[
+        <Text key="created-at" variant="subtle">
+          {createdAtText}
+        </Text>,
+      ]}
       title={title}
       description={description}
       photo={
         <Image
           src={photo.url}
+          alt={title}
           width={200}
           height={200}
           objectFit="cover"

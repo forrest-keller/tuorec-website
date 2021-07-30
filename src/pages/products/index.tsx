@@ -7,7 +7,7 @@ const ProductsPage = () => {
   const productListQueryResult = useProductListQuery({
     variables: {
       orderBy: ProductOrderByInput.UpdatedAtDesc,
-      first: 10,
+      first: 3,
       skip: 0,
     },
   });

@@ -1,7 +1,5 @@
-import { Box, Divider, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { Pricing } from "components";
 import { Card } from "components/card";
-import { RichText } from "components/rich-text";
 import { ProductFragment } from "generated/graphql";
 import Image from "next/image";
 import { FunctionComponent } from "react";
@@ -15,12 +13,13 @@ export const Product: FunctionComponent<ProductFragment> = ({
 }) => {
   return (
     <Card
-      href={`/product/${id}`}
+      href={`/products/${id}`}
       title={name}
       description={description}
       photo={
         <Image
           src={photo.url}
+          alt={name}
           width={200}
           height={200}
           objectFit="cover"
@@ -28,7 +27,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
         />
       }
       topRightElements={pricings.map((pricing) => (
-        <Pricing {...pricing} />
+        <Pricing key={pricing.id} {...pricing} />
       ))}
     />
   );

@@ -40,7 +40,12 @@ export const Layout: FunctionComponent<LayoutProps> = ({
         paddingX={{ base: "initial", md: 10 }}
       >
         <Link justifySelf="start" variant="navigation" {...logoLinkRest}>
-          <Image src={logoLinkImageSrc} width={50} height={50} />
+          <Image
+            src={logoLinkImageSrc}
+            alt="OREC Logo"
+            width={50}
+            height={50}
+          />
         </Link>
         <Grid
           gap={10}
