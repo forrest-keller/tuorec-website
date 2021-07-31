@@ -3,6 +3,9 @@ schema:
   - ${NEXT_PUBLIC_GRAPH_CMS_ENDPOINT_URL}
 documents: "src/**/*.graphql"
 generates:
+  src/generated/graphql/apollo.ts:
+    plugins:
+      - typescript-apollo-client-helpers
   src/generated/graphql/base.tsx:
     plugins:
       - "typescript"
