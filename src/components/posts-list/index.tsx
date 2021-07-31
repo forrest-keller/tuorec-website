@@ -1,38 +1,14 @@
-import { Alert, Grid, Skeleton, SlideFade, Text } from "@chakra-ui/react";
-import { PostsListQueryHookResult } from "generated/graphql";
+import { Alert, Grid, Skeleton, Text } from "@chakra-ui/react";
+import { PostsListFragment } from "generated/graphql";
 import { FunctionComponent } from "react";
-import { UseInfiniteScrollHookResult } from "react-infinite-scroll-hook";
 import { PostCard } from "components/post-card";
 
-export interface PostsListProps {
-  postsListQueryHookResult: PostsListQueryHookResult;
-  useInfiniteScrollHookResult: UseInfiniteScrollHookResult;
-}
-
-export const PostsList: FunctionComponent<PostsListProps> = ({
-  postsListQueryHookResult: { loading, error, data },
-  useInfiniteScrollHookResult: [sentryRef],
-}) => {
-  if (loading) {
-    return <Skeleton />;
-  }
-
-  if (error) {
-    return <Alert status="error">Error loading posts list...</Alert>;
-  }
-
-  if (!data) {
-    return <Text>No posts...</Text>;
-  }
-
+export const PostsList: FunctionComponent<PostsListFragment> = ({ edges }) => {
   return (
     <Grid gap={5}>
-      {data?.postsConnection.edges.map(({ node }) => (
+      {edges.map(({ node }) => (
         <PostCard key={node.id} {...node} />
       ))}
-      {data?.postsConnection.pageInfo.hasNextPage ? (
-        <Skeleton ref={sentryRef} height="200px" />
-      ) : null}
     </Grid>
   );
 };

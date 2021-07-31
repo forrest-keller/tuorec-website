@@ -1,0 +1,11 @@
+fragment PostsList on PostConnection {
+  edges {
+    cursor
+    node {
+      ...PostCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}

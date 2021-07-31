@@ -6478,29 +6478,18 @@ export type EventCardFragment = (
   )> }
 );
 
-export type EventsListQueryVariables = Exact<{
-  first: Scalars['Int'];
-  skip: Scalars['Int'];
-  orderBy: EventOrderByInput;
-  startTimeAfter: Scalars['DateTime'];
-}>;
-
-
-export type EventsListQuery = (
-  { __typename?: 'Query' }
-  & { eventsConnection: (
-    { __typename?: 'EventConnection' }
-    & { edges: Array<(
-      { __typename?: 'EventEdge' }
-      & Pick<EventEdge, 'cursor'>
-      & { node: (
-        { __typename?: 'Event' }
-        & EventCardFragment
-      ) }
-    )>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & Pick<PageInfo, 'hasNextPage'>
+export type EventsListFragment = (
+  { __typename?: 'EventConnection' }
+  & { edges: Array<(
+    { __typename?: 'EventEdge' }
+    & Pick<EventEdge, 'cursor'>
+    & { node: (
+      { __typename?: 'Event' }
+      & EventCardFragment
     ) }
+  )>, pageInfo: (
+    { __typename?: 'PageInfo' }
+    & Pick<PageInfo, 'hasNextPage'>
   ) }
 );
 
@@ -6513,28 +6502,18 @@ export type PostCardFragment = (
   ) }
 );
 
-export type PostsListQueryVariables = Exact<{
-  first: Scalars['Int'];
-  skip: Scalars['Int'];
-  orderBy: PostOrderByInput;
-}>;
-
-
-export type PostsListQuery = (
-  { __typename?: 'Query' }
-  & { postsConnection: (
-    { __typename?: 'PostConnection' }
-    & { edges: Array<(
-      { __typename?: 'PostEdge' }
-      & Pick<PostEdge, 'cursor'>
-      & { node: (
-        { __typename?: 'Post' }
-        & PostCardFragment
-      ) }
-    )>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & Pick<PageInfo, 'hasNextPage'>
+export type PostsListFragment = (
+  { __typename?: 'PostConnection' }
+  & { edges: Array<(
+    { __typename?: 'PostEdge' }
+    & Pick<PostEdge, 'cursor'>
+    & { node: (
+      { __typename?: 'Post' }
+      & PostCardFragment
     ) }
+  )>, pageInfo: (
+    { __typename?: 'PageInfo' }
+    & Pick<PageInfo, 'hasNextPage'>
   ) }
 );
 
@@ -6555,6 +6534,71 @@ export type ProductCardFragment = (
   ) }
 );
 
+export type ProductListFragment = (
+  { __typename?: 'ProductConnection' }
+  & { edges: Array<(
+    { __typename?: 'ProductEdge' }
+    & Pick<ProductEdge, 'cursor'>
+    & { node: (
+      { __typename?: 'Product' }
+      & ProductCardFragment
+    ) }
+  )>, pageInfo: (
+    { __typename?: 'PageInfo' }
+    & Pick<PageInfo, 'hasNextPage'>
+  ) }
+);
+
+export type ProductFragment = (
+  { __typename?: 'Product' }
+  & Pick<Product, 'id' | 'description' | 'name'>
+  & { content: (
+    { __typename?: 'ProductContentRichText' }
+    & Pick<ProductContentRichText, 'json'>
+  ), photo: (
+    { __typename?: 'Asset' }
+    & Pick<Asset, 'url'>
+  ), pricings: Array<(
+    { __typename?: 'Pricing' }
+    & PricingChipFragment
+  )> }
+);
+
+export type EventsListQueryVariables = Exact<{
+  first: Scalars['Int'];
+  skip: Scalars['Int'];
+  orderBy: EventOrderByInput;
+  startTimeAfter: Scalars['DateTime'];
+}>;
+
+
+export type EventsListQuery = { eventsConnection: (
+    { __typename?: 'EventConnection' }
+    & EventsListFragment
+  ) };
+
+export type PostsListQueryVariables = Exact<{
+  first: Scalars['Int'];
+  skip: Scalars['Int'];
+  orderBy: PostOrderByInput;
+}>;
+
+
+export type PostsListQuery = { postsConnection: (
+    { __typename?: 'PostConnection' }
+    & PostsListFragment
+  ) };
+
+export type ProductQueryVariables = Exact<{
+  id?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type ProductQuery = { product?: Maybe<(
+    { __typename?: 'Product' }
+    & ProductFragment
+  )> };
+
 export type ProductListQueryVariables = Exact<{
   first: Scalars['Int'];
   skip: Scalars['Int'];
@@ -6562,23 +6606,10 @@ export type ProductListQueryVariables = Exact<{
 }>;
 
 
-export type ProductListQuery = (
-  { __typename?: 'Query' }
-  & { productsConnection: (
+export type ProductListQuery = { productsConnection: (
     { __typename?: 'ProductConnection' }
-    & { edges: Array<(
-      { __typename?: 'ProductEdge' }
-      & Pick<ProductEdge, 'cursor'>
-      & { node: (
-        { __typename?: 'Product' }
-        & ProductCardFragment
-      ) }
-    )>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & Pick<PageInfo, 'hasNextPage'>
-    ) }
-  ) }
-);
+    & ProductListFragment
+  ) };
 
 
 
@@ -7946,6 +7977,19 @@ export const EventCardFragmentDoc = gql`
   }
 }
     ${PricingChipFragmentDoc}`;
+export const EventsListFragmentDoc = gql`
+    fragment EventsList on EventConnection {
+  edges {
+    cursor
+    node {
+      ...EventCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}
+    ${EventCardFragmentDoc}`;
 export const PostCardFragmentDoc = gql`
     fragment PostCard on Post {
   id
@@ -7957,6 +8001,19 @@ export const PostCardFragmentDoc = gql`
   }
 }
     `;
+export const PostsListFragmentDoc = gql`
+    fragment PostsList on PostConnection {
+  edges {
+    cursor
+    node {
+      ...PostCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}
+    ${PostCardFragmentDoc}`;
 export const ProductCardFragmentDoc = gql`
     fragment ProductCard on Product {
   id
@@ -7970,6 +8027,35 @@ export const ProductCardFragmentDoc = gql`
   }
 }
     ${PricingChipFragmentDoc}`;
+export const ProductListFragmentDoc = gql`
+    fragment ProductList on ProductConnection {
+  edges {
+    cursor
+    node {
+      ...ProductCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}
+    ${ProductCardFragmentDoc}`;
+export const ProductFragmentDoc = gql`
+    fragment Product on Product {
+  id
+  content {
+    json
+  }
+  description
+  name
+  photo {
+    url
+  }
+  pricings {
+    ...PricingChip
+  }
+}
+    ${PricingChipFragmentDoc}`;
 export const EventsListDocument = gql`
     query EventsList($first: Int!, $skip: Int!, $orderBy: EventOrderByInput!, $startTimeAfter: DateTime!) {
   eventsConnection(
@@ -7978,18 +8064,10 @@ export const EventsListDocument = gql`
     orderBy: $orderBy
     where: {startTime_gt: $startTimeAfter}
   ) {
-    edges {
-      cursor
-      node {
-        ...EventCard
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
+    ...EventsList
   }
 }
-    ${EventCardFragmentDoc}`;
+    ${EventsListFragmentDoc}`;
 
 /**
  * __useEventsListQuery__
@@ -8024,18 +8102,10 @@ export type EventsListQueryResult = Apollo.QueryResult<EventsListQuery, EventsLi
 export const PostsListDocument = gql`
     query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
   postsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
-    edges {
-      cursor
-      node {
-        ...PostCard
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
+    ...PostsList
   }
 }
-    ${PostCardFragmentDoc}`;
+    ${PostsListFragmentDoc}`;
 
 /**
  * __usePostsListQuery__
@@ -8066,21 +8136,48 @@ export function usePostsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type PostsListQueryHookResult = ReturnType<typeof usePostsListQuery>;
 export type PostsListLazyQueryHookResult = ReturnType<typeof usePostsListLazyQuery>;
 export type PostsListQueryResult = Apollo.QueryResult<PostsListQuery, PostsListQueryVariables>;
+export const ProductDocument = gql`
+    query Product($id: ID) {
+  product(where: {id: $id}) {
+    ...Product
+  }
+}
+    ${ProductFragmentDoc}`;
+
+/**
+ * __useProductQuery__
+ *
+ * To run a query within a React component, call `useProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProductQuery(baseOptions?: Apollo.QueryHookOptions<ProductQuery, ProductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
+      }
+export function useProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductQuery, ProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
+        }
+export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
+export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
+export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;
 export const ProductListDocument = gql`
     query ProductList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
   productsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
-    edges {
-      cursor
-      node {
-        ...ProductCard
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
+    ...ProductList
   }
 }
-    ${ProductCardFragmentDoc}`;
+    ${ProductListFragmentDoc}`;
 
 /**
  * __useProductListQuery__

@@ -1,0 +1,11 @@
+fragment ProductList on ProductConnection {
+  edges {
+    cursor
+    node {
+      ...ProductCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}

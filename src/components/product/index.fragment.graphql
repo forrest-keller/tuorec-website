@@ -1,0 +1,14 @@
+fragment Product on Product {
+  id
+  content {
+    json
+  }
+  description
+  name
+  photo {
+    url
+  }
+  pricings {
+    ...PricingChip
+  }
+}

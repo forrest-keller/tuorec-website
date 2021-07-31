@@ -1,10 +1,17 @@
-import { Container, Grid, Heading } from "@chakra-ui/react";
+import {
+  Alert,
+  Box,
+  Container,
+  Grid,
+  Heading,
+  Spinner,
+} from "@chakra-ui/react";
 import { PostsList } from "components";
 import { PostOrderByInput, usePostsListQuery } from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const PostsPage = () => {
-  const postsListQueryResult = usePostsListQuery({
+  const { data, loading, error, fetchMore } = usePostsListQuery({
     variables: {
       orderBy: PostOrderByInput.CreatedAtDesc,
       first: 10,
@@ -12,9 +19,7 @@ const PostsPage = () => {
     },
   });
 
-  const { data, loading, error, fetchMore } = postsListQueryResult;
-
-  const useInfiniteScrollHookResult = useInfiniteScroll({
+  const [loaderRef] = useInfiniteScroll({
     loading: loading,
     disabled: error !== undefined,
     hasNextPage: !!data?.postsConnection.pageInfo.hasNextPage,
@@ -32,10 +37,16 @@ const PostsPage = () => {
         <Heading variant="h1" as="h1">
           Posts
         </Heading>
-        <PostsList
-          postsListQueryHookResult={postsListQueryResult}
-          useInfiniteScrollHookResult={useInfiniteScrollHookResult}
-        />
+        {error && <Alert status="error">Error retrieving posts.</Alert>}
+        {data?.postsConnection.edges.length === 0 && (
+          <Alert status="info">No posts.</Alert>
+        )}
+        {data && <PostsList {...data?.postsConnection} />}
+        <Box justifySelf="center">
+          {(data?.postsConnection.pageInfo.hasNextPage || loading) && (
+            <Spinner ref={loaderRef} />
+          )}
+        </Box>
       </Grid>
     </Container>
   );
