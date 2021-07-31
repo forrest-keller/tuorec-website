@@ -3,14 +3,29 @@ schema:
   - ${NEXT_PUBLIC_GRAPH_CMS_ENDPOINT_URL}
 documents: "src/**/*.graphql"
 generates:
-  src/generated/graphql.tsx:
+  src/generated/graphql/base.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-resolvers"
       - "typescript-react-apollo"
     config:
       skipTypeNameForRoot: true
-  ./graphql.schema.json:
+      reactApolloVersion: 3
+      withHooks: false
+      withHOC: false
+      withComponent: false
+      exportFragmentSpreadSubTypes: true
+      documentMode: graphQLTag
+  src/generated/graphql/next.tsx:
+    config:
+      skipTypeNameForRoot: true
+      documentMode: external
+      importDocumentNodeExternallyFrom: ./base
+      reactApolloVersion: 3
+      withHooks: true
+      apolloClientInstanceImport: "utilities/client"
+    preset: import-types
+    presetConfig:
+      typesPath: ./base
     plugins:
-      - "introspection"
+      - "graphql-codegen-apollo-next-ssr"

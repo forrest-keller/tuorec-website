@@ -3,3 +3,9 @@ query Product($id: ID) {
     ...Product
   }
 }
+
+query ProductIds {
+  products {
+    id
+  }
+}

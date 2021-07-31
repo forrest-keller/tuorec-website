@@ -8,18 +8,18 @@ import {
 } from "@chakra-ui/react";
 import { EventsList } from "components/events-list";
 import dayjs from "dayjs";
-import { EventOrderByInput, useEventsListQuery } from "generated";
+import { EventOrderByInput, useEventsList } from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const EventsPage = () => {
-  const { data, loading, error, fetchMore } = useEventsListQuery({
+  const { data, loading, error, fetchMore } = useEventsList(() => ({
     variables: {
       orderBy: EventOrderByInput.CreatedAtDesc,
       first: 10,
       skip: 0,
       startTimeAfter: dayjs(),
     },
-  });
+  }));
 
   const [loaderRef] = useInfiniteScroll({
     loading: loading,
