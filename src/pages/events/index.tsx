@@ -1,13 +1,7 @@
 import { Container, Grid, Heading } from "@chakra-ui/react";
-import { PostsList } from "components";
 import { EventsList } from "components/events-list";
 import dayjs from "dayjs";
-import {
-  ActivityTypes,
-  EventOrderByInput,
-  PostOrderByInput,
-  useEventsListQuery,
-} from "generated";
+import { EventOrderByInput, useEventsListQuery } from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const EventsPage = () => {

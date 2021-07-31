@@ -6459,7 +6459,7 @@ export enum _SystemDateTimeFieldVariation {
   Combined = 'combined'
 }
 
-export type EventFragment = (
+export type EventCardFragment = (
   { __typename?: 'Event' }
   & Pick<Event, 'id' | 'name' | 'description' | 'activities' | 'startTime' | 'endTime'>
   & { photo?: Maybe<(
@@ -6467,7 +6467,7 @@ export type EventFragment = (
     & Pick<Asset, 'url'>
   )>, pricing?: Maybe<(
     { __typename?: 'Pricing' }
-    & PricingFragment
+    & PricingChipFragment
   )>, place?: Maybe<(
     { __typename?: 'Place' }
     & Pick<Place, 'name' | 'description'>
@@ -6495,7 +6495,7 @@ export type EventsListQuery = (
       & Pick<EventEdge, 'cursor'>
       & { node: (
         { __typename?: 'Event' }
-        & EventFragment
+        & EventCardFragment
       ) }
     )>, pageInfo: (
       { __typename?: 'PageInfo' }
@@ -6504,7 +6504,7 @@ export type EventsListQuery = (
   ) }
 );
 
-export type PostFragment = (
+export type PostCardFragment = (
   { __typename?: 'Post' }
   & Pick<Post, 'id' | 'title' | 'description' | 'createdAt'>
   & { photo: (
@@ -6529,7 +6529,7 @@ export type PostsListQuery = (
       & Pick<PostEdge, 'cursor'>
       & { node: (
         { __typename?: 'Post' }
-        & PostFragment
+        & PostCardFragment
       ) }
     )>, pageInfo: (
       { __typename?: 'PageInfo' }
@@ -6538,9 +6538,21 @@ export type PostsListQuery = (
   ) }
 );
 
-export type PricingFragment = (
+export type PricingChipFragment = (
   { __typename?: 'Pricing' }
   & Pick<Pricing, 'id' | 'price' | 'period'>
+);
+
+export type ProductCardFragment = (
+  { __typename?: 'Product' }
+  & Pick<Product, 'id' | 'name' | 'description'>
+  & { pricings: Array<(
+    { __typename?: 'Pricing' }
+    & PricingChipFragment
+  )>, photo: (
+    { __typename?: 'Asset' }
+    & Pick<Asset, 'url'>
+  ) }
 );
 
 export type ProductListQueryVariables = Exact<{
@@ -6559,24 +6571,12 @@ export type ProductListQuery = (
       & Pick<ProductEdge, 'cursor'>
       & { node: (
         { __typename?: 'Product' }
-        & ProductFragment
+        & ProductCardFragment
       ) }
     )>, pageInfo: (
       { __typename?: 'PageInfo' }
       & Pick<PageInfo, 'hasNextPage'>
     ) }
-  ) }
-);
-
-export type ProductFragment = (
-  { __typename?: 'Product' }
-  & Pick<Product, 'id' | 'name' | 'description'>
-  & { pricings: Array<(
-    { __typename?: 'Pricing' }
-    & PricingFragment
-  )>, photo: (
-    { __typename?: 'Asset' }
-    & Pick<Asset, 'url'>
   ) }
 );
 
@@ -7916,15 +7916,15 @@ export type DirectiveResolvers<ContextType = any> = {
  * Use "DirectiveResolvers" root object instead. If you wish to get "IDirectiveResolvers", add "typesPrefix: I" to your config.
  */
 export type IDirectiveResolvers<ContextType = any> = DirectiveResolvers<ContextType>;
-export const PricingFragmentDoc = gql`
-    fragment Pricing on Pricing {
+export const PricingChipFragmentDoc = gql`
+    fragment PricingChip on Pricing {
   id
   price
   period
 }
     `;
-export const EventFragmentDoc = gql`
-    fragment Event on Event {
+export const EventCardFragmentDoc = gql`
+    fragment EventCard on Event {
   id
   name
   description
@@ -7935,7 +7935,7 @@ export const EventFragmentDoc = gql`
     url
   }
   pricing {
-    ...Pricing
+    ...PricingChip
   }
   place {
     name
@@ -7945,9 +7945,9 @@ export const EventFragmentDoc = gql`
     }
   }
 }
-    ${PricingFragmentDoc}`;
-export const PostFragmentDoc = gql`
-    fragment Post on Post {
+    ${PricingChipFragmentDoc}`;
+export const PostCardFragmentDoc = gql`
+    fragment PostCard on Post {
   id
   title
   description
@@ -7957,19 +7957,19 @@ export const PostFragmentDoc = gql`
   }
 }
     `;
-export const ProductFragmentDoc = gql`
-    fragment Product on Product {
+export const ProductCardFragmentDoc = gql`
+    fragment ProductCard on Product {
   id
   name
   description
   pricings {
-    ...Pricing
+    ...PricingChip
   }
   photo {
     url
   }
 }
-    ${PricingFragmentDoc}`;
+    ${PricingChipFragmentDoc}`;
 export const EventsListDocument = gql`
     query EventsList($first: Int!, $skip: Int!, $orderBy: EventOrderByInput!, $startTimeAfter: DateTime!) {
   eventsConnection(
@@ -7981,7 +7981,7 @@ export const EventsListDocument = gql`
     edges {
       cursor
       node {
-        ...Event
+        ...EventCard
       }
     }
     pageInfo {
@@ -7989,7 +7989,7 @@ export const EventsListDocument = gql`
     }
   }
 }
-    ${EventFragmentDoc}`;
+    ${EventCardFragmentDoc}`;
 
 /**
  * __useEventsListQuery__
@@ -8027,7 +8027,7 @@ export const PostsListDocument = gql`
     edges {
       cursor
       node {
-        ...Post
+        ...PostCard
       }
     }
     pageInfo {
@@ -8035,7 +8035,7 @@ export const PostsListDocument = gql`
     }
   }
 }
-    ${PostFragmentDoc}`;
+    ${PostCardFragmentDoc}`;
 
 /**
  * __usePostsListQuery__
@@ -8072,7 +8072,7 @@ export const ProductListDocument = gql`
     edges {
       cursor
       node {
-        ...Product
+        ...ProductCard
       }
     }
     pageInfo {
@@ -8080,7 +8080,7 @@ export const ProductListDocument = gql`
     }
   }
 }
-    ${ProductFragmentDoc}`;
+    ${ProductCardFragmentDoc}`;
 
 /**
  * __useProductListQuery__

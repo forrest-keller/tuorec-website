@@ -3,7 +3,7 @@ query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
     edges {
       cursor
       node {
-        ...Post
+        ...PostCard
       }
     }
     pageInfo {

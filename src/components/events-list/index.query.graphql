@@ -13,7 +13,7 @@ query EventsList(
     edges {
       cursor
       node {
-        ...Event
+        ...EventCard
       }
     }
     pageInfo {

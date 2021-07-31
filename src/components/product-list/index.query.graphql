@@ -3,7 +3,7 @@ query ProductList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
     edges {
       cursor
       node {
-        ...Product
+        ...ProductCard
       }
     }
     pageInfo {

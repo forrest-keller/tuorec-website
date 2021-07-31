@@ -1,10 +1,10 @@
-import { Pricing } from "components";
+import { PricingChip } from "components";
 import { Card } from "components/card";
-import { ProductFragment } from "generated/graphql";
+import { ProductCardFragment } from "generated/graphql";
 import Image from "next/image";
 import { FunctionComponent } from "react";
 
-export const Product: FunctionComponent<ProductFragment> = ({
+export const ProductCard: FunctionComponent<ProductCardFragment> = ({
   id,
   name,
   description,
@@ -27,7 +27,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
         />
       }
       topRightElements={pricings.map((pricing) => (
-        <Pricing key={pricing.id} {...pricing} />
+        <PricingChip key={pricing.id} {...pricing} />
       ))}
     />
   );

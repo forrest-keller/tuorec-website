@@ -1,15 +1,7 @@
-import {
-  Alert,
-  Grid,
-  GridItem,
-  Skeleton,
-  SlideFade,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
+import { Alert, Grid, Skeleton, Text } from "@chakra-ui/react";
 import { ProductListQueryHookResult } from "generated/graphql";
 import { FunctionComponent } from "react";
-import { Product } from "components";
+import { ProductCard } from "components";
 import { UseInfiniteScrollHookResult } from "react-infinite-scroll-hook";
 
 export interface ProductListProps {
@@ -36,7 +28,7 @@ export const ProductList: FunctionComponent<ProductListProps> = ({
   return (
     <Grid gap={5}>
       {data?.productsConnection.edges.map(({ node }) => (
-        <Product key={node.id} {...node} />
+        <ProductCard key={node.id} {...node} />
       ))}
       {data?.productsConnection.pageInfo.hasNextPage ? (
         <Skeleton ref={sentryRef} height="200px" />

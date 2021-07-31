@@ -2,7 +2,7 @@ import { Alert, Grid, Skeleton, SlideFade, Text } from "@chakra-ui/react";
 import { PostsListQueryHookResult } from "generated/graphql";
 import { FunctionComponent } from "react";
 import { UseInfiniteScrollHookResult } from "react-infinite-scroll-hook";
-import { Post } from "components/post";
+import { PostCard } from "components/post-card";
 
 export interface PostsListProps {
   postsListQueryHookResult: PostsListQueryHookResult;
@@ -28,7 +28,7 @@ export const PostsList: FunctionComponent<PostsListProps> = ({
   return (
     <Grid gap={5}>
       {data?.postsConnection.edges.map(({ node }) => (
-        <Post key={node.id} {...node} />
+        <PostCard key={node.id} {...node} />
       ))}
       {data?.postsConnection.pageInfo.hasNextPage ? (
         <Skeleton ref={sentryRef} height="200px" />

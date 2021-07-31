@@ -9,7 +9,7 @@ import { Text } from "@chakra-ui/react";
 
 dayjs.extend(relativeTime);
 
-export const Post: FunctionComponent<PostFragment> = ({
+export const PostCard: FunctionComponent<PostFragment> = ({
   id,
   title,
   photo,

@@ -1,9 +1,9 @@
-fragment Product on Product {
+fragment ProductCard on Product {
   id
   name
   description
   pricings {
-    ...Pricing
+    ...PricingChip
   }
   photo {
     url

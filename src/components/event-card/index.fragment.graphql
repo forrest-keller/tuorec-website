@@ -1,4 +1,4 @@
-fragment Event on Event {
+fragment EventCard on Event {
   id
   name
   description
@@ -9,7 +9,7 @@ fragment Event on Event {
     url
   }
   pricing {
-    ...Pricing
+    ...PricingChip
   }
   place {
     name
