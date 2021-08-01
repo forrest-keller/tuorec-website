@@ -17,7 +17,7 @@ const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
               key: "gear",
               text: "Gear",
               icon: GiCampingTent,
-              href: "/products",
+              href: "/rentals",
             },
             {
               key: "events",

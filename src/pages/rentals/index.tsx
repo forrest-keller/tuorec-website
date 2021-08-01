@@ -7,22 +7,22 @@ import {
   Heading,
   Spinner,
 } from "@chakra-ui/react";
-import { Post, ProductList } from "components";
+import { Post, RentalsList } from "components";
 import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
   PostFragment,
-  ProductOrderByInput,
-  useProductsQuery,
+  RentalOrderByInput,
+  useRentalsQuery,
 } from "../../../generated/graphql/base";
-import { getServerPageProductsPosts } from "../../../generated/graphql/next";
+import { getServerPageRentalsPosts } from "../../../generated/graphql/next";
 
 export interface Props {
   posts: PostFragment[];
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const res = await getServerPageProductsPosts({});
+  const res = await getServerPageRentalsPosts({});
 
   return {
     props: {
@@ -31,10 +31,10 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
-const ProductsPage: NextPage<Props> = ({ posts }) => {
-  const { data, loading, error, fetchMore } = useProductsQuery({
+const RentalsPage: NextPage<Props> = ({ posts }) => {
+  const { data, loading, error, fetchMore } = useRentalsQuery({
     variables: {
-      orderBy: ProductOrderByInput.UpdatedAtDesc,
+      orderBy: RentalOrderByInput.UpdatedAtDesc,
       first: 3,
       skip: 0,
     },
@@ -43,11 +43,11 @@ const ProductsPage: NextPage<Props> = ({ posts }) => {
   const [loaderRef] = useInfiniteScroll({
     loading: loading,
     disabled: error !== undefined,
-    hasNextPage: !!data?.productsConnection.pageInfo.hasNextPage,
+    hasNextPage: !!data?.rentalsConnection.pageInfo.hasNextPage,
     onLoadMore: () =>
       fetchMore({
         variables: {
-          skip: data?.productsConnection.edges.length || 0,
+          skip: data?.rentalsConnection.edges.length || 0,
         },
       }),
   });
@@ -63,13 +63,13 @@ const ProductsPage: NextPage<Props> = ({ posts }) => {
       </Container>
       <Container>
         <Grid gap={10}>
-          {error && <Alert status="error">Error retrieving products.</Alert>}
-          {data?.productsConnection.edges.length === 0 && (
-            <Alert status="info">No products.</Alert>
+          {error && <Alert status="error">Error retrieving rentals.</Alert>}
+          {data?.rentalsConnection.edges.length === 0 && (
+            <Alert status="info">No rentals.</Alert>
           )}
-          {data && <ProductList {...data.productsConnection} />}
+          {data && <RentalsList {...data.rentalsConnection} />}
           <Box justifySelf="center">
-            {(data?.productsConnection.pageInfo.hasNextPage || loading) && (
+            {(data?.rentalsConnection.pageInfo.hasNextPage || loading) && (
               <Spinner ref={loaderRef} />
             )}
           </Box>
@@ -79,4 +79,4 @@ const ProductsPage: NextPage<Props> = ({ posts }) => {
   );
 };
 
-export default ProductsPage;
+export default RentalsPage;

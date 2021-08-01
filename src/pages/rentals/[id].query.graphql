@@ -1,0 +1,11 @@
+query Rental($id: ID) {
+  rental(where: { id: $id }) {
+    ...Rental
+  }
+}
+
+query RentalIds {
+  rentals {
+    id
+  }
+}

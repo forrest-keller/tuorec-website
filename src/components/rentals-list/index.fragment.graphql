@@ -1,8 +1,8 @@
-fragment ProductList on ProductConnection {
+fragment RentalsList on RentalConnection {
   edges {
     cursor
     node {
-      ...ProductCard
+      ...RentalCard
     }
   }
   pageInfo {

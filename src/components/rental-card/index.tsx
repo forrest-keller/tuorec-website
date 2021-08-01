@@ -1,9 +1,9 @@
 import { Card } from "components/card";
 import Image from "next/image";
 import { FunctionComponent } from "react";
-import { ProductCardFragment } from "../../../generated/graphql/base";
+import { RentalCardFragment } from "../../../generated/graphql/base";
 
-export const ProductCard: FunctionComponent<ProductCardFragment> = ({
+export const RentalCard: FunctionComponent<RentalCardFragment> = ({
   id,
   name,
   description,
@@ -11,7 +11,7 @@ export const ProductCard: FunctionComponent<ProductCardFragment> = ({
 }) => {
   return (
     <Card
-      href={`/products/${id}`}
+      href={`/rentals/${id}`}
       title={name}
       description={description}
       photo={

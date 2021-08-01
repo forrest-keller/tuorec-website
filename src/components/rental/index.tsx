@@ -2,9 +2,9 @@ import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import { RichText } from "components/rich-text";
-import { ProductFragment } from "../../../generated/graphql/base";
+import { RentalFragment } from "../../../generated/graphql/base";
 
-export const Product: FunctionComponent<ProductFragment> = ({
+export const Rental: FunctionComponent<RentalFragment> = ({
   name,
   description,
   photo,

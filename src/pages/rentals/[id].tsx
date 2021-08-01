@@ -1,45 +1,45 @@
 import { Container } from "@chakra-ui/react";
-import { Post } from "components";
+import { Rental } from "components";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { PostFragment } from "../../../generated/graphql/base";
+import { RentalFragment } from "../../../generated/graphql/base";
 import {
-  getServerPagePost,
-  getServerPagePostIds,
+  getServerPageRental,
+  getServerPageRentalIds,
 } from "../../../generated/graphql/next";
 
 export interface Props {
-  post: PostFragment;
+  rental: RentalFragment;
 }
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const res = await getServerPagePostIds({});
+  const res = await getServerPageRentalIds({});
 
   return {
     fallback: false,
-    paths: res.props.data.posts.map((post) => ({
-      params: { id: post.id },
+    paths: res.props.data.rentals.map((rental) => ({
+      params: { id: rental.id },
     })),
   };
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-  const res = await getServerPagePost({
+  const res = await getServerPageRental({
     variables: { id: ctx?.params?.id as string | undefined },
   });
 
-  if (!res.props.data.post) {
+  if (!res.props.data.rental) {
     throw new Error("Rental not found.");
   }
 
-  return { props: { post: res.props.data.post } };
+  return { props: { rental: res.props.data.rental } };
 };
 
-const PostPage: NextPage<Props> = ({ post }) => {
+const RentalPage: NextPage<Props> = ({ rental }) => {
   return (
     <Container variant="xl">
-      <Post {...post} />
+      <Rental {...rental} />
     </Container>
   );
 };
 
-export default PostPage;
+export default RentalPage;

@@ -1,4 +1,4 @@
-fragment Product on Product {
+fragment Rental on Rental {
   id
   name
   description

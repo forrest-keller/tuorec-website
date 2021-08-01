@@ -23,7 +23,7 @@ const typePolicies: TypedTypePolicies = {
     fields: {
       eventsConnection: mergeConnection(),
       postsConnection: mergeConnection(),
-      productsConnection: mergeConnection(),
+      rentalsConnection: mergeConnection(),
     },
   },
 };

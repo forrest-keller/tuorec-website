@@ -1,0 +1,11 @@
+query Rentals($first: Int!, $skip: Int!, $orderBy: RentalOrderByInput!) {
+  rentalsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
+    ...RentalsList
+  }
+}
+
+query RentalsPosts {
+  posts(where: { displayLocations_contains_all: rentals }) {
+    ...Post
+  }
+}

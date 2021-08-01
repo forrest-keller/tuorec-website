@@ -1,4 +1,4 @@
-fragment ProductCard on Product {
+fragment RentalCard on Rental {
   id
   name
   description
