@@ -1,7 +1,7 @@
 import { Grid } from "@chakra-ui/react";
-import { ProductListFragment } from "generated/graphql";
 import { FunctionComponent } from "react";
 import { ProductCard } from "components";
+import { ProductListFragment } from "../../../generated/graphql/base";
 
 export const ProductList: FunctionComponent<ProductListFragment> = ({
   edges,

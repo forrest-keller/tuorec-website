@@ -1,7 +1,7 @@
 import { Alert, Grid, Skeleton, Text } from "@chakra-ui/react";
-import { PostsListFragment } from "generated/graphql";
 import { FunctionComponent } from "react";
 import { PostCard } from "components/post-card";
+import { PostsListFragment } from "../../../generated/graphql/base";
 
 export const PostsList: FunctionComponent<PostsListFragment> = ({ edges }) => {
   return (
