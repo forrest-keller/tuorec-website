@@ -1,7 +1,7 @@
 import { Card } from "components/card";
-import { ProductCardFragment } from "generated/graphql";
 import Image from "next/image";
 import { FunctionComponent } from "react";
+import { ProductCardFragment } from "../../../generated/graphql/base";
 
 export const ProductCard: FunctionComponent<ProductCardFragment> = ({
   id,

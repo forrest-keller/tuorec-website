@@ -7,11 +7,11 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { ProductList } from "components";
+import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
   ProductOrderByInput,
   useProductListQuery,
-} from "generated/graphql/base";
-import useInfiniteScroll from "react-infinite-scroll-hook";
+} from "../../../generated/graphql/base";
 
 const ProductsPage = () => {
   const { data, loading, error, fetchMore } = useProductListQuery({

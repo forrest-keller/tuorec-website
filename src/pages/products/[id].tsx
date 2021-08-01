@@ -1,11 +1,11 @@
 import { Container } from "@chakra-ui/react";
 import { Product } from "components";
-import { ProductFragment } from "generated/graphql/base";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { ProductFragment } from "../../../generated/graphql/base";
 import {
   getServerPageProduct,
   getServerPageProductIds,
-} from "generated/graphql/next";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+} from "../../../generated/graphql/next";
 
 export interface Props {
   product: ProductFragment;

@@ -1,8 +1,8 @@
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
-import { ProductFragment } from "generated";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import { RichText } from "components/rich-text";
+import { ProductFragment } from "../../../generated/graphql/base";
 
 export const Product: FunctionComponent<ProductFragment> = ({
   name,

@@ -2,9 +2,9 @@ import { Tag, Text } from "@chakra-ui/react";
 import { capitalCase } from "change-case";
 import { Card } from "components/card";
 import dayjs from "dayjs";
-import { EventCardFragment } from "generated/graphql/base";
 import Image from "next/image";
 import { FunctionComponent } from "react";
+import { EventCardFragment } from "../../../generated/graphql/base";
 
 export const EventCard: FunctionComponent<EventCardFragment> = ({
   id,

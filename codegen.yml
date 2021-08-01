@@ -3,10 +3,10 @@ schema:
   - ${NEXT_PUBLIC_GRAPH_CMS_ENDPOINT_URL}
 documents: "src/**/*.graphql"
 generates:
-  src/generated/graphql/apollo.ts:
+  generated/graphql/apollo.ts:
     plugins:
       - typescript-apollo-client-helpers
-  src/generated/graphql/base.tsx:
+  generated/graphql/base.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
@@ -16,7 +16,7 @@ generates:
       reactApolloVersion: 3
       withHooks: true
       documentMode: graphQLTag
-  src/generated/graphql/next.tsx:
+  generated/graphql/next.tsx:
     config:
       documentMode: external
       importDocumentNodeExternallyFrom: ./base
