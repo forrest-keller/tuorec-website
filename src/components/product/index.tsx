@@ -1,17 +1,17 @@
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
-import { PricingChipFragment, ProductFragment } from "generated";
+import { ProductFragment } from "generated";
 import { FunctionComponent } from "react";
 import Image from "next/image";
-import { PricingChip } from "components/pricing-chip";
+import { RichText } from "components/rich-text";
 
 export const Product: FunctionComponent<ProductFragment> = ({
   name,
   description,
   photo,
-  pricings,
+  content,
 }) => {
   return (
-    <Stack>
+    <Grid gap={10}>
       <Grid
         gap={10}
         autoFlow={{ lg: "column" }}
@@ -34,6 +34,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
           <Text variant="subtle">{description}</Text>
         </Grid>
       </Grid>
-    </Stack>
+      <RichText content={content.json} />
+    </Grid>
   );
 };

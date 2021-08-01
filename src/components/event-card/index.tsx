@@ -1,7 +1,6 @@
 import { Tag, Text } from "@chakra-ui/react";
 import { capitalCase } from "change-case";
 import { Card } from "components/card";
-import { PricingChip } from "components/pricing-chip";
 import dayjs from "dayjs";
 import { EventCardFragment } from "generated";
 import Image from "next/image";
@@ -14,7 +13,6 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
   activities,
   startTime,
   endTime,
-  pricing,
   place,
   photo,
 }) => {
@@ -41,9 +39,6 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
   return (
     <Card
       href={`/events/${id}`}
-      topRightElements={
-        pricing ? [<PricingChip key={pricing.id} {...pricing} />] : undefined
-      }
       overTitleElements={[
         <Text key="time-range" variant="subtle">
           {timeRangeText}

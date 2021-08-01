@@ -1,6 +1,5 @@
 export * from "./layout";
 export * from "./link";
-export * from "./pricing-chip";
 export * from "./product-card";
 export * from "./product-list";
 export * from "./card";

@@ -1,4 +1,3 @@
-import { PricingChip } from "components";
 import { Card } from "components/card";
 import { ProductCardFragment } from "generated/graphql";
 import Image from "next/image";
@@ -8,7 +7,6 @@ export const ProductCard: FunctionComponent<ProductCardFragment> = ({
   id,
   name,
   description,
-  pricings,
   photo,
 }) => {
   return (
@@ -26,9 +24,6 @@ export const ProductCard: FunctionComponent<ProductCardFragment> = ({
           layout="responsive"
         />
       }
-      topRightElements={pricings.map((pricing) => (
-        <PricingChip key={pricing.id} {...pricing} />
-      ))}
     />
   );
 };
