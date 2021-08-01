@@ -13,3 +13,9 @@ query Events(
     ...EventsList
   }
 }
+
+query EventsPosts {
+  posts(where: { displayLocations_contains_all: events }) {
+    ...Post
+  }
+}

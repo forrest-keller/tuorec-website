@@ -6,14 +6,31 @@ import {
   Heading,
   Spinner,
 } from "@chakra-ui/react";
-import { PostsList } from "components";
+import { Post, PostsList } from "components";
+import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
+  PostFragment,
   PostOrderByInput,
   usePostsQuery,
 } from "../../../generated/graphql/base";
+import { getServerPagePostsPosts } from "../../../generated/graphql/next";
 
-const PostsPage = () => {
+export interface Props {
+  posts: PostFragment[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const res = await getServerPagePostsPosts({});
+
+  return {
+    props: {
+      posts: res.props.data.posts,
+    },
+  };
+};
+
+const PostsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = usePostsQuery({
     variables: {
       orderBy: PostOrderByInput.CreatedAtDesc,
@@ -35,11 +52,15 @@ const PostsPage = () => {
   });
 
   return (
-    <Container>
-      <Grid gap={10}>
-        <Heading variant="h1" as="h1">
-          Posts
-        </Heading>
+    <Grid gap={10}>
+      <Container variant="xl">
+        <Grid gap={10}>
+          {posts.map((post) => (
+            <Post key={post.id} {...post} />
+          ))}
+        </Grid>
+      </Container>
+      <Container>
         {error && <Alert status="error">Error retrieving posts.</Alert>}
         {data?.postsConnection.edges.length === 0 && (
           <Alert status="info">No posts.</Alert>
@@ -50,8 +71,8 @@ const PostsPage = () => {
             <Spinner ref={loaderRef} />
           )}
         </Box>
-      </Grid>
-    </Container>
+      </Container>
+    </Grid>
   );
 };
 

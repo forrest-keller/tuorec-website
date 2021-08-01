@@ -5,7 +5,7 @@ query Products($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
 }
 
 query ProductsPosts {
-  posts(where: { displayLocations: products }) {
+  posts(where: { displayLocations_contains_all: products }) {
     ...Post
   }
 }

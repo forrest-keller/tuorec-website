@@ -1,5 +1,16 @@
 query Posts($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
-  postsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
+  postsConnection(
+    first: $first
+    skip: $skip
+    orderBy: $orderBy
+    where: { hide: false }
+  ) {
     ...PostsList
+  }
+}
+
+query PostsPosts {
+  posts(where: { displayLocations_contains_all: posts }) {
+    ...Post
   }
 }

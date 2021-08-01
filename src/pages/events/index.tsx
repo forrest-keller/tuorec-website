@@ -6,15 +6,33 @@ import {
   Heading,
   Spinner,
 } from "@chakra-ui/react";
+import { Post } from "components";
 import { EventsList } from "components/events-list";
 import dayjs from "dayjs";
+import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
   EventOrderByInput,
+  PostFragment,
   useEventsQuery,
 } from "../../../generated/graphql/base";
+import { getServerPageEventsPosts } from "../../../generated/graphql/next";
 
-const EventsPage = () => {
+export interface Props {
+  posts: PostFragment[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const res = await getServerPageEventsPosts({});
+
+  return {
+    props: {
+      posts: res.props.data.posts,
+    },
+  };
+};
+
+const EventsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = useEventsQuery({
     variables: {
       orderBy: EventOrderByInput.CreatedAtDesc,
@@ -37,11 +55,14 @@ const EventsPage = () => {
   });
 
   return (
-    <Container>
-      <Grid gap={10}>
-        <Heading variant="h1" as="h1">
-          Events
-        </Heading>
+    <Grid gap={10}>
+      <Container variant="xl">
+        {posts.map((post) => (
+          <Post key={post.id} {...post} />
+        ))}
+      </Container>
+
+      <Container>
         {error && <Alert status="error">Error retrieving events.</Alert>}
         {data?.eventsConnection.edges.length === 0 && (
           <Alert status="info">No events.</Alert>
@@ -52,8 +73,8 @@ const EventsPage = () => {
             <Spinner ref={loaderRef} />
           )}
         </Box>
-      </Grid>
-    </Container>
+      </Container>
+    </Grid>
   );
 };
 
