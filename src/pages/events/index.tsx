@@ -11,11 +11,11 @@ import dayjs from "dayjs";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
   EventOrderByInput,
-  useEventsListQuery,
+  useEventsQuery,
 } from "../../../generated/graphql/base";
 
 const EventsPage = () => {
-  const { data, loading, error, fetchMore } = useEventsListQuery({
+  const { data, loading, error, fetchMore } = useEventsQuery({
     variables: {
       orderBy: EventOrderByInput.CreatedAtDesc,
       first: 10,

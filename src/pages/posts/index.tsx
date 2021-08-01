@@ -10,11 +10,11 @@ import { PostsList } from "components";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
   PostOrderByInput,
-  usePostsListQuery,
+  usePostsQuery,
 } from "../../../generated/graphql/base";
 
 const PostsPage = () => {
-  const { data, loading, error, fetchMore } = usePostsListQuery({
+  const { data, loading, error, fetchMore } = usePostsQuery({
     variables: {
       orderBy: PostOrderByInput.CreatedAtDesc,
       first: 10,

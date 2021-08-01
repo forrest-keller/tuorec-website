@@ -10,11 +10,11 @@ import { ProductList } from "components";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
   ProductOrderByInput,
-  useProductListQuery,
+  useProductsQuery,
 } from "../../../generated/graphql/base";
 
 const ProductsPage = () => {
-  const { data, loading, error, fetchMore } = useProductListQuery({
+  const { data, loading, error, fetchMore } = useProductsQuery({
     variables: {
       orderBy: ProductOrderByInput.UpdatedAtDesc,
       first: 3,
@@ -35,11 +35,13 @@ const ProductsPage = () => {
   });
 
   return (
-    <Container>
-      <Grid gap={10}>
+    <Grid gap={10}>
+      <Container variant="xl">
         <Heading variant="h1" as="h1">
           Products
         </Heading>
+      </Container>
+      <Container>
         {error && <Alert status="error">Error retrieving products.</Alert>}
         {data?.productsConnection.edges.length === 0 && (
           <Alert status="info">No products.</Alert>
@@ -50,8 +52,8 @@ const ProductsPage = () => {
             <Spinner ref={loaderRef} />
           )}
         </Box>
-      </Grid>
-    </Container>
+      </Container>
+    </Grid>
   );
 };
 

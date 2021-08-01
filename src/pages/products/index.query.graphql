@@ -1,4 +1,4 @@
-query ProductList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
+query Products($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
   productsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
     ...ProductList
   }

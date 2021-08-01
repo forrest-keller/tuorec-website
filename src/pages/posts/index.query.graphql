@@ -1,4 +1,4 @@
-query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
+query Posts($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
   postsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
     ...PostsList
   }

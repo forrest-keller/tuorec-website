@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
 const ProductPage: NextPage<Props> = ({ product }) => {
   return (
-    <Container>
+    <Container variant="xl">
       <Product {...product} />
     </Container>
   );

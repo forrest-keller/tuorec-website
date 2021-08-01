@@ -15,7 +15,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
       <Grid
         gap={10}
         autoFlow={{ lg: "column" }}
-        autoColumns={{ lg: "1fr 1fr" }}
+        autoColumns={{ lg: "1fr 2fr" }}
       >
         <Box>
           <Image

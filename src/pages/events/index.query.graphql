@@ -1,4 +1,4 @@
-query EventsList(
+query Events(
   $first: Int!
   $skip: Int!
   $orderBy: EventOrderByInput!
