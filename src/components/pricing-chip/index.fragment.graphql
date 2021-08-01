@@ -1,5 +1,0 @@
-fragment PricingChip on Pricing {
-  id
-  price
-  period
-}

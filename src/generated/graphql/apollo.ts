@@ -45,6 +45,33 @@ export type BatchPayloadKeySpecifier = ('count' | BatchPayloadKeySpecifier)[];
 export type BatchPayloadFieldPolicy = {
 	count?: FieldPolicy<any> | FieldReadFunction<any>
 };
+export type BuyPriceKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'price' | 'quantity' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'events' | 'history' | BuyPriceKeySpecifier)[];
+export type BuyPriceFieldPolicy = {
+	stage?: FieldPolicy<any> | FieldReadFunction<any>,
+	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishedAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	price?: FieldPolicy<any> | FieldReadFunction<any>,
+	quantity?: FieldPolicy<any> | FieldReadFunction<any>,
+	createdBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	events?: FieldPolicy<any> | FieldReadFunction<any>,
+	history?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type BuyPriceConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | BuyPriceConnectionKeySpecifier)[];
+export type BuyPriceConnectionFieldPolicy = {
+	pageInfo?: FieldPolicy<any> | FieldReadFunction<any>,
+	edges?: FieldPolicy<any> | FieldReadFunction<any>,
+	aggregate?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type BuyPriceEdgeKeySpecifier = ('node' | 'cursor' | BuyPriceEdgeKeySpecifier)[];
+export type BuyPriceEdgeFieldPolicy = {
+	node?: FieldPolicy<any> | FieldReadFunction<any>,
+	cursor?: FieldPolicy<any> | FieldReadFunction<any>
+};
 export type ColorKeySpecifier = ('hex' | 'rgba' | 'css' | ColorKeySpecifier)[];
 export type ColorFieldPolicy = {
 	hex?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -59,7 +86,7 @@ export type DocumentVersionFieldPolicy = {
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	data?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type EventKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'name' | 'description' | 'content' | 'startTime' | 'endTime' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'photo' | 'people' | 'place' | 'meetingPlace' | 'pricing' | 'type' | 'activities' | 'history' | EventKeySpecifier)[];
+export type EventKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'name' | 'description' | 'content' | 'startTime' | 'endTime' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'place' | 'photo' | 'people' | 'meetingPlace' | 'activities' | 'prices' | 'history' | EventKeySpecifier)[];
 export type EventFieldPolicy = {
 	stage?: FieldPolicy<any> | FieldReadFunction<any>,
 	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -75,13 +102,12 @@ export type EventFieldPolicy = {
 	createdBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	place?: FieldPolicy<any> | FieldReadFunction<any>,
 	photo?: FieldPolicy<any> | FieldReadFunction<any>,
 	people?: FieldPolicy<any> | FieldReadFunction<any>,
-	place?: FieldPolicy<any> | FieldReadFunction<any>,
 	meetingPlace?: FieldPolicy<any> | FieldReadFunction<any>,
-	pricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	type?: FieldPolicy<any> | FieldReadFunction<any>,
 	activities?: FieldPolicy<any> | FieldReadFunction<any>,
+	prices?: FieldPolicy<any> | FieldReadFunction<any>,
 	history?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type EventConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | EventConnectionKeySpecifier)[];
@@ -104,49 +130,13 @@ export type EventEdgeFieldPolicy = {
 	node?: FieldPolicy<any> | FieldReadFunction<any>,
 	cursor?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type GroupKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'name' | 'content' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'people' | 'history' | GroupKeySpecifier)[];
-export type GroupFieldPolicy = {
-	stage?: FieldPolicy<any> | FieldReadFunction<any>,
-	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
-	id?: FieldPolicy<any> | FieldReadFunction<any>,
-	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishedAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	name?: FieldPolicy<any> | FieldReadFunction<any>,
-	content?: FieldPolicy<any> | FieldReadFunction<any>,
-	createdBy?: FieldPolicy<any> | FieldReadFunction<any>,
-	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
-	people?: FieldPolicy<any> | FieldReadFunction<any>,
-	history?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type GroupConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | GroupConnectionKeySpecifier)[];
-export type GroupConnectionFieldPolicy = {
-	pageInfo?: FieldPolicy<any> | FieldReadFunction<any>,
-	edges?: FieldPolicy<any> | FieldReadFunction<any>,
-	aggregate?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type GroupContentRichTextKeySpecifier = ('raw' | 'json' | 'html' | 'markdown' | 'text' | 'references' | GroupContentRichTextKeySpecifier)[];
-export type GroupContentRichTextFieldPolicy = {
-	raw?: FieldPolicy<any> | FieldReadFunction<any>,
-	json?: FieldPolicy<any> | FieldReadFunction<any>,
-	html?: FieldPolicy<any> | FieldReadFunction<any>,
-	markdown?: FieldPolicy<any> | FieldReadFunction<any>,
-	text?: FieldPolicy<any> | FieldReadFunction<any>,
-	references?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type GroupEdgeKeySpecifier = ('node' | 'cursor' | GroupEdgeKeySpecifier)[];
-export type GroupEdgeFieldPolicy = {
-	node?: FieldPolicy<any> | FieldReadFunction<any>,
-	cursor?: FieldPolicy<any> | FieldReadFunction<any>
-};
 export type LocationKeySpecifier = ('latitude' | 'longitude' | 'distance' | LocationKeySpecifier)[];
 export type LocationFieldPolicy = {
 	latitude?: FieldPolicy<any> | FieldReadFunction<any>,
 	longitude?: FieldPolicy<any> | FieldReadFunction<any>,
 	distance?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('createAsset' | 'updateAsset' | 'deleteAsset' | 'upsertAsset' | 'publishAsset' | 'unpublishAsset' | 'updateManyAssetsConnection' | 'deleteManyAssetsConnection' | 'publishManyAssetsConnection' | 'unpublishManyAssetsConnection' | 'updateManyAssets' | 'deleteManyAssets' | 'publishManyAssets' | 'unpublishManyAssets' | 'createPerson' | 'updatePerson' | 'deletePerson' | 'upsertPerson' | 'publishPerson' | 'unpublishPerson' | 'updateManyPeopleConnection' | 'deleteManyPeopleConnection' | 'publishManyPeopleConnection' | 'unpublishManyPeopleConnection' | 'updateManyPeople' | 'deleteManyPeople' | 'publishManyPeople' | 'unpublishManyPeople' | 'createGroup' | 'updateGroup' | 'deleteGroup' | 'upsertGroup' | 'publishGroup' | 'unpublishGroup' | 'updateManyGroupsConnection' | 'deleteManyGroupsConnection' | 'publishManyGroupsConnection' | 'unpublishManyGroupsConnection' | 'updateManyGroups' | 'deleteManyGroups' | 'publishManyGroups' | 'unpublishManyGroups' | 'createPlace' | 'updatePlace' | 'deletePlace' | 'upsertPlace' | 'publishPlace' | 'unpublishPlace' | 'updateManyPlacesConnection' | 'deleteManyPlacesConnection' | 'publishManyPlacesConnection' | 'unpublishManyPlacesConnection' | 'updateManyPlaces' | 'deleteManyPlaces' | 'publishManyPlaces' | 'unpublishManyPlaces' | 'createPricing' | 'updatePricing' | 'deletePricing' | 'upsertPricing' | 'publishPricing' | 'unpublishPricing' | 'updateManyPricingsConnection' | 'deleteManyPricingsConnection' | 'publishManyPricingsConnection' | 'unpublishManyPricingsConnection' | 'updateManyPricings' | 'deleteManyPricings' | 'publishManyPricings' | 'unpublishManyPricings' | 'createProduct' | 'updateProduct' | 'deleteProduct' | 'upsertProduct' | 'publishProduct' | 'unpublishProduct' | 'updateManyProductsConnection' | 'deleteManyProductsConnection' | 'publishManyProductsConnection' | 'unpublishManyProductsConnection' | 'updateManyProducts' | 'deleteManyProducts' | 'publishManyProducts' | 'unpublishManyProducts' | 'createEvent' | 'updateEvent' | 'deleteEvent' | 'upsertEvent' | 'publishEvent' | 'unpublishEvent' | 'updateManyEventsConnection' | 'deleteManyEventsConnection' | 'publishManyEventsConnection' | 'unpublishManyEventsConnection' | 'updateManyEvents' | 'deleteManyEvents' | 'publishManyEvents' | 'unpublishManyEvents' | 'createPost' | 'updatePost' | 'deletePost' | 'upsertPost' | 'publishPost' | 'unpublishPost' | 'updateManyPostsConnection' | 'deleteManyPostsConnection' | 'publishManyPostsConnection' | 'unpublishManyPostsConnection' | 'updateManyPosts' | 'deleteManyPosts' | 'publishManyPosts' | 'unpublishManyPosts' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('createAsset' | 'updateAsset' | 'deleteAsset' | 'upsertAsset' | 'publishAsset' | 'unpublishAsset' | 'updateManyAssetsConnection' | 'deleteManyAssetsConnection' | 'publishManyAssetsConnection' | 'unpublishManyAssetsConnection' | 'updateManyAssets' | 'deleteManyAssets' | 'publishManyAssets' | 'unpublishManyAssets' | 'createPerson' | 'updatePerson' | 'deletePerson' | 'upsertPerson' | 'publishPerson' | 'unpublishPerson' | 'updateManyPeopleConnection' | 'deleteManyPeopleConnection' | 'publishManyPeopleConnection' | 'unpublishManyPeopleConnection' | 'updateManyPeople' | 'deleteManyPeople' | 'publishManyPeople' | 'unpublishManyPeople' | 'createPlace' | 'updatePlace' | 'deletePlace' | 'upsertPlace' | 'publishPlace' | 'unpublishPlace' | 'updateManyPlacesConnection' | 'deleteManyPlacesConnection' | 'publishManyPlacesConnection' | 'unpublishManyPlacesConnection' | 'updateManyPlaces' | 'deleteManyPlaces' | 'publishManyPlaces' | 'unpublishManyPlaces' | 'createProduct' | 'updateProduct' | 'deleteProduct' | 'upsertProduct' | 'publishProduct' | 'unpublishProduct' | 'updateManyProductsConnection' | 'deleteManyProductsConnection' | 'publishManyProductsConnection' | 'unpublishManyProductsConnection' | 'updateManyProducts' | 'deleteManyProducts' | 'publishManyProducts' | 'unpublishManyProducts' | 'createEvent' | 'updateEvent' | 'deleteEvent' | 'upsertEvent' | 'publishEvent' | 'unpublishEvent' | 'updateManyEventsConnection' | 'deleteManyEventsConnection' | 'publishManyEventsConnection' | 'unpublishManyEventsConnection' | 'updateManyEvents' | 'deleteManyEvents' | 'publishManyEvents' | 'unpublishManyEvents' | 'createPost' | 'updatePost' | 'deletePost' | 'upsertPost' | 'publishPost' | 'unpublishPost' | 'updateManyPostsConnection' | 'deleteManyPostsConnection' | 'publishManyPostsConnection' | 'unpublishManyPostsConnection' | 'updateManyPosts' | 'deleteManyPosts' | 'publishManyPosts' | 'unpublishManyPosts' | 'createRentPrice' | 'updateRentPrice' | 'deleteRentPrice' | 'upsertRentPrice' | 'publishRentPrice' | 'unpublishRentPrice' | 'updateManyRentPricesConnection' | 'deleteManyRentPricesConnection' | 'publishManyRentPricesConnection' | 'unpublishManyRentPricesConnection' | 'updateManyRentPrices' | 'deleteManyRentPrices' | 'publishManyRentPrices' | 'unpublishManyRentPrices' | 'createBuyPrice' | 'updateBuyPrice' | 'deleteBuyPrice' | 'upsertBuyPrice' | 'publishBuyPrice' | 'unpublishBuyPrice' | 'updateManyBuyPricesConnection' | 'deleteManyBuyPricesConnection' | 'publishManyBuyPricesConnection' | 'unpublishManyBuyPricesConnection' | 'updateManyBuyPrices' | 'deleteManyBuyPrices' | 'publishManyBuyPrices' | 'unpublishManyBuyPrices' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	createAsset?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateAsset?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -176,20 +166,6 @@ export type MutationFieldPolicy = {
 	deleteManyPeople?: FieldPolicy<any> | FieldReadFunction<any>,
 	publishManyPeople?: FieldPolicy<any> | FieldReadFunction<any>,
 	unpublishManyPeople?: FieldPolicy<any> | FieldReadFunction<any>,
-	createGroup?: FieldPolicy<any> | FieldReadFunction<any>,
-	updateGroup?: FieldPolicy<any> | FieldReadFunction<any>,
-	deleteGroup?: FieldPolicy<any> | FieldReadFunction<any>,
-	upsertGroup?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishGroup?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishGroup?: FieldPolicy<any> | FieldReadFunction<any>,
-	updateManyGroupsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	deleteManyGroupsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishManyGroupsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishManyGroupsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	updateManyGroups?: FieldPolicy<any> | FieldReadFunction<any>,
-	deleteManyGroups?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishManyGroups?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishManyGroups?: FieldPolicy<any> | FieldReadFunction<any>,
 	createPlace?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatePlace?: FieldPolicy<any> | FieldReadFunction<any>,
 	deletePlace?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -204,20 +180,6 @@ export type MutationFieldPolicy = {
 	deleteManyPlaces?: FieldPolicy<any> | FieldReadFunction<any>,
 	publishManyPlaces?: FieldPolicy<any> | FieldReadFunction<any>,
 	unpublishManyPlaces?: FieldPolicy<any> | FieldReadFunction<any>,
-	createPricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	updatePricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	deletePricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	upsertPricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishPricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishPricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	updateManyPricingsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	deleteManyPricingsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishManyPricingsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishManyPricingsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	updateManyPricings?: FieldPolicy<any> | FieldReadFunction<any>,
-	deleteManyPricings?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishManyPricings?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishManyPricings?: FieldPolicy<any> | FieldReadFunction<any>,
 	createProduct?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateProduct?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteProduct?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -259,7 +221,35 @@ export type MutationFieldPolicy = {
 	updateManyPosts?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteManyPosts?: FieldPolicy<any> | FieldReadFunction<any>,
 	publishManyPosts?: FieldPolicy<any> | FieldReadFunction<any>,
-	unpublishManyPosts?: FieldPolicy<any> | FieldReadFunction<any>
+	unpublishManyPosts?: FieldPolicy<any> | FieldReadFunction<any>,
+	createRentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateRentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteRentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	upsertRentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishRentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	unpublishRentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateManyRentPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteManyRentPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishManyRentPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	unpublishManyRentPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateManyRentPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteManyRentPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishManyRentPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	unpublishManyRentPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	createBuyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateBuyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteBuyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	upsertBuyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishBuyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	unpublishBuyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateManyBuyPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteManyBuyPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishManyBuyPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	unpublishManyBuyPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateManyBuyPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteManyBuyPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishManyBuyPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	unpublishManyBuyPrices?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type NodeKeySpecifier = ('id' | 'stage' | NodeKeySpecifier)[];
 export type NodeFieldPolicy = {
@@ -274,7 +264,7 @@ export type PageInfoFieldPolicy = {
 	endCursor?: FieldPolicy<any> | FieldReadFunction<any>,
 	pageSize?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type PersonKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'firstName' | 'lastName' | 'content' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'photo' | 'groups' | 'history' | PersonKeySpecifier)[];
+export type PersonKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'firstName' | 'lastName' | 'content' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'photo' | 'history' | PersonKeySpecifier)[];
 export type PersonFieldPolicy = {
 	stage?: FieldPolicy<any> | FieldReadFunction<any>,
 	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -289,7 +279,6 @@ export type PersonFieldPolicy = {
 	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	photo?: FieldPolicy<any> | FieldReadFunction<any>,
-	groups?: FieldPolicy<any> | FieldReadFunction<any>,
 	history?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type PersonConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | PersonConnectionKeySpecifier)[];
@@ -389,33 +378,7 @@ export type PostEdgeFieldPolicy = {
 	node?: FieldPolicy<any> | FieldReadFunction<any>,
 	cursor?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type PricingKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'price' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'period' | 'history' | PricingKeySpecifier)[];
-export type PricingFieldPolicy = {
-	stage?: FieldPolicy<any> | FieldReadFunction<any>,
-	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
-	id?: FieldPolicy<any> | FieldReadFunction<any>,
-	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishedAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	price?: FieldPolicy<any> | FieldReadFunction<any>,
-	createdBy?: FieldPolicy<any> | FieldReadFunction<any>,
-	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
-	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
-	period?: FieldPolicy<any> | FieldReadFunction<any>,
-	history?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type PricingConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | PricingConnectionKeySpecifier)[];
-export type PricingConnectionFieldPolicy = {
-	pageInfo?: FieldPolicy<any> | FieldReadFunction<any>,
-	edges?: FieldPolicy<any> | FieldReadFunction<any>,
-	aggregate?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type PricingEdgeKeySpecifier = ('node' | 'cursor' | PricingEdgeKeySpecifier)[];
-export type PricingEdgeFieldPolicy = {
-	node?: FieldPolicy<any> | FieldReadFunction<any>,
-	cursor?: FieldPolicy<any> | FieldReadFunction<any>
-};
-export type ProductKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'name' | 'description' | 'content' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'photo' | 'pricings' | 'history' | ProductKeySpecifier)[];
+export type ProductKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'name' | 'description' | 'content' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'photo' | 'history' | ProductKeySpecifier)[];
 export type ProductFieldPolicy = {
 	stage?: FieldPolicy<any> | FieldReadFunction<any>,
 	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -430,7 +393,6 @@ export type ProductFieldPolicy = {
 	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
 	photo?: FieldPolicy<any> | FieldReadFunction<any>,
-	pricings?: FieldPolicy<any> | FieldReadFunction<any>,
 	history?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type ProductConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | ProductConnectionKeySpecifier)[];
@@ -453,7 +415,7 @@ export type ProductEdgeFieldPolicy = {
 	node?: FieldPolicy<any> | FieldReadFunction<any>,
 	cursor?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('node' | 'users' | 'user' | 'usersConnection' | 'assets' | 'asset' | 'assetsConnection' | 'assetVersion' | 'people' | 'person' | 'peopleConnection' | 'personVersion' | 'groups' | 'group' | 'groupsConnection' | 'groupVersion' | 'places' | 'place' | 'placesConnection' | 'placeVersion' | 'pricings' | 'pricing' | 'pricingsConnection' | 'pricingVersion' | 'products' | 'product' | 'productsConnection' | 'productVersion' | 'events' | 'event' | 'eventsConnection' | 'eventVersion' | 'posts' | 'post' | 'postsConnection' | 'postVersion' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('node' | 'users' | 'user' | 'usersConnection' | 'assets' | 'asset' | 'assetsConnection' | 'assetVersion' | 'people' | 'person' | 'peopleConnection' | 'personVersion' | 'places' | 'place' | 'placesConnection' | 'placeVersion' | 'products' | 'product' | 'productsConnection' | 'productVersion' | 'events' | 'event' | 'eventsConnection' | 'eventVersion' | 'posts' | 'post' | 'postsConnection' | 'postVersion' | 'rentPrices' | 'rentPrice' | 'rentPricesConnection' | 'rentPriceVersion' | 'buyPrices' | 'buyPrice' | 'buyPricesConnection' | 'buyPriceVersion' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	node?: FieldPolicy<any> | FieldReadFunction<any>,
 	users?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -467,18 +429,10 @@ export type QueryFieldPolicy = {
 	person?: FieldPolicy<any> | FieldReadFunction<any>,
 	peopleConnection?: FieldPolicy<any> | FieldReadFunction<any>,
 	personVersion?: FieldPolicy<any> | FieldReadFunction<any>,
-	groups?: FieldPolicy<any> | FieldReadFunction<any>,
-	group?: FieldPolicy<any> | FieldReadFunction<any>,
-	groupsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	groupVersion?: FieldPolicy<any> | FieldReadFunction<any>,
 	places?: FieldPolicy<any> | FieldReadFunction<any>,
 	place?: FieldPolicy<any> | FieldReadFunction<any>,
 	placesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
 	placeVersion?: FieldPolicy<any> | FieldReadFunction<any>,
-	pricings?: FieldPolicy<any> | FieldReadFunction<any>,
-	pricing?: FieldPolicy<any> | FieldReadFunction<any>,
-	pricingsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	pricingVersion?: FieldPolicy<any> | FieldReadFunction<any>,
 	products?: FieldPolicy<any> | FieldReadFunction<any>,
 	product?: FieldPolicy<any> | FieldReadFunction<any>,
 	productsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -490,7 +444,15 @@ export type QueryFieldPolicy = {
 	posts?: FieldPolicy<any> | FieldReadFunction<any>,
 	post?: FieldPolicy<any> | FieldReadFunction<any>,
 	postsConnection?: FieldPolicy<any> | FieldReadFunction<any>,
-	postVersion?: FieldPolicy<any> | FieldReadFunction<any>
+	postVersion?: FieldPolicy<any> | FieldReadFunction<any>,
+	rentPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	rentPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	rentPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	rentPriceVersion?: FieldPolicy<any> | FieldReadFunction<any>,
+	buyPrices?: FieldPolicy<any> | FieldReadFunction<any>,
+	buyPrice?: FieldPolicy<any> | FieldReadFunction<any>,
+	buyPricesConnection?: FieldPolicy<any> | FieldReadFunction<any>,
+	buyPriceVersion?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type RGBAKeySpecifier = ('r' | 'g' | 'b' | 'a' | RGBAKeySpecifier)[];
 export type RGBAFieldPolicy = {
@@ -498,6 +460,34 @@ export type RGBAFieldPolicy = {
 	g?: FieldPolicy<any> | FieldReadFunction<any>,
 	b?: FieldPolicy<any> | FieldReadFunction<any>,
 	a?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type RentPriceKeySpecifier = ('stage' | 'documentInStages' | 'id' | 'createdAt' | 'updatedAt' | 'publishedAt' | 'price' | 'days' | 'quantity' | 'createdBy' | 'updatedBy' | 'publishedBy' | 'events' | 'history' | RentPriceKeySpecifier)[];
+export type RentPriceFieldPolicy = {
+	stage?: FieldPolicy<any> | FieldReadFunction<any>,
+	documentInStages?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishedAt?: FieldPolicy<any> | FieldReadFunction<any>,
+	price?: FieldPolicy<any> | FieldReadFunction<any>,
+	days?: FieldPolicy<any> | FieldReadFunction<any>,
+	quantity?: FieldPolicy<any> | FieldReadFunction<any>,
+	createdBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	updatedBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	publishedBy?: FieldPolicy<any> | FieldReadFunction<any>,
+	events?: FieldPolicy<any> | FieldReadFunction<any>,
+	history?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type RentPriceConnectionKeySpecifier = ('pageInfo' | 'edges' | 'aggregate' | RentPriceConnectionKeySpecifier)[];
+export type RentPriceConnectionFieldPolicy = {
+	pageInfo?: FieldPolicy<any> | FieldReadFunction<any>,
+	edges?: FieldPolicy<any> | FieldReadFunction<any>,
+	aggregate?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type RentPriceEdgeKeySpecifier = ('node' | 'cursor' | RentPriceEdgeKeySpecifier)[];
+export type RentPriceEdgeFieldPolicy = {
+	node?: FieldPolicy<any> | FieldReadFunction<any>,
+	cursor?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type RichTextKeySpecifier = ('raw' | 'html' | 'markdown' | 'text' | RichTextKeySpecifier)[];
 export type RichTextFieldPolicy = {
@@ -558,6 +548,18 @@ export type TypedTypePolicies = TypePolicies & {
 		keyFields?: false | BatchPayloadKeySpecifier | (() => undefined | BatchPayloadKeySpecifier),
 		fields?: BatchPayloadFieldPolicy,
 	},
+	BuyPrice?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | BuyPriceKeySpecifier | (() => undefined | BuyPriceKeySpecifier),
+		fields?: BuyPriceFieldPolicy,
+	},
+	BuyPriceConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | BuyPriceConnectionKeySpecifier | (() => undefined | BuyPriceConnectionKeySpecifier),
+		fields?: BuyPriceConnectionFieldPolicy,
+	},
+	BuyPriceEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | BuyPriceEdgeKeySpecifier | (() => undefined | BuyPriceEdgeKeySpecifier),
+		fields?: BuyPriceEdgeFieldPolicy,
+	},
 	Color?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | ColorKeySpecifier | (() => undefined | ColorKeySpecifier),
 		fields?: ColorFieldPolicy,
@@ -581,22 +583,6 @@ export type TypedTypePolicies = TypePolicies & {
 	EventEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | EventEdgeKeySpecifier | (() => undefined | EventEdgeKeySpecifier),
 		fields?: EventEdgeFieldPolicy,
-	},
-	Group?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | GroupKeySpecifier | (() => undefined | GroupKeySpecifier),
-		fields?: GroupFieldPolicy,
-	},
-	GroupConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | GroupConnectionKeySpecifier | (() => undefined | GroupConnectionKeySpecifier),
-		fields?: GroupConnectionFieldPolicy,
-	},
-	GroupContentRichText?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | GroupContentRichTextKeySpecifier | (() => undefined | GroupContentRichTextKeySpecifier),
-		fields?: GroupContentRichTextFieldPolicy,
-	},
-	GroupEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | GroupEdgeKeySpecifier | (() => undefined | GroupEdgeKeySpecifier),
-		fields?: GroupEdgeFieldPolicy,
 	},
 	Location?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | LocationKeySpecifier | (() => undefined | LocationKeySpecifier),
@@ -662,18 +648,6 @@ export type TypedTypePolicies = TypePolicies & {
 		keyFields?: false | PostEdgeKeySpecifier | (() => undefined | PostEdgeKeySpecifier),
 		fields?: PostEdgeFieldPolicy,
 	},
-	Pricing?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | PricingKeySpecifier | (() => undefined | PricingKeySpecifier),
-		fields?: PricingFieldPolicy,
-	},
-	PricingConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | PricingConnectionKeySpecifier | (() => undefined | PricingConnectionKeySpecifier),
-		fields?: PricingConnectionFieldPolicy,
-	},
-	PricingEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | PricingEdgeKeySpecifier | (() => undefined | PricingEdgeKeySpecifier),
-		fields?: PricingEdgeFieldPolicy,
-	},
 	Product?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | ProductKeySpecifier | (() => undefined | ProductKeySpecifier),
 		fields?: ProductFieldPolicy,
@@ -697,6 +671,18 @@ export type TypedTypePolicies = TypePolicies & {
 	RGBA?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | RGBAKeySpecifier | (() => undefined | RGBAKeySpecifier),
 		fields?: RGBAFieldPolicy,
+	},
+	RentPrice?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | RentPriceKeySpecifier | (() => undefined | RentPriceKeySpecifier),
+		fields?: RentPriceFieldPolicy,
+	},
+	RentPriceConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | RentPriceConnectionKeySpecifier | (() => undefined | RentPriceConnectionKeySpecifier),
+		fields?: RentPriceConnectionFieldPolicy,
+	},
+	RentPriceEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | RentPriceEdgeKeySpecifier | (() => undefined | RentPriceEdgeKeySpecifier),
+		fields?: RentPriceEdgeFieldPolicy,
 	},
 	RichText?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | RichTextKeySpecifier | (() => undefined | RichTextKeySpecifier),

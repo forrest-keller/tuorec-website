@@ -1,14 +1,11 @@
 fragment Product on Product {
   id
-  content {
-    json
-  }
-  description
   name
+  description
   photo {
     url
   }
-  pricings {
-    ...PricingChip
+  content {
+    json
   }
 }

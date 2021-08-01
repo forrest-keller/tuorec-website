@@ -8,9 +8,6 @@ fragment EventCard on Event {
   photo {
     url
   }
-  pricing {
-    ...PricingChip
-  }
   place {
     name
     description

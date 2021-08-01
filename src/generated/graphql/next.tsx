@@ -23,12 +23,6 @@ export async function getServerPageEventsList
             },
         };
       }
-export const useEventsList = (
-  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.EventsListQuery, Types.EventsListQueryVariables>) => {
-  const router = useRouter();
-  const options = optionsFunc ? optionsFunc(router) : {};
-  return useQuery(Operations.EventsListDocument, options);
-};
 export type PageEventsListComp = React.FC<{data?: Types.EventsListQuery, error?: Apollo.ApolloError}>;
 export const withPageEventsList = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.EventsListQuery, Types.EventsListQueryVariables>) => (WrappedComponent:PageEventsListComp) : NextPage  => (props) => {
                 const router = useRouter()
@@ -40,7 +34,7 @@ export const withPageEventsList = (optionsFunc?: (router: NextRouter)=> QueryHoo
 export const ssrEventsList = {
       getServerPage: getServerPageEventsList,
       withPage: withPageEventsList,
-      usePage: useEventsList,
+      
     }
 export async function getServerPagePostsList
     (options: Omit<Apollo.QueryOptions<Types.PostsListQueryVariables>, 'query'>, ctx? :any ){
@@ -58,12 +52,6 @@ export async function getServerPagePostsList
             },
         };
       }
-export const usePostsList = (
-  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.PostsListQuery, Types.PostsListQueryVariables>) => {
-  const router = useRouter();
-  const options = optionsFunc ? optionsFunc(router) : {};
-  return useQuery(Operations.PostsListDocument, options);
-};
 export type PagePostsListComp = React.FC<{data?: Types.PostsListQuery, error?: Apollo.ApolloError}>;
 export const withPagePostsList = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.PostsListQuery, Types.PostsListQueryVariables>) => (WrappedComponent:PagePostsListComp) : NextPage  => (props) => {
                 const router = useRouter()
@@ -75,7 +63,7 @@ export const withPagePostsList = (optionsFunc?: (router: NextRouter)=> QueryHook
 export const ssrPostsList = {
       getServerPage: getServerPagePostsList,
       withPage: withPagePostsList,
-      usePage: usePostsList,
+      
     }
 export async function getServerPageProduct
     (options: Omit<Apollo.QueryOptions<Types.ProductQueryVariables>, 'query'>, ctx? :any ){
@@ -93,12 +81,6 @@ export async function getServerPageProduct
             },
         };
       }
-export const useProduct = (
-  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ProductQuery, Types.ProductQueryVariables>) => {
-  const router = useRouter();
-  const options = optionsFunc ? optionsFunc(router) : {};
-  return useQuery(Operations.ProductDocument, options);
-};
 export type PageProductComp = React.FC<{data?: Types.ProductQuery, error?: Apollo.ApolloError}>;
 export const withPageProduct = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ProductQuery, Types.ProductQueryVariables>) => (WrappedComponent:PageProductComp) : NextPage  => (props) => {
                 const router = useRouter()
@@ -110,7 +92,7 @@ export const withPageProduct = (optionsFunc?: (router: NextRouter)=> QueryHookOp
 export const ssrProduct = {
       getServerPage: getServerPageProduct,
       withPage: withPageProduct,
-      usePage: useProduct,
+      
     }
 export async function getServerPageProductIds
     (options: Omit<Apollo.QueryOptions<Types.ProductIdsQueryVariables>, 'query'>, ctx? :any ){
@@ -128,12 +110,6 @@ export async function getServerPageProductIds
             },
         };
       }
-export const useProductIds = (
-  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ProductIdsQuery, Types.ProductIdsQueryVariables>) => {
-  const router = useRouter();
-  const options = optionsFunc ? optionsFunc(router) : {};
-  return useQuery(Operations.ProductIdsDocument, options);
-};
 export type PageProductIdsComp = React.FC<{data?: Types.ProductIdsQuery, error?: Apollo.ApolloError}>;
 export const withPageProductIds = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ProductIdsQuery, Types.ProductIdsQueryVariables>) => (WrappedComponent:PageProductIdsComp) : NextPage  => (props) => {
                 const router = useRouter()
@@ -145,7 +121,7 @@ export const withPageProductIds = (optionsFunc?: (router: NextRouter)=> QueryHoo
 export const ssrProductIds = {
       getServerPage: getServerPageProductIds,
       withPage: withPageProductIds,
-      usePage: useProductIds,
+      
     }
 export async function getServerPageProductList
     (options: Omit<Apollo.QueryOptions<Types.ProductListQueryVariables>, 'query'>, ctx? :any ){
@@ -163,12 +139,6 @@ export async function getServerPageProductList
             },
         };
       }
-export const useProductList = (
-  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ProductListQuery, Types.ProductListQueryVariables>) => {
-  const router = useRouter();
-  const options = optionsFunc ? optionsFunc(router) : {};
-  return useQuery(Operations.ProductListDocument, options);
-};
 export type PageProductListComp = React.FC<{data?: Types.ProductListQuery, error?: Apollo.ApolloError}>;
 export const withPageProductList = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ProductListQuery, Types.ProductListQueryVariables>) => (WrappedComponent:PageProductListComp) : NextPage  => (props) => {
                 const router = useRouter()
@@ -180,5 +150,5 @@ export const withPageProductList = (optionsFunc?: (router: NextRouter)=> QueryHo
 export const ssrProductList = {
       getServerPage: getServerPageProductList,
       withPage: withPageProductList,
-      usePage: useProductList,
+      
     }

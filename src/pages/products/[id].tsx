@@ -5,12 +5,7 @@ import {
   getServerPageProductIds,
   ProductFragment,
 } from "generated";
-import {
-  GetStaticPaths,
-  GetStaticProps,
-  NextPage,
-  NextPageContext,
-} from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 export interface Props {
   product: ProductFragment;
@@ -20,10 +15,10 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   const res = await getServerPageProductIds({});
 
   return {
+    fallback: false,
     paths: res.props.data.products.map((product) => ({
       params: { id: product.id },
     })),
-    fallback: false,
   };
 };
 

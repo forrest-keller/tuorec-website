@@ -16,7 +16,7 @@
     "dev": "concurrently \"npm:start:dev\" \"npm:gen:watch\""
   },
   "dependencies": {
-    "@apollo/client": "^3.3.21",
+    "@apollo/client": "^3.4.1",
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",

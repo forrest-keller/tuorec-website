@@ -2,9 +2,6 @@ fragment ProductCard on Product {
   id
   name
   description
-  pricings {
-    ...PricingChip
-  }
   photo {
     url
   }

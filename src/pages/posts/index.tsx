@@ -7,17 +7,17 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { PostsList } from "components";
-import { PostOrderByInput, usePostsList } from "generated";
+import { PostOrderByInput, usePostsListQuery } from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const PostsPage = () => {
-  const { data, loading, error, fetchMore } = usePostsList(() => ({
+  const { data, loading, error, fetchMore } = usePostsListQuery({
     variables: {
       orderBy: PostOrderByInput.CreatedAtDesc,
       first: 10,
       skip: 0,
     },
-  }));
+  });
 
   const [loaderRef] = useInfiniteScroll({
     loading: loading,

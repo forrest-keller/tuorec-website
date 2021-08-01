@@ -7,17 +7,17 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { ProductList } from "components";
-import { ProductOrderByInput, useProductList } from "generated";
+import { ProductOrderByInput, useProductListQuery } from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const ProductsPage = () => {
-  const { data, loading, error, fetchMore } = useProductList(() => ({
+  const { data, loading, error, fetchMore } = useProductListQuery({
     variables: {
       orderBy: ProductOrderByInput.UpdatedAtDesc,
       first: 3,
       skip: 0,
     },
-  }));
+  });
 
   const [loaderRef] = useInfiniteScroll({
     loading: loading,

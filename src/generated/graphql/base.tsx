@@ -4,6 +4,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -766,6 +767,435 @@ export type BatchPayload = {
   count: Scalars['Long'];
 };
 
+export type BuyPrice = Node & {
+  __typename?: 'BuyPrice';
+  /** System stage field */
+  stage: Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<BuyPrice>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  events: Array<Event>;
+  /** List of BuyPrice versions */
+  history: Array<Version>;
+};
+
+
+export type BuyPriceDocumentInStagesArgs = {
+  stages?: Array<Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+export type BuyPriceCreatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type BuyPriceUpdatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type BuyPricePublishedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type BuyPriceEventsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type BuyPriceHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Stage>;
+};
+
+export type BuyPriceConnectInput = {
+  /** Document to connect */
+  where: BuyPriceWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<ConnectPositionInput>;
+};
+
+/** A connection to a list of items. */
+export type BuyPriceConnection = {
+  __typename?: 'BuyPriceConnection';
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** A list of edges. */
+  edges: Array<BuyPriceEdge>;
+  aggregate: Aggregate;
+};
+
+export type BuyPriceCreateInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+  events?: Maybe<EventCreateManyInlineInput>;
+};
+
+export type BuyPriceCreateManyInlineInput = {
+  /** Create and connect multiple existing BuyPrice documents */
+  create?: Maybe<Array<BuyPriceCreateInput>>;
+  /** Connect multiple existing BuyPrice documents */
+  connect?: Maybe<Array<BuyPriceWhereUniqueInput>>;
+};
+
+export type BuyPriceCreateOneInlineInput = {
+  /** Create and connect one BuyPrice document */
+  create?: Maybe<BuyPriceCreateInput>;
+  /** Connect one existing BuyPrice document */
+  connect?: Maybe<BuyPriceWhereUniqueInput>;
+};
+
+/** An edge in a connection. */
+export type BuyPriceEdge = {
+  __typename?: 'BuyPriceEdge';
+  /** The item at the end of the edge. */
+  node: BuyPrice;
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+};
+
+/** Identifies documents */
+export type BuyPriceManyWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<BuyPriceWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<BuyPriceWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<BuyPriceWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  price?: Maybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  price_not?: Maybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  price_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values that are not contained in given list. */
+  price_not_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  price_lt?: Maybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  price_lte?: Maybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  price_gt?: Maybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  price_gte?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  quantity_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  quantity_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  quantity_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  quantity_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  quantity_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  quantity_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  quantity_gte?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  publishedBy?: Maybe<UserWhereInput>;
+  events_every?: Maybe<EventWhereInput>;
+  events_some?: Maybe<EventWhereInput>;
+  events_none?: Maybe<EventWhereInput>;
+};
+
+export enum BuyPriceOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  QuantityAsc = 'quantity_ASC',
+  QuantityDesc = 'quantity_DESC'
+}
+
+export type BuyPriceUpdateInput = {
+  price?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+  events?: Maybe<EventUpdateManyInlineInput>;
+};
+
+export type BuyPriceUpdateManyInlineInput = {
+  /** Create and connect multiple BuyPrice documents */
+  create?: Maybe<Array<BuyPriceCreateInput>>;
+  /** Connect multiple existing BuyPrice documents */
+  connect?: Maybe<Array<BuyPriceConnectInput>>;
+  /** Override currently-connected documents with multiple existing BuyPrice documents */
+  set?: Maybe<Array<BuyPriceWhereUniqueInput>>;
+  /** Update multiple BuyPrice documents */
+  update?: Maybe<Array<BuyPriceUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple BuyPrice documents */
+  upsert?: Maybe<Array<BuyPriceUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple BuyPrice documents */
+  disconnect?: Maybe<Array<BuyPriceWhereUniqueInput>>;
+  /** Delete multiple BuyPrice documents */
+  delete?: Maybe<Array<BuyPriceWhereUniqueInput>>;
+};
+
+export type BuyPriceUpdateManyInput = {
+  price?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+};
+
+export type BuyPriceUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: BuyPriceWhereInput;
+  /** Update many input */
+  data: BuyPriceUpdateManyInput;
+};
+
+export type BuyPriceUpdateOneInlineInput = {
+  /** Create and connect one BuyPrice document */
+  create?: Maybe<BuyPriceCreateInput>;
+  /** Update single BuyPrice document */
+  update?: Maybe<BuyPriceUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single BuyPrice document */
+  upsert?: Maybe<BuyPriceUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing BuyPrice document */
+  connect?: Maybe<BuyPriceWhereUniqueInput>;
+  /** Disconnect currently connected BuyPrice document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected BuyPrice document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type BuyPriceUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: BuyPriceWhereUniqueInput;
+  /** Document to update */
+  data: BuyPriceUpdateInput;
+};
+
+export type BuyPriceUpsertInput = {
+  /** Create document if it didn't exist */
+  create: BuyPriceCreateInput;
+  /** Update document if it exists */
+  update: BuyPriceUpdateInput;
+};
+
+export type BuyPriceUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: BuyPriceWhereUniqueInput;
+  /** Upsert data */
+  data: BuyPriceUpsertInput;
+};
+
+/** Identifies documents */
+export type BuyPriceWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<BuyPriceWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<BuyPriceWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<BuyPriceWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  price?: Maybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  price_not?: Maybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  price_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values that are not contained in given list. */
+  price_not_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  price_lt?: Maybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  price_lte?: Maybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  price_gt?: Maybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  price_gte?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  quantity_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  quantity_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  quantity_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  quantity_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  quantity_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  quantity_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  quantity_gte?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  publishedBy?: Maybe<UserWhereInput>;
+  events_every?: Maybe<EventWhereInput>;
+  events_some?: Maybe<EventWhereInput>;
+  events_none?: Maybe<EventWhereInput>;
+};
+
+/** References BuyPrice record uniquely */
+export type BuyPriceWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
+};
+
 /** Representing a color value comprising of HEX, RGBA and css color values */
 export type Color = {
   __typename?: 'Color';
@@ -871,7 +1301,7 @@ export type Event = Node & {
   updatedAt: Scalars['DateTime'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
-  /** OPTIONAL: Generates name from activities and location by default. */
+  /** OPTIONAL: Generates name from place and activities by default. */
   name?: Maybe<Scalars['String']>;
   /** OPTIONAL: Uses place description by default. */
   description?: Maybe<Scalars['String']>;
@@ -884,14 +1314,13 @@ export type Event = Node & {
   updatedBy?: Maybe<User>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
+  place?: Maybe<Place>;
   /** OPTIONAL: Uses first location photo by default. */
   photo?: Maybe<Asset>;
   people: Array<Person>;
-  place?: Maybe<Place>;
   meetingPlace?: Maybe<Place>;
-  pricing?: Maybe<Pricing>;
-  type: EventTypes;
   activities: Array<ActivityTypes>;
+  prices: Array<EventPrices>;
   /** List of Event versions */
   history: Array<Version>;
 };
@@ -919,6 +1348,11 @@ export type EventPublishedByArgs = {
 };
 
 
+export type EventPlaceArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
 export type EventPhotoArgs = {
   locales?: Maybe<Array<Locale>>;
 };
@@ -936,17 +1370,17 @@ export type EventPeopleArgs = {
 };
 
 
-export type EventPlaceArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
 export type EventMeetingPlaceArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
 
-export type EventPricingArgs = {
+export type EventPricesArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
   locales?: Maybe<Array<Locale>>;
 };
 
@@ -998,13 +1432,12 @@ export type EventCreateInput = {
   content: Scalars['RichTextAST'];
   startTime: Scalars['DateTime'];
   endTime: Scalars['DateTime'];
+  place?: Maybe<PlaceCreateOneInlineInput>;
   photo?: Maybe<AssetCreateOneInlineInput>;
   people?: Maybe<PersonCreateManyInlineInput>;
-  place?: Maybe<PlaceCreateOneInlineInput>;
   meetingPlace?: Maybe<PlaceCreateOneInlineInput>;
-  pricing?: Maybe<PricingCreateOneInlineInput>;
-  type: EventTypes;
   activities?: Maybe<Array<ActivityTypes>>;
+  prices?: Maybe<EventPricesCreateManyInlineInput>;
 };
 
 export type EventCreateManyInlineInput = {
@@ -1175,20 +1608,12 @@ export type EventManyWhereInput = {
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
+  place?: Maybe<PlaceWhereInput>;
   photo?: Maybe<AssetWhereInput>;
   people_every?: Maybe<PersonWhereInput>;
   people_some?: Maybe<PersonWhereInput>;
   people_none?: Maybe<PersonWhereInput>;
-  place?: Maybe<PlaceWhereInput>;
   meetingPlace?: Maybe<PlaceWhereInput>;
-  pricing?: Maybe<PricingWhereInput>;
-  type?: Maybe<EventTypes>;
-  /** All values that are not equal to given value. */
-  type_not?: Maybe<EventTypes>;
-  /** All values that are contained in given list. */
-  type_in?: Maybe<Array<EventTypes>>;
-  /** All values that are not contained in given list. */
-  type_not_in?: Maybe<Array<EventTypes>>;
   /** Matches if the field array contains *all* items provided to the filter and order does match */
   activities?: Maybe<Array<ActivityTypes>>;
   /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
@@ -1218,15 +1643,97 @@ export enum EventOrderByInput {
   StartTimeDesc = 'startTime_DESC',
   EndTimeAsc = 'endTime_ASC',
   EndTimeDesc = 'endTime_DESC',
-  TypeAsc = 'type_ASC',
-  TypeDesc = 'type_DESC',
   ActivitiesAsc = 'activities_ASC',
   ActivitiesDesc = 'activities_DESC'
 }
 
-export enum EventTypes {
-  Trip = 'trip'
-}
+export type EventPrices = BuyPrice | RentPrice;
+
+export type EventPricesConnectInput = {
+  RentPrice?: Maybe<RentPriceConnectInput>;
+  BuyPrice?: Maybe<BuyPriceConnectInput>;
+};
+
+export type EventPricesCreateInput = {
+  RentPrice?: Maybe<RentPriceCreateInput>;
+  BuyPrice?: Maybe<BuyPriceCreateInput>;
+};
+
+export type EventPricesCreateManyInlineInput = {
+  /** Create and connect multiple existing EventPrices documents */
+  create?: Maybe<Array<EventPricesCreateInput>>;
+  /** Connect multiple existing EventPrices documents */
+  connect?: Maybe<Array<EventPricesWhereUniqueInput>>;
+};
+
+export type EventPricesCreateOneInlineInput = {
+  /** Create and connect one EventPrices document */
+  create?: Maybe<EventPricesCreateInput>;
+  /** Connect one existing EventPrices document */
+  connect?: Maybe<EventPricesWhereUniqueInput>;
+};
+
+export type EventPricesUpdateInput = {
+  RentPrice?: Maybe<RentPriceUpdateInput>;
+  BuyPrice?: Maybe<BuyPriceUpdateInput>;
+};
+
+export type EventPricesUpdateManyInlineInput = {
+  /** Create and connect multiple EventPrices documents */
+  create?: Maybe<Array<EventPricesCreateInput>>;
+  /** Connect multiple existing EventPrices documents */
+  connect?: Maybe<Array<EventPricesConnectInput>>;
+  /** Override currently-connected documents with multiple existing EventPrices documents */
+  set?: Maybe<Array<EventPricesWhereUniqueInput>>;
+  /** Update multiple EventPrices documents */
+  update?: Maybe<Array<EventPricesUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple EventPrices documents */
+  upsert?: Maybe<Array<EventPricesUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple EventPrices documents */
+  disconnect?: Maybe<Array<EventPricesWhereUniqueInput>>;
+  /** Delete multiple EventPrices documents */
+  delete?: Maybe<Array<EventPricesWhereUniqueInput>>;
+};
+
+export type EventPricesUpdateManyWithNestedWhereInput = {
+  RentPrice?: Maybe<RentPriceUpdateManyWithNestedWhereInput>;
+  BuyPrice?: Maybe<BuyPriceUpdateManyWithNestedWhereInput>;
+};
+
+export type EventPricesUpdateOneInlineInput = {
+  /** Create and connect one EventPrices document */
+  create?: Maybe<EventPricesCreateInput>;
+  /** Update single EventPrices document */
+  update?: Maybe<EventPricesUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single EventPrices document */
+  upsert?: Maybe<EventPricesUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing EventPrices document */
+  connect?: Maybe<EventPricesWhereUniqueInput>;
+  /** Disconnect currently connected EventPrices document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected EventPrices document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type EventPricesUpdateWithNestedWhereUniqueInput = {
+  RentPrice?: Maybe<RentPriceUpdateWithNestedWhereUniqueInput>;
+  BuyPrice?: Maybe<BuyPriceUpdateWithNestedWhereUniqueInput>;
+};
+
+export type EventPricesUpsertWithNestedWhereUniqueInput = {
+  RentPrice?: Maybe<RentPriceUpsertWithNestedWhereUniqueInput>;
+  BuyPrice?: Maybe<BuyPriceUpsertWithNestedWhereUniqueInput>;
+};
+
+export type EventPricesWhereInput = {
+  RentPrice?: Maybe<RentPriceWhereInput>;
+  BuyPrice?: Maybe<BuyPriceWhereInput>;
+};
+
+export type EventPricesWhereUniqueInput = {
+  RentPrice?: Maybe<RentPriceWhereUniqueInput>;
+  BuyPrice?: Maybe<BuyPriceWhereUniqueInput>;
+};
 
 export type EventUpdateInput = {
   name?: Maybe<Scalars['String']>;
@@ -1234,13 +1741,12 @@ export type EventUpdateInput = {
   content?: Maybe<Scalars['RichTextAST']>;
   startTime?: Maybe<Scalars['DateTime']>;
   endTime?: Maybe<Scalars['DateTime']>;
+  place?: Maybe<PlaceUpdateOneInlineInput>;
   photo?: Maybe<AssetUpdateOneInlineInput>;
   people?: Maybe<PersonUpdateManyInlineInput>;
-  place?: Maybe<PlaceUpdateOneInlineInput>;
   meetingPlace?: Maybe<PlaceUpdateOneInlineInput>;
-  pricing?: Maybe<PricingUpdateOneInlineInput>;
-  type?: Maybe<EventTypes>;
   activities?: Maybe<Array<ActivityTypes>>;
+  prices?: Maybe<EventPricesUpdateManyInlineInput>;
 };
 
 export type EventUpdateManyInlineInput = {
@@ -1266,7 +1772,6 @@ export type EventUpdateManyInput = {
   content?: Maybe<Scalars['RichTextAST']>;
   startTime?: Maybe<Scalars['DateTime']>;
   endTime?: Maybe<Scalars['DateTime']>;
-  type?: Maybe<EventTypes>;
   activities?: Maybe<Array<ActivityTypes>>;
 };
 
@@ -1458,20 +1963,12 @@ export type EventWhereInput = {
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
+  place?: Maybe<PlaceWhereInput>;
   photo?: Maybe<AssetWhereInput>;
   people_every?: Maybe<PersonWhereInput>;
   people_some?: Maybe<PersonWhereInput>;
   people_none?: Maybe<PersonWhereInput>;
-  place?: Maybe<PlaceWhereInput>;
   meetingPlace?: Maybe<PlaceWhereInput>;
-  pricing?: Maybe<PricingWhereInput>;
-  type?: Maybe<EventTypes>;
-  /** All values that are not equal to given value. */
-  type_not?: Maybe<EventTypes>;
-  /** All values that are contained in given list. */
-  type_in?: Maybe<Array<EventTypes>>;
-  /** All values that are not contained in given list. */
-  type_not_in?: Maybe<Array<EventTypes>>;
   /** Matches if the field array contains *all* items provided to the filter and order does match */
   activities?: Maybe<Array<ActivityTypes>>;
   /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
@@ -1486,429 +1983,6 @@ export type EventWhereInput = {
 
 /** References Event record uniquely */
 export type EventWhereUniqueInput = {
-  id?: Maybe<Scalars['ID']>;
-};
-
-export type Group = Node & {
-  __typename?: 'Group';
-  /** System stage field */
-  stage: Stage;
-  /** Get the document in other stages */
-  documentInStages: Array<Group>;
-  /** The unique identifier */
-  id: Scalars['ID'];
-  /** The time the document was created */
-  createdAt: Scalars['DateTime'];
-  /** The time the document was updated */
-  updatedAt: Scalars['DateTime'];
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  name: Scalars['String'];
-  content: GroupContentRichText;
-  /** User that created this document */
-  createdBy?: Maybe<User>;
-  /** User that last updated this document */
-  updatedBy?: Maybe<User>;
-  /** User that last published this document */
-  publishedBy?: Maybe<User>;
-  people: Array<Person>;
-  /** List of Group versions */
-  history: Array<Version>;
-};
-
-
-export type GroupDocumentInStagesArgs = {
-  stages?: Array<Stage>;
-  includeCurrent?: Scalars['Boolean'];
-  inheritLocale?: Scalars['Boolean'];
-};
-
-
-export type GroupCreatedByArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type GroupUpdatedByArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type GroupPublishedByArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type GroupPeopleArgs = {
-  where?: Maybe<PersonWhereInput>;
-  orderBy?: Maybe<PersonOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type GroupHistoryArgs = {
-  limit?: Scalars['Int'];
-  skip?: Scalars['Int'];
-  stageOverride?: Maybe<Stage>;
-};
-
-export type GroupConnectInput = {
-  /** Document to connect */
-  where: GroupWhereUniqueInput;
-  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-  position?: Maybe<ConnectPositionInput>;
-};
-
-/** A connection to a list of items. */
-export type GroupConnection = {
-  __typename?: 'GroupConnection';
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** A list of edges. */
-  edges: Array<GroupEdge>;
-  aggregate: Aggregate;
-};
-
-export type GroupContentRichText = {
-  __typename?: 'GroupContentRichText';
-  /** @deprecated Please use the 'json' field */
-  raw: Scalars['RichTextAST'];
-  json: Scalars['RichTextAST'];
-  /** Returns HTMl representation */
-  html: Scalars['String'];
-  /** Returns Markdown representation */
-  markdown: Scalars['String'];
-  /** Returns plain-text contents of RichText */
-  text: Scalars['String'];
-  references: Array<GroupContentRichTextEmbeddedTypes>;
-};
-
-export type GroupContentRichTextEmbeddedTypes = Asset;
-
-export type GroupCreateInput = {
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  name: Scalars['String'];
-  content: Scalars['RichTextAST'];
-  people?: Maybe<PersonCreateManyInlineInput>;
-};
-
-export type GroupCreateManyInlineInput = {
-  /** Create and connect multiple existing Group documents */
-  create?: Maybe<Array<GroupCreateInput>>;
-  /** Connect multiple existing Group documents */
-  connect?: Maybe<Array<GroupWhereUniqueInput>>;
-};
-
-export type GroupCreateOneInlineInput = {
-  /** Create and connect one Group document */
-  create?: Maybe<GroupCreateInput>;
-  /** Connect one existing Group document */
-  connect?: Maybe<GroupWhereUniqueInput>;
-};
-
-/** An edge in a connection. */
-export type GroupEdge = {
-  __typename?: 'GroupEdge';
-  /** The item at the end of the edge. */
-  node: Group;
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-};
-
-/** Identifies documents */
-export type GroupManyWhereInput = {
-  /** Contains search across all appropriate fields. */
-  _search?: Maybe<Scalars['String']>;
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<GroupWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<GroupWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<GroupWhereInput>>;
-  id?: Maybe<Scalars['ID']>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  publishedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  publishedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  publishedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  publishedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  name?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  name_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  name_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  name_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values containing the given string. */
-  name_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  name_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  name_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  name_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  name_not_ends_with?: Maybe<Scalars['String']>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  publishedBy?: Maybe<UserWhereInput>;
-  people_every?: Maybe<PersonWhereInput>;
-  people_some?: Maybe<PersonWhereInput>;
-  people_none?: Maybe<PersonWhereInput>;
-};
-
-export enum GroupOrderByInput {
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  PublishedAtAsc = 'publishedAt_ASC',
-  PublishedAtDesc = 'publishedAt_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC'
-}
-
-export type GroupUpdateInput = {
-  name?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['RichTextAST']>;
-  people?: Maybe<PersonUpdateManyInlineInput>;
-};
-
-export type GroupUpdateManyInlineInput = {
-  /** Create and connect multiple Group documents */
-  create?: Maybe<Array<GroupCreateInput>>;
-  /** Connect multiple existing Group documents */
-  connect?: Maybe<Array<GroupConnectInput>>;
-  /** Override currently-connected documents with multiple existing Group documents */
-  set?: Maybe<Array<GroupWhereUniqueInput>>;
-  /** Update multiple Group documents */
-  update?: Maybe<Array<GroupUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple Group documents */
-  upsert?: Maybe<Array<GroupUpsertWithNestedWhereUniqueInput>>;
-  /** Disconnect multiple Group documents */
-  disconnect?: Maybe<Array<GroupWhereUniqueInput>>;
-  /** Delete multiple Group documents */
-  delete?: Maybe<Array<GroupWhereUniqueInput>>;
-};
-
-export type GroupUpdateManyInput = {
-  name?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['RichTextAST']>;
-};
-
-export type GroupUpdateManyWithNestedWhereInput = {
-  /** Document search */
-  where: GroupWhereInput;
-  /** Update many input */
-  data: GroupUpdateManyInput;
-};
-
-export type GroupUpdateOneInlineInput = {
-  /** Create and connect one Group document */
-  create?: Maybe<GroupCreateInput>;
-  /** Update single Group document */
-  update?: Maybe<GroupUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single Group document */
-  upsert?: Maybe<GroupUpsertWithNestedWhereUniqueInput>;
-  /** Connect existing Group document */
-  connect?: Maybe<GroupWhereUniqueInput>;
-  /** Disconnect currently connected Group document */
-  disconnect?: Maybe<Scalars['Boolean']>;
-  /** Delete currently connected Group document */
-  delete?: Maybe<Scalars['Boolean']>;
-};
-
-export type GroupUpdateWithNestedWhereUniqueInput = {
-  /** Unique document search */
-  where: GroupWhereUniqueInput;
-  /** Document to update */
-  data: GroupUpdateInput;
-};
-
-export type GroupUpsertInput = {
-  /** Create document if it didn't exist */
-  create: GroupCreateInput;
-  /** Update document if it exists */
-  update: GroupUpdateInput;
-};
-
-export type GroupUpsertWithNestedWhereUniqueInput = {
-  /** Unique document search */
-  where: GroupWhereUniqueInput;
-  /** Upsert data */
-  data: GroupUpsertInput;
-};
-
-/** Identifies documents */
-export type GroupWhereInput = {
-  /** Contains search across all appropriate fields. */
-  _search?: Maybe<Scalars['String']>;
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<GroupWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<GroupWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<GroupWhereInput>>;
-  id?: Maybe<Scalars['ID']>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  publishedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  publishedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  publishedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  publishedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  name?: Maybe<Scalars['String']>;
-  /** All values that are not equal to given value. */
-  name_not?: Maybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  name_in?: Maybe<Array<Scalars['String']>>;
-  /** All values that are not contained in given list. */
-  name_not_in?: Maybe<Array<Scalars['String']>>;
-  /** All values containing the given string. */
-  name_contains?: Maybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  name_not_contains?: Maybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  name_starts_with?: Maybe<Scalars['String']>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  name_ends_with?: Maybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  name_not_ends_with?: Maybe<Scalars['String']>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  publishedBy?: Maybe<UserWhereInput>;
-  people_every?: Maybe<PersonWhereInput>;
-  people_some?: Maybe<PersonWhereInput>;
-  people_none?: Maybe<PersonWhereInput>;
-};
-
-/** References Group record uniquely */
-export type GroupWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
 };
 
@@ -2052,46 +2126,6 @@ export type Mutation = {
    * @deprecated Please use the new paginated many mutation (unpublishManyPeopleConnection)
    */
   unpublishManyPeople: BatchPayload;
-  /** Create one group */
-  createGroup?: Maybe<Group>;
-  /** Update one group */
-  updateGroup?: Maybe<Group>;
-  /** Delete one group from _all_ existing stages. Returns deleted document. */
-  deleteGroup?: Maybe<Group>;
-  /** Upsert one group */
-  upsertGroup?: Maybe<Group>;
-  /** Publish one group */
-  publishGroup?: Maybe<Group>;
-  /** Unpublish one group from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  unpublishGroup?: Maybe<Group>;
-  /** Update many Group documents */
-  updateManyGroupsConnection: GroupConnection;
-  /** Delete many Group documents, return deleted documents */
-  deleteManyGroupsConnection: GroupConnection;
-  /** Publish many Group documents */
-  publishManyGroupsConnection: GroupConnection;
-  /** Find many Group documents that match criteria in specified stage and unpublish from target stages */
-  unpublishManyGroupsConnection: GroupConnection;
-  /**
-   * Update many groups
-   * @deprecated Please use the new paginated many mutation (updateManyGroupsConnection)
-   */
-  updateManyGroups: BatchPayload;
-  /**
-   * Delete many Group documents
-   * @deprecated Please use the new paginated many mutation (deleteManyGroupsConnection)
-   */
-  deleteManyGroups: BatchPayload;
-  /**
-   * Publish many Group documents
-   * @deprecated Please use the new paginated many mutation (publishManyGroupsConnection)
-   */
-  publishManyGroups: BatchPayload;
-  /**
-   * Unpublish many Group documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyGroupsConnection)
-   */
-  unpublishManyGroups: BatchPayload;
   /** Create one place */
   createPlace?: Maybe<Place>;
   /** Update one place */
@@ -2132,46 +2166,6 @@ export type Mutation = {
    * @deprecated Please use the new paginated many mutation (unpublishManyPlacesConnection)
    */
   unpublishManyPlaces: BatchPayload;
-  /** Create one pricing */
-  createPricing?: Maybe<Pricing>;
-  /** Update one pricing */
-  updatePricing?: Maybe<Pricing>;
-  /** Delete one pricing from _all_ existing stages. Returns deleted document. */
-  deletePricing?: Maybe<Pricing>;
-  /** Upsert one pricing */
-  upsertPricing?: Maybe<Pricing>;
-  /** Publish one pricing */
-  publishPricing?: Maybe<Pricing>;
-  /** Unpublish one pricing from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  unpublishPricing?: Maybe<Pricing>;
-  /** Update many Pricing documents */
-  updateManyPricingsConnection: PricingConnection;
-  /** Delete many Pricing documents, return deleted documents */
-  deleteManyPricingsConnection: PricingConnection;
-  /** Publish many Pricing documents */
-  publishManyPricingsConnection: PricingConnection;
-  /** Find many Pricing documents that match criteria in specified stage and unpublish from target stages */
-  unpublishManyPricingsConnection: PricingConnection;
-  /**
-   * Update many pricings
-   * @deprecated Please use the new paginated many mutation (updateManyPricingsConnection)
-   */
-  updateManyPricings: BatchPayload;
-  /**
-   * Delete many Pricing documents
-   * @deprecated Please use the new paginated many mutation (deleteManyPricingsConnection)
-   */
-  deleteManyPricings: BatchPayload;
-  /**
-   * Publish many Pricing documents
-   * @deprecated Please use the new paginated many mutation (publishManyPricingsConnection)
-   */
-  publishManyPricings: BatchPayload;
-  /**
-   * Unpublish many Pricing documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyPricingsConnection)
-   */
-  unpublishManyPricings: BatchPayload;
   /** Create one product */
   createProduct?: Maybe<Product>;
   /** Update one product */
@@ -2292,6 +2286,86 @@ export type Mutation = {
    * @deprecated Please use the new paginated many mutation (unpublishManyPostsConnection)
    */
   unpublishManyPosts: BatchPayload;
+  /** Create one rentPrice */
+  createRentPrice?: Maybe<RentPrice>;
+  /** Update one rentPrice */
+  updateRentPrice?: Maybe<RentPrice>;
+  /** Delete one rentPrice from _all_ existing stages. Returns deleted document. */
+  deleteRentPrice?: Maybe<RentPrice>;
+  /** Upsert one rentPrice */
+  upsertRentPrice?: Maybe<RentPrice>;
+  /** Publish one rentPrice */
+  publishRentPrice?: Maybe<RentPrice>;
+  /** Unpublish one rentPrice from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishRentPrice?: Maybe<RentPrice>;
+  /** Update many RentPrice documents */
+  updateManyRentPricesConnection: RentPriceConnection;
+  /** Delete many RentPrice documents, return deleted documents */
+  deleteManyRentPricesConnection: RentPriceConnection;
+  /** Publish many RentPrice documents */
+  publishManyRentPricesConnection: RentPriceConnection;
+  /** Find many RentPrice documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyRentPricesConnection: RentPriceConnection;
+  /**
+   * Update many rentPrices
+   * @deprecated Please use the new paginated many mutation (updateManyRentPricesConnection)
+   */
+  updateManyRentPrices: BatchPayload;
+  /**
+   * Delete many RentPrice documents
+   * @deprecated Please use the new paginated many mutation (deleteManyRentPricesConnection)
+   */
+  deleteManyRentPrices: BatchPayload;
+  /**
+   * Publish many RentPrice documents
+   * @deprecated Please use the new paginated many mutation (publishManyRentPricesConnection)
+   */
+  publishManyRentPrices: BatchPayload;
+  /**
+   * Unpublish many RentPrice documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyRentPricesConnection)
+   */
+  unpublishManyRentPrices: BatchPayload;
+  /** Create one buyPrice */
+  createBuyPrice?: Maybe<BuyPrice>;
+  /** Update one buyPrice */
+  updateBuyPrice?: Maybe<BuyPrice>;
+  /** Delete one buyPrice from _all_ existing stages. Returns deleted document. */
+  deleteBuyPrice?: Maybe<BuyPrice>;
+  /** Upsert one buyPrice */
+  upsertBuyPrice?: Maybe<BuyPrice>;
+  /** Publish one buyPrice */
+  publishBuyPrice?: Maybe<BuyPrice>;
+  /** Unpublish one buyPrice from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishBuyPrice?: Maybe<BuyPrice>;
+  /** Update many BuyPrice documents */
+  updateManyBuyPricesConnection: BuyPriceConnection;
+  /** Delete many BuyPrice documents, return deleted documents */
+  deleteManyBuyPricesConnection: BuyPriceConnection;
+  /** Publish many BuyPrice documents */
+  publishManyBuyPricesConnection: BuyPriceConnection;
+  /** Find many BuyPrice documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyBuyPricesConnection: BuyPriceConnection;
+  /**
+   * Update many buyPrices
+   * @deprecated Please use the new paginated many mutation (updateManyBuyPricesConnection)
+   */
+  updateManyBuyPrices: BatchPayload;
+  /**
+   * Delete many BuyPrice documents
+   * @deprecated Please use the new paginated many mutation (deleteManyBuyPricesConnection)
+   */
+  deleteManyBuyPrices: BatchPayload;
+  /**
+   * Publish many BuyPrice documents
+   * @deprecated Please use the new paginated many mutation (publishManyBuyPricesConnection)
+   */
+  publishManyBuyPrices: BatchPayload;
+  /**
+   * Unpublish many BuyPrice documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyBuyPricesConnection)
+   */
+  unpublishManyBuyPrices: BatchPayload;
 };
 
 
@@ -2514,108 +2588,6 @@ export type MutationUnpublishManyPeopleArgs = {
 };
 
 
-export type MutationCreateGroupArgs = {
-  data: GroupCreateInput;
-};
-
-
-export type MutationUpdateGroupArgs = {
-  where: GroupWhereUniqueInput;
-  data: GroupUpdateInput;
-};
-
-
-export type MutationDeleteGroupArgs = {
-  where: GroupWhereUniqueInput;
-};
-
-
-export type MutationUpsertGroupArgs = {
-  where: GroupWhereUniqueInput;
-  upsert: GroupUpsertInput;
-};
-
-
-export type MutationPublishGroupArgs = {
-  where: GroupWhereUniqueInput;
-  to?: Array<Stage>;
-};
-
-
-export type MutationUnpublishGroupArgs = {
-  where: GroupWhereUniqueInput;
-  from?: Array<Stage>;
-};
-
-
-export type MutationUpdateManyGroupsConnectionArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  data: GroupUpdateManyInput;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationDeleteManyGroupsConnectionArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationPublishManyGroupsConnectionArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  from?: Maybe<Stage>;
-  to?: Array<Stage>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUnpublishManyGroupsConnectionArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  stage?: Maybe<Stage>;
-  from?: Array<Stage>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUpdateManyGroupsArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  data: GroupUpdateManyInput;
-};
-
-
-export type MutationDeleteManyGroupsArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-};
-
-
-export type MutationPublishManyGroupsArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  to?: Array<Stage>;
-};
-
-
-export type MutationUnpublishManyGroupsArgs = {
-  where?: Maybe<GroupManyWhereInput>;
-  from?: Array<Stage>;
-};
-
-
 export type MutationCreatePlaceArgs = {
   data: PlaceCreateInput;
 };
@@ -2714,108 +2686,6 @@ export type MutationPublishManyPlacesArgs = {
 
 export type MutationUnpublishManyPlacesArgs = {
   where?: Maybe<PlaceManyWhereInput>;
-  from?: Array<Stage>;
-};
-
-
-export type MutationCreatePricingArgs = {
-  data: PricingCreateInput;
-};
-
-
-export type MutationUpdatePricingArgs = {
-  where: PricingWhereUniqueInput;
-  data: PricingUpdateInput;
-};
-
-
-export type MutationDeletePricingArgs = {
-  where: PricingWhereUniqueInput;
-};
-
-
-export type MutationUpsertPricingArgs = {
-  where: PricingWhereUniqueInput;
-  upsert: PricingUpsertInput;
-};
-
-
-export type MutationPublishPricingArgs = {
-  where: PricingWhereUniqueInput;
-  to?: Array<Stage>;
-};
-
-
-export type MutationUnpublishPricingArgs = {
-  where: PricingWhereUniqueInput;
-  from?: Array<Stage>;
-};
-
-
-export type MutationUpdateManyPricingsConnectionArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-  data: PricingUpdateManyInput;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationDeleteManyPricingsConnectionArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationPublishManyPricingsConnectionArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-  from?: Maybe<Stage>;
-  to?: Array<Stage>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUnpublishManyPricingsConnectionArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-  stage?: Maybe<Stage>;
-  from?: Array<Stage>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUpdateManyPricingsArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-  data: PricingUpdateManyInput;
-};
-
-
-export type MutationDeleteManyPricingsArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-};
-
-
-export type MutationPublishManyPricingsArgs = {
-  where?: Maybe<PricingManyWhereInput>;
-  to?: Array<Stage>;
-};
-
-
-export type MutationUnpublishManyPricingsArgs = {
-  where?: Maybe<PricingManyWhereInput>;
   from?: Array<Stage>;
 };
 
@@ -3125,6 +2995,210 @@ export type MutationUnpublishManyPostsArgs = {
   from?: Array<Stage>;
 };
 
+
+export type MutationCreateRentPriceArgs = {
+  data: RentPriceCreateInput;
+};
+
+
+export type MutationUpdateRentPriceArgs = {
+  where: RentPriceWhereUniqueInput;
+  data: RentPriceUpdateInput;
+};
+
+
+export type MutationDeleteRentPriceArgs = {
+  where: RentPriceWhereUniqueInput;
+};
+
+
+export type MutationUpsertRentPriceArgs = {
+  where: RentPriceWhereUniqueInput;
+  upsert: RentPriceUpsertInput;
+};
+
+
+export type MutationPublishRentPriceArgs = {
+  where: RentPriceWhereUniqueInput;
+  to?: Array<Stage>;
+};
+
+
+export type MutationUnpublishRentPriceArgs = {
+  where: RentPriceWhereUniqueInput;
+  from?: Array<Stage>;
+};
+
+
+export type MutationUpdateManyRentPricesConnectionArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  data: RentPriceUpdateManyInput;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationDeleteManyRentPricesConnectionArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationPublishManyRentPricesConnectionArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  from?: Maybe<Stage>;
+  to?: Array<Stage>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationUnpublishManyRentPricesConnectionArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  stage?: Maybe<Stage>;
+  from?: Array<Stage>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationUpdateManyRentPricesArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  data: RentPriceUpdateManyInput;
+};
+
+
+export type MutationDeleteManyRentPricesArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+};
+
+
+export type MutationPublishManyRentPricesArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  to?: Array<Stage>;
+};
+
+
+export type MutationUnpublishManyRentPricesArgs = {
+  where?: Maybe<RentPriceManyWhereInput>;
+  from?: Array<Stage>;
+};
+
+
+export type MutationCreateBuyPriceArgs = {
+  data: BuyPriceCreateInput;
+};
+
+
+export type MutationUpdateBuyPriceArgs = {
+  where: BuyPriceWhereUniqueInput;
+  data: BuyPriceUpdateInput;
+};
+
+
+export type MutationDeleteBuyPriceArgs = {
+  where: BuyPriceWhereUniqueInput;
+};
+
+
+export type MutationUpsertBuyPriceArgs = {
+  where: BuyPriceWhereUniqueInput;
+  upsert: BuyPriceUpsertInput;
+};
+
+
+export type MutationPublishBuyPriceArgs = {
+  where: BuyPriceWhereUniqueInput;
+  to?: Array<Stage>;
+};
+
+
+export type MutationUnpublishBuyPriceArgs = {
+  where: BuyPriceWhereUniqueInput;
+  from?: Array<Stage>;
+};
+
+
+export type MutationUpdateManyBuyPricesConnectionArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  data: BuyPriceUpdateManyInput;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationDeleteManyBuyPricesConnectionArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationPublishManyBuyPricesConnectionArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  from?: Maybe<Stage>;
+  to?: Array<Stage>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationUnpublishManyBuyPricesConnectionArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  stage?: Maybe<Stage>;
+  from?: Array<Stage>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationUpdateManyBuyPricesArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  data: BuyPriceUpdateManyInput;
+};
+
+
+export type MutationDeleteManyBuyPricesArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+};
+
+
+export type MutationPublishManyBuyPricesArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  to?: Array<Stage>;
+};
+
+
+export type MutationUnpublishManyBuyPricesArgs = {
+  where?: Maybe<BuyPriceManyWhereInput>;
+  from?: Array<Stage>;
+};
+
 /** An object with an ID */
 export type Node = {
   /** The id of the object. */
@@ -3172,7 +3246,6 @@ export type Person = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   photo: Asset;
-  groups: Array<Group>;
   /** List of Person versions */
   history: Array<Version>;
 };
@@ -3201,18 +3274,6 @@ export type PersonPublishedByArgs = {
 
 
 export type PersonPhotoArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type PersonGroupsArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
   locales?: Maybe<Array<Locale>>;
 };
 
@@ -3264,7 +3325,6 @@ export type PersonCreateInput = {
   content: Scalars['RichTextAST'];
   photo: AssetCreateOneInlineInput;
   ckri2a0qx0ytm01we6zlm4t7a?: Maybe<EventCreateManyInlineInput>;
-  groups?: Maybe<GroupCreateManyInlineInput>;
 };
 
 export type PersonCreateManyInlineInput = {
@@ -3406,9 +3466,6 @@ export type PersonManyWhereInput = {
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
   photo?: Maybe<AssetWhereInput>;
-  groups_every?: Maybe<GroupWhereInput>;
-  groups_some?: Maybe<GroupWhereInput>;
-  groups_none?: Maybe<GroupWhereInput>;
 };
 
 export enum PersonOrderByInput {
@@ -3432,7 +3489,6 @@ export type PersonUpdateInput = {
   content?: Maybe<Scalars['RichTextAST']>;
   photo?: Maybe<AssetUpdateOneInlineInput>;
   ckri2a0qx0ytm01we6zlm4t7a?: Maybe<EventUpdateManyInlineInput>;
-  groups?: Maybe<GroupUpdateManyInlineInput>;
 };
 
 export type PersonUpdateManyInlineInput = {
@@ -3617,9 +3673,6 @@ export type PersonWhereInput = {
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
   photo?: Maybe<AssetWhereInput>;
-  groups_every?: Maybe<GroupWhereInput>;
-  groups_some?: Maybe<GroupWhereInput>;
-  groups_none?: Maybe<GroupWhereInput>;
 };
 
 /** References Person record uniquely */
@@ -4628,405 +4681,6 @@ export type PostWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
 };
 
-export type Pricing = Node & {
-  __typename?: 'Pricing';
-  /** System stage field */
-  stage: Stage;
-  /** Get the document in other stages */
-  documentInStages: Array<Pricing>;
-  /** The unique identifier */
-  id: Scalars['ID'];
-  /** The time the document was created */
-  createdAt: Scalars['DateTime'];
-  /** The time the document was updated */
-  updatedAt: Scalars['DateTime'];
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  price: Scalars['Float'];
-  /** User that created this document */
-  createdBy?: Maybe<User>;
-  /** User that last updated this document */
-  updatedBy?: Maybe<User>;
-  /** User that last published this document */
-  publishedBy?: Maybe<User>;
-  /** Ex: $5 per day */
-  period?: Maybe<TimePeriods>;
-  /** List of Pricing versions */
-  history: Array<Version>;
-};
-
-
-export type PricingDocumentInStagesArgs = {
-  stages?: Array<Stage>;
-  includeCurrent?: Scalars['Boolean'];
-  inheritLocale?: Scalars['Boolean'];
-};
-
-
-export type PricingCreatedByArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type PricingUpdatedByArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type PricingPublishedByArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type PricingHistoryArgs = {
-  limit?: Scalars['Int'];
-  skip?: Scalars['Int'];
-  stageOverride?: Maybe<Stage>;
-};
-
-export type PricingConnectInput = {
-  /** Document to connect */
-  where: PricingWhereUniqueInput;
-  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-  position?: Maybe<ConnectPositionInput>;
-};
-
-/** A connection to a list of items. */
-export type PricingConnection = {
-  __typename?: 'PricingConnection';
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** A list of edges. */
-  edges: Array<PricingEdge>;
-  aggregate: Aggregate;
-};
-
-export type PricingCreateInput = {
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  price: Scalars['Float'];
-  ckri22ju50nor01z1eg7e0ozn?: Maybe<ProductCreateManyInlineInput>;
-  ckri2yveq0q1l01xsdys4ev3n?: Maybe<EventCreateManyInlineInput>;
-  period?: Maybe<TimePeriods>;
-};
-
-export type PricingCreateManyInlineInput = {
-  /** Create and connect multiple existing Pricing documents */
-  create?: Maybe<Array<PricingCreateInput>>;
-  /** Connect multiple existing Pricing documents */
-  connect?: Maybe<Array<PricingWhereUniqueInput>>;
-};
-
-export type PricingCreateOneInlineInput = {
-  /** Create and connect one Pricing document */
-  create?: Maybe<PricingCreateInput>;
-  /** Connect one existing Pricing document */
-  connect?: Maybe<PricingWhereUniqueInput>;
-};
-
-/** An edge in a connection. */
-export type PricingEdge = {
-  __typename?: 'PricingEdge';
-  /** The item at the end of the edge. */
-  node: Pricing;
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-};
-
-/** Identifies documents */
-export type PricingManyWhereInput = {
-  /** Contains search across all appropriate fields. */
-  _search?: Maybe<Scalars['String']>;
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<PricingWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<PricingWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<PricingWhereInput>>;
-  id?: Maybe<Scalars['ID']>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  publishedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  publishedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  publishedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  publishedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  price?: Maybe<Scalars['Float']>;
-  /** All values that are not equal to given value. */
-  price_not?: Maybe<Scalars['Float']>;
-  /** All values that are contained in given list. */
-  price_in?: Maybe<Array<Scalars['Float']>>;
-  /** All values that are not contained in given list. */
-  price_not_in?: Maybe<Array<Scalars['Float']>>;
-  /** All values less than the given value. */
-  price_lt?: Maybe<Scalars['Float']>;
-  /** All values less than or equal the given value. */
-  price_lte?: Maybe<Scalars['Float']>;
-  /** All values greater than the given value. */
-  price_gt?: Maybe<Scalars['Float']>;
-  /** All values greater than or equal the given value. */
-  price_gte?: Maybe<Scalars['Float']>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  publishedBy?: Maybe<UserWhereInput>;
-  period?: Maybe<TimePeriods>;
-  /** All values that are not equal to given value. */
-  period_not?: Maybe<TimePeriods>;
-  /** All values that are contained in given list. */
-  period_in?: Maybe<Array<TimePeriods>>;
-  /** All values that are not contained in given list. */
-  period_not_in?: Maybe<Array<TimePeriods>>;
-};
-
-export enum PricingOrderByInput {
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  PublishedAtAsc = 'publishedAt_ASC',
-  PublishedAtDesc = 'publishedAt_DESC',
-  PriceAsc = 'price_ASC',
-  PriceDesc = 'price_DESC',
-  PeriodAsc = 'period_ASC',
-  PeriodDesc = 'period_DESC'
-}
-
-export type PricingUpdateInput = {
-  price?: Maybe<Scalars['Float']>;
-  ckri22ju50nor01z1eg7e0ozn?: Maybe<ProductUpdateManyInlineInput>;
-  ckri2yveq0q1l01xsdys4ev3n?: Maybe<EventUpdateManyInlineInput>;
-  period?: Maybe<TimePeriods>;
-};
-
-export type PricingUpdateManyInlineInput = {
-  /** Create and connect multiple Pricing documents */
-  create?: Maybe<Array<PricingCreateInput>>;
-  /** Connect multiple existing Pricing documents */
-  connect?: Maybe<Array<PricingConnectInput>>;
-  /** Override currently-connected documents with multiple existing Pricing documents */
-  set?: Maybe<Array<PricingWhereUniqueInput>>;
-  /** Update multiple Pricing documents */
-  update?: Maybe<Array<PricingUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple Pricing documents */
-  upsert?: Maybe<Array<PricingUpsertWithNestedWhereUniqueInput>>;
-  /** Disconnect multiple Pricing documents */
-  disconnect?: Maybe<Array<PricingWhereUniqueInput>>;
-  /** Delete multiple Pricing documents */
-  delete?: Maybe<Array<PricingWhereUniqueInput>>;
-};
-
-export type PricingUpdateManyInput = {
-  price?: Maybe<Scalars['Float']>;
-  period?: Maybe<TimePeriods>;
-};
-
-export type PricingUpdateManyWithNestedWhereInput = {
-  /** Document search */
-  where: PricingWhereInput;
-  /** Update many input */
-  data: PricingUpdateManyInput;
-};
-
-export type PricingUpdateOneInlineInput = {
-  /** Create and connect one Pricing document */
-  create?: Maybe<PricingCreateInput>;
-  /** Update single Pricing document */
-  update?: Maybe<PricingUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single Pricing document */
-  upsert?: Maybe<PricingUpsertWithNestedWhereUniqueInput>;
-  /** Connect existing Pricing document */
-  connect?: Maybe<PricingWhereUniqueInput>;
-  /** Disconnect currently connected Pricing document */
-  disconnect?: Maybe<Scalars['Boolean']>;
-  /** Delete currently connected Pricing document */
-  delete?: Maybe<Scalars['Boolean']>;
-};
-
-export type PricingUpdateWithNestedWhereUniqueInput = {
-  /** Unique document search */
-  where: PricingWhereUniqueInput;
-  /** Document to update */
-  data: PricingUpdateInput;
-};
-
-export type PricingUpsertInput = {
-  /** Create document if it didn't exist */
-  create: PricingCreateInput;
-  /** Update document if it exists */
-  update: PricingUpdateInput;
-};
-
-export type PricingUpsertWithNestedWhereUniqueInput = {
-  /** Unique document search */
-  where: PricingWhereUniqueInput;
-  /** Upsert data */
-  data: PricingUpsertInput;
-};
-
-/** Identifies documents */
-export type PricingWhereInput = {
-  /** Contains search across all appropriate fields. */
-  _search?: Maybe<Scalars['String']>;
-  /** Logical AND on all given filters. */
-  AND?: Maybe<Array<PricingWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<Array<PricingWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<PricingWhereInput>>;
-  id?: Maybe<Scalars['ID']>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<Scalars['ID']>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<Scalars['ID']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: Maybe<Scalars['ID']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  publishedAt_not?: Maybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  publishedAt_lt?: Maybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  publishedAt_lte?: Maybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  publishedAt_gt?: Maybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  price?: Maybe<Scalars['Float']>;
-  /** All values that are not equal to given value. */
-  price_not?: Maybe<Scalars['Float']>;
-  /** All values that are contained in given list. */
-  price_in?: Maybe<Array<Scalars['Float']>>;
-  /** All values that are not contained in given list. */
-  price_not_in?: Maybe<Array<Scalars['Float']>>;
-  /** All values less than the given value. */
-  price_lt?: Maybe<Scalars['Float']>;
-  /** All values less than or equal the given value. */
-  price_lte?: Maybe<Scalars['Float']>;
-  /** All values greater than the given value. */
-  price_gt?: Maybe<Scalars['Float']>;
-  /** All values greater than or equal the given value. */
-  price_gte?: Maybe<Scalars['Float']>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  publishedBy?: Maybe<UserWhereInput>;
-  period?: Maybe<TimePeriods>;
-  /** All values that are not equal to given value. */
-  period_not?: Maybe<TimePeriods>;
-  /** All values that are contained in given list. */
-  period_in?: Maybe<Array<TimePeriods>>;
-  /** All values that are not contained in given list. */
-  period_not_in?: Maybe<Array<TimePeriods>>;
-};
-
-/** References Pricing record uniquely */
-export type PricingWhereUniqueInput = {
-  id?: Maybe<Scalars['ID']>;
-};
-
 export type Product = Node & {
   __typename?: 'Product';
   /** System stage field */
@@ -5051,7 +4705,6 @@ export type Product = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   photo: Asset;
-  pricings: Array<Pricing>;
   /** List of Product versions */
   history: Array<Version>;
 };
@@ -5080,18 +4733,6 @@ export type ProductPublishedByArgs = {
 
 
 export type ProductPhotoArgs = {
-  locales?: Maybe<Array<Locale>>;
-};
-
-
-export type ProductPricingsArgs = {
-  where?: Maybe<PricingWhereInput>;
-  orderBy?: Maybe<PricingOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
   locales?: Maybe<Array<Locale>>;
 };
 
@@ -5142,7 +4783,6 @@ export type ProductCreateInput = {
   description: Scalars['String'];
   content: Scalars['RichTextAST'];
   photo: AssetCreateOneInlineInput;
-  pricings?: Maybe<PricingCreateManyInlineInput>;
 };
 
 export type ProductCreateManyInlineInput = {
@@ -5284,9 +4924,6 @@ export type ProductManyWhereInput = {
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
   photo?: Maybe<AssetWhereInput>;
-  pricings_every?: Maybe<PricingWhereInput>;
-  pricings_some?: Maybe<PricingWhereInput>;
-  pricings_none?: Maybe<PricingWhereInput>;
 };
 
 export enum ProductOrderByInput {
@@ -5309,7 +4946,6 @@ export type ProductUpdateInput = {
   description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
   photo?: Maybe<AssetUpdateOneInlineInput>;
-  pricings?: Maybe<PricingUpdateManyInlineInput>;
 };
 
 export type ProductUpdateManyInlineInput = {
@@ -5494,9 +5130,6 @@ export type ProductWhereInput = {
   updatedBy?: Maybe<UserWhereInput>;
   publishedBy?: Maybe<UserWhereInput>;
   photo?: Maybe<AssetWhereInput>;
-  pricings_every?: Maybe<PricingWhereInput>;
-  pricings_some?: Maybe<PricingWhereInput>;
-  pricings_none?: Maybe<PricingWhereInput>;
 };
 
 /** References Product record uniquely */
@@ -5537,14 +5170,6 @@ export type Query = {
   peopleConnection: PersonConnection;
   /** Retrieve document version */
   personVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple groups */
-  groups: Array<Group>;
-  /** Retrieve a single group */
-  group?: Maybe<Group>;
-  /** Retrieve multiple groups using the Relay connection interface */
-  groupsConnection: GroupConnection;
-  /** Retrieve document version */
-  groupVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple places */
   places: Array<Place>;
   /** Retrieve a single place */
@@ -5553,14 +5178,6 @@ export type Query = {
   placesConnection: PlaceConnection;
   /** Retrieve document version */
   placeVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple pricings */
-  pricings: Array<Pricing>;
-  /** Retrieve a single pricing */
-  pricing?: Maybe<Pricing>;
-  /** Retrieve multiple pricings using the Relay connection interface */
-  pricingsConnection: PricingConnection;
-  /** Retrieve document version */
-  pricingVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple products */
   products: Array<Product>;
   /** Retrieve a single product */
@@ -5585,6 +5202,22 @@ export type Query = {
   postsConnection: PostConnection;
   /** Retrieve document version */
   postVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple rentPrices */
+  rentPrices: Array<RentPrice>;
+  /** Retrieve a single rentPrice */
+  rentPrice?: Maybe<RentPrice>;
+  /** Retrieve multiple rentPrices using the Relay connection interface */
+  rentPricesConnection: RentPriceConnection;
+  /** Retrieve document version */
+  rentPriceVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple buyPrices */
+  buyPrices: Array<BuyPrice>;
+  /** Retrieve a single buyPrice */
+  buyPrice?: Maybe<BuyPrice>;
+  /** Retrieve multiple buyPrices using the Relay connection interface */
+  buyPricesConnection: BuyPriceConnection;
+  /** Retrieve document version */
+  buyPriceVersion?: Maybe<DocumentVersion>;
 };
 
 
@@ -5704,44 +5337,6 @@ export type QueryPersonVersionArgs = {
 };
 
 
-export type QueryGroupsArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: Array<Locale>;
-};
-
-
-export type QueryGroupArgs = {
-  where: GroupWhereUniqueInput;
-  stage?: Stage;
-  locales?: Array<Locale>;
-};
-
-
-export type QueryGroupsConnectionArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: Array<Locale>;
-};
-
-
-export type QueryGroupVersionArgs = {
-  where: VersionWhereInput;
-};
-
-
 export type QueryPlacesArgs = {
   where?: Maybe<PlaceWhereInput>;
   orderBy?: Maybe<PlaceOrderByInput>;
@@ -5776,44 +5371,6 @@ export type QueryPlacesConnectionArgs = {
 
 
 export type QueryPlaceVersionArgs = {
-  where: VersionWhereInput;
-};
-
-
-export type QueryPricingsArgs = {
-  where?: Maybe<PricingWhereInput>;
-  orderBy?: Maybe<PricingOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: Array<Locale>;
-};
-
-
-export type QueryPricingArgs = {
-  where: PricingWhereUniqueInput;
-  stage?: Stage;
-  locales?: Array<Locale>;
-};
-
-
-export type QueryPricingsConnectionArgs = {
-  where?: Maybe<PricingWhereInput>;
-  orderBy?: Maybe<PricingOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: Array<Locale>;
-};
-
-
-export type QueryPricingVersionArgs = {
   where: VersionWhereInput;
 };
 
@@ -5931,6 +5488,82 @@ export type QueryPostVersionArgs = {
   where: VersionWhereInput;
 };
 
+
+export type QueryRentPricesArgs = {
+  where?: Maybe<RentPriceWhereInput>;
+  orderBy?: Maybe<RentPriceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: Array<Locale>;
+};
+
+
+export type QueryRentPriceArgs = {
+  where: RentPriceWhereUniqueInput;
+  stage?: Stage;
+  locales?: Array<Locale>;
+};
+
+
+export type QueryRentPricesConnectionArgs = {
+  where?: Maybe<RentPriceWhereInput>;
+  orderBy?: Maybe<RentPriceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: Array<Locale>;
+};
+
+
+export type QueryRentPriceVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryBuyPricesArgs = {
+  where?: Maybe<BuyPriceWhereInput>;
+  orderBy?: Maybe<BuyPriceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: Array<Locale>;
+};
+
+
+export type QueryBuyPriceArgs = {
+  where: BuyPriceWhereUniqueInput;
+  stage?: Stage;
+  locales?: Array<Locale>;
+};
+
+
+export type QueryBuyPricesConnectionArgs = {
+  where?: Maybe<BuyPriceWhereInput>;
+  orderBy?: Maybe<BuyPriceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: Array<Locale>;
+};
+
+
+export type QueryBuyPriceVersionArgs = {
+  where: VersionWhereInput;
+};
+
 /** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
 export type Rgba = {
   __typename?: 'RGBA';
@@ -5949,6 +5582,471 @@ export type RgbaInput = {
   a: Scalars['RGBATransparency'];
 };
 
+
+export type RentPrice = Node & {
+  __typename?: 'RentPrice';
+  /** System stage field */
+  stage: Stage;
+  /** Get the document in other stages */
+  documentInStages: Array<RentPrice>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  price: Scalars['Float'];
+  days: Scalars['Float'];
+  quantity: Scalars['Int'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  events: Array<Event>;
+  /** List of RentPrice versions */
+  history: Array<Version>;
+};
+
+
+export type RentPriceDocumentInStagesArgs = {
+  stages?: Array<Stage>;
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+};
+
+
+export type RentPriceCreatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type RentPriceUpdatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type RentPricePublishedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type RentPriceEventsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type RentPriceHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Stage>;
+};
+
+export type RentPriceConnectInput = {
+  /** Document to connect */
+  where: RentPriceWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<ConnectPositionInput>;
+};
+
+/** A connection to a list of items. */
+export type RentPriceConnection = {
+  __typename?: 'RentPriceConnection';
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** A list of edges. */
+  edges: Array<RentPriceEdge>;
+  aggregate: Aggregate;
+};
+
+export type RentPriceCreateInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  price: Scalars['Float'];
+  days: Scalars['Float'];
+  quantity: Scalars['Int'];
+  events?: Maybe<EventCreateManyInlineInput>;
+};
+
+export type RentPriceCreateManyInlineInput = {
+  /** Create and connect multiple existing RentPrice documents */
+  create?: Maybe<Array<RentPriceCreateInput>>;
+  /** Connect multiple existing RentPrice documents */
+  connect?: Maybe<Array<RentPriceWhereUniqueInput>>;
+};
+
+export type RentPriceCreateOneInlineInput = {
+  /** Create and connect one RentPrice document */
+  create?: Maybe<RentPriceCreateInput>;
+  /** Connect one existing RentPrice document */
+  connect?: Maybe<RentPriceWhereUniqueInput>;
+};
+
+/** An edge in a connection. */
+export type RentPriceEdge = {
+  __typename?: 'RentPriceEdge';
+  /** The item at the end of the edge. */
+  node: RentPrice;
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+};
+
+/** Identifies documents */
+export type RentPriceManyWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<RentPriceWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<RentPriceWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<RentPriceWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  price?: Maybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  price_not?: Maybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  price_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values that are not contained in given list. */
+  price_not_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  price_lt?: Maybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  price_lte?: Maybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  price_gt?: Maybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  price_gte?: Maybe<Scalars['Float']>;
+  days?: Maybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  days_not?: Maybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  days_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values that are not contained in given list. */
+  days_not_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  days_lt?: Maybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  days_lte?: Maybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  days_gt?: Maybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  days_gte?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  quantity_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  quantity_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  quantity_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  quantity_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  quantity_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  quantity_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  quantity_gte?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  publishedBy?: Maybe<UserWhereInput>;
+  events_every?: Maybe<EventWhereInput>;
+  events_some?: Maybe<EventWhereInput>;
+  events_none?: Maybe<EventWhereInput>;
+};
+
+export enum RentPriceOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  DaysAsc = 'days_ASC',
+  DaysDesc = 'days_DESC',
+  QuantityAsc = 'quantity_ASC',
+  QuantityDesc = 'quantity_DESC'
+}
+
+export type RentPriceUpdateInput = {
+  price?: Maybe<Scalars['Float']>;
+  days?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+  events?: Maybe<EventUpdateManyInlineInput>;
+};
+
+export type RentPriceUpdateManyInlineInput = {
+  /** Create and connect multiple RentPrice documents */
+  create?: Maybe<Array<RentPriceCreateInput>>;
+  /** Connect multiple existing RentPrice documents */
+  connect?: Maybe<Array<RentPriceConnectInput>>;
+  /** Override currently-connected documents with multiple existing RentPrice documents */
+  set?: Maybe<Array<RentPriceWhereUniqueInput>>;
+  /** Update multiple RentPrice documents */
+  update?: Maybe<Array<RentPriceUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple RentPrice documents */
+  upsert?: Maybe<Array<RentPriceUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple RentPrice documents */
+  disconnect?: Maybe<Array<RentPriceWhereUniqueInput>>;
+  /** Delete multiple RentPrice documents */
+  delete?: Maybe<Array<RentPriceWhereUniqueInput>>;
+};
+
+export type RentPriceUpdateManyInput = {
+  price?: Maybe<Scalars['Float']>;
+  days?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+};
+
+export type RentPriceUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: RentPriceWhereInput;
+  /** Update many input */
+  data: RentPriceUpdateManyInput;
+};
+
+export type RentPriceUpdateOneInlineInput = {
+  /** Create and connect one RentPrice document */
+  create?: Maybe<RentPriceCreateInput>;
+  /** Update single RentPrice document */
+  update?: Maybe<RentPriceUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single RentPrice document */
+  upsert?: Maybe<RentPriceUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing RentPrice document */
+  connect?: Maybe<RentPriceWhereUniqueInput>;
+  /** Disconnect currently connected RentPrice document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Delete currently connected RentPrice document */
+  delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type RentPriceUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: RentPriceWhereUniqueInput;
+  /** Document to update */
+  data: RentPriceUpdateInput;
+};
+
+export type RentPriceUpsertInput = {
+  /** Create document if it didn't exist */
+  create: RentPriceCreateInput;
+  /** Update document if it exists */
+  update: RentPriceUpdateInput;
+};
+
+export type RentPriceUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: RentPriceWhereUniqueInput;
+  /** Upsert data */
+  data: RentPriceUpsertInput;
+};
+
+/** Identifies documents */
+export type RentPriceWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<RentPriceWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<RentPriceWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<RentPriceWhereInput>>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  price?: Maybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  price_not?: Maybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  price_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values that are not contained in given list. */
+  price_not_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  price_lt?: Maybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  price_lte?: Maybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  price_gt?: Maybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  price_gte?: Maybe<Scalars['Float']>;
+  days?: Maybe<Scalars['Float']>;
+  /** All values that are not equal to given value. */
+  days_not?: Maybe<Scalars['Float']>;
+  /** All values that are contained in given list. */
+  days_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values that are not contained in given list. */
+  days_not_in?: Maybe<Array<Scalars['Float']>>;
+  /** All values less than the given value. */
+  days_lt?: Maybe<Scalars['Float']>;
+  /** All values less than or equal the given value. */
+  days_lte?: Maybe<Scalars['Float']>;
+  /** All values greater than the given value. */
+  days_gt?: Maybe<Scalars['Float']>;
+  /** All values greater than or equal the given value. */
+  days_gte?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  quantity_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  quantity_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  quantity_not_in?: Maybe<Array<Scalars['Int']>>;
+  /** All values less than the given value. */
+  quantity_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  quantity_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  quantity_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  quantity_gte?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  publishedBy?: Maybe<UserWhereInput>;
+  events_every?: Maybe<EventWhereInput>;
+  events_some?: Maybe<EventWhereInput>;
+  events_none?: Maybe<EventWhereInput>;
+};
+
+/** References RentPrice record uniquely */
+export type RentPriceWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
+};
 
 /** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
 export type RichText = {
@@ -5976,12 +6074,6 @@ export enum SystemDateTimeFieldVariation {
   Base = 'BASE',
   Localization = 'LOCALIZATION',
   Combined = 'COMBINED'
-}
-
-export enum TimePeriods {
-  Hour = 'hour',
-  Day = 'day',
-  Week = 'week'
 }
 
 export type UnpublishLocaleInput = {
@@ -6372,10 +6464,10 @@ export type VersionWhereInput = {
 
 export enum WebsiteLocations {
   Home = 'home',
-  Gear = 'gear',
   Events = 'events',
   Posts = 'posts',
-  Banner = 'banner'
+  Banner = 'banner',
+  Products = 'products'
 }
 
 export enum _FilterKind {
@@ -6461,9 +6553,6 @@ export type EventCardFragment = (
   & { photo?: Maybe<(
     { __typename?: 'Asset' }
     & Pick<Asset, 'url'>
-  )>, pricing?: Maybe<(
-    { __typename?: 'Pricing' }
-    & PricingChipFragment
   )>, place?: Maybe<(
     { __typename?: 'Place' }
     & Pick<Place, 'name' | 'description'>
@@ -6513,18 +6602,10 @@ export type PostsListFragment = (
   ) }
 );
 
-export type PricingChipFragment = (
-  { __typename?: 'Pricing' }
-  & Pick<Pricing, 'id' | 'price' | 'period'>
-);
-
 export type ProductCardFragment = (
   { __typename?: 'Product' }
   & Pick<Product, 'id' | 'name' | 'description'>
-  & { pricings: Array<(
-    { __typename?: 'Pricing' }
-    & PricingChipFragment
-  )>, photo: (
+  & { photo: (
     { __typename?: 'Asset' }
     & Pick<Asset, 'url'>
   ) }
@@ -6547,17 +6628,14 @@ export type ProductListFragment = (
 
 export type ProductFragment = (
   { __typename?: 'Product' }
-  & Pick<Product, 'id' | 'description' | 'name'>
-  & { content: (
-    { __typename?: 'ProductContentRichText' }
-    & Pick<ProductContentRichText, 'json'>
-  ), photo: (
+  & Pick<Product, 'id' | 'name' | 'description'>
+  & { photo: (
     { __typename?: 'Asset' }
     & Pick<Asset, 'url'>
-  ), pricings: Array<(
-    { __typename?: 'Pricing' }
-    & PricingChipFragment
-  )> }
+  ), content: (
+    { __typename?: 'ProductContentRichText' }
+    & Pick<ProductContentRichText, 'json'>
+  ) }
 );
 
 export type EventsListQueryVariables = Exact<{
@@ -6568,10 +6646,13 @@ export type EventsListQueryVariables = Exact<{
 }>;
 
 
-export type EventsListQuery = { eventsConnection: (
+export type EventsListQuery = (
+  { __typename?: 'Query' }
+  & { eventsConnection: (
     { __typename?: 'EventConnection' }
     & EventsListFragment
-  ) };
+  ) }
+);
 
 export type PostsListQueryVariables = Exact<{
   first: Scalars['Int'];
@@ -6580,28 +6661,37 @@ export type PostsListQueryVariables = Exact<{
 }>;
 
 
-export type PostsListQuery = { postsConnection: (
+export type PostsListQuery = (
+  { __typename?: 'Query' }
+  & { postsConnection: (
     { __typename?: 'PostConnection' }
     & PostsListFragment
-  ) };
+  ) }
+);
 
 export type ProductQueryVariables = Exact<{
   id?: Maybe<Scalars['ID']>;
 }>;
 
 
-export type ProductQuery = { product?: Maybe<(
+export type ProductQuery = (
+  { __typename?: 'Query' }
+  & { product?: Maybe<(
     { __typename?: 'Product' }
     & ProductFragment
-  )> };
+  )> }
+);
 
 export type ProductIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductIdsQuery = { products: Array<(
+export type ProductIdsQuery = (
+  { __typename?: 'Query' }
+  & { products: Array<(
     { __typename?: 'Product' }
     & Pick<Product, 'id'>
-  )> };
+  )> }
+);
 
 export type ProductListQueryVariables = Exact<{
   first: Scalars['Int'];
@@ -6610,18 +6700,14 @@ export type ProductListQueryVariables = Exact<{
 }>;
 
 
-export type ProductListQuery = { productsConnection: (
+export type ProductListQuery = (
+  { __typename?: 'Query' }
+  & { productsConnection: (
     { __typename?: 'ProductConnection' }
     & ProductListFragment
-  ) };
+  ) }
+);
 
-export const PricingChipFragmentDoc = gql`
-    fragment PricingChip on Pricing {
-  id
-  price
-  period
-}
-    `;
 export const EventCardFragmentDoc = gql`
     fragment EventCard on Event {
   id
@@ -6633,9 +6719,6 @@ export const EventCardFragmentDoc = gql`
   photo {
     url
   }
-  pricing {
-    ...PricingChip
-  }
   place {
     name
     description
@@ -6644,7 +6727,7 @@ export const EventCardFragmentDoc = gql`
     }
   }
 }
-    ${PricingChipFragmentDoc}`;
+    `;
 export const EventsListFragmentDoc = gql`
     fragment EventsList on EventConnection {
   edges {
@@ -6687,14 +6770,11 @@ export const ProductCardFragmentDoc = gql`
   id
   name
   description
-  pricings {
-    ...PricingChip
-  }
   photo {
     url
   }
 }
-    ${PricingChipFragmentDoc}`;
+    `;
 export const ProductListFragmentDoc = gql`
     fragment ProductList on ProductConnection {
   edges {
@@ -6711,19 +6791,16 @@ export const ProductListFragmentDoc = gql`
 export const ProductFragmentDoc = gql`
     fragment Product on Product {
   id
-  content {
-    json
-  }
-  description
   name
+  description
   photo {
     url
   }
-  pricings {
-    ...PricingChip
+  content {
+    json
   }
 }
-    ${PricingChipFragmentDoc}`;
+    `;
 export const EventsListDocument = gql`
     query EventsList($first: Int!, $skip: Int!, $orderBy: EventOrderByInput!, $startTimeAfter: DateTime!) {
   eventsConnection(
@@ -6736,6 +6813,36 @@ export const EventsListDocument = gql`
   }
 }
     ${EventsListFragmentDoc}`;
+
+/**
+ * __useEventsListQuery__
+ *
+ * To run a query within a React component, call `useEventsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEventsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEventsListQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
+ *      startTimeAfter: // value for 'startTimeAfter'
+ *   },
+ * });
+ */
+export function useEventsListQuery(baseOptions: Apollo.QueryHookOptions<EventsListQuery, EventsListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EventsListQuery, EventsListQueryVariables>(EventsListDocument, options);
+      }
+export function useEventsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EventsListQuery, EventsListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EventsListQuery, EventsListQueryVariables>(EventsListDocument, options);
+        }
+export type EventsListQueryHookResult = ReturnType<typeof useEventsListQuery>;
+export type EventsListLazyQueryHookResult = ReturnType<typeof useEventsListLazyQuery>;
 export type EventsListQueryResult = Apollo.QueryResult<EventsListQuery, EventsListQueryVariables>;
 export const PostsListDocument = gql`
     query PostsList($first: Int!, $skip: Int!, $orderBy: PostOrderByInput!) {
@@ -6744,6 +6851,35 @@ export const PostsListDocument = gql`
   }
 }
     ${PostsListFragmentDoc}`;
+
+/**
+ * __usePostsListQuery__
+ *
+ * To run a query within a React component, call `usePostsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsListQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function usePostsListQuery(baseOptions: Apollo.QueryHookOptions<PostsListQuery, PostsListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PostsListQuery, PostsListQueryVariables>(PostsListDocument, options);
+      }
+export function usePostsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsListQuery, PostsListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PostsListQuery, PostsListQueryVariables>(PostsListDocument, options);
+        }
+export type PostsListQueryHookResult = ReturnType<typeof usePostsListQuery>;
+export type PostsListLazyQueryHookResult = ReturnType<typeof usePostsListLazyQuery>;
 export type PostsListQueryResult = Apollo.QueryResult<PostsListQuery, PostsListQueryVariables>;
 export const ProductDocument = gql`
     query Product($id: ID) {
@@ -6752,6 +6888,33 @@ export const ProductDocument = gql`
   }
 }
     ${ProductFragmentDoc}`;
+
+/**
+ * __useProductQuery__
+ *
+ * To run a query within a React component, call `useProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProductQuery(baseOptions?: Apollo.QueryHookOptions<ProductQuery, ProductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
+      }
+export function useProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductQuery, ProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
+        }
+export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
+export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
 export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;
 export const ProductIdsDocument = gql`
     query ProductIds {
@@ -6760,6 +6923,32 @@ export const ProductIdsDocument = gql`
   }
 }
     `;
+
+/**
+ * __useProductIdsQuery__
+ *
+ * To run a query within a React component, call `useProductIdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductIdsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useProductIdsQuery(baseOptions?: Apollo.QueryHookOptions<ProductIdsQuery, ProductIdsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductIdsQuery, ProductIdsQueryVariables>(ProductIdsDocument, options);
+      }
+export function useProductIdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductIdsQuery, ProductIdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductIdsQuery, ProductIdsQueryVariables>(ProductIdsDocument, options);
+        }
+export type ProductIdsQueryHookResult = ReturnType<typeof useProductIdsQuery>;
+export type ProductIdsLazyQueryHookResult = ReturnType<typeof useProductIdsLazyQuery>;
 export type ProductIdsQueryResult = Apollo.QueryResult<ProductIdsQuery, ProductIdsQueryVariables>;
 export const ProductListDocument = gql`
     query ProductList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
@@ -6768,4 +6957,33 @@ export const ProductListDocument = gql`
   }
 }
     ${ProductListFragmentDoc}`;
+
+/**
+ * __useProductListQuery__
+ *
+ * To run a query within a React component, call `useProductListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductListQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useProductListQuery(baseOptions: Apollo.QueryHookOptions<ProductListQuery, ProductListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductListQuery, ProductListQueryVariables>(ProductListDocument, options);
+      }
+export function useProductListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductListQuery, ProductListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductListQuery, ProductListQueryVariables>(ProductListDocument, options);
+        }
+export type ProductListQueryHookResult = ReturnType<typeof useProductListQuery>;
+export type ProductListLazyQueryHookResult = ReturnType<typeof useProductListLazyQuery>;
 export type ProductListQueryResult = Apollo.QueryResult<ProductListQuery, ProductListQueryVariables>;

@@ -12,20 +12,15 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
     config:
-      skipTypeNameForRoot: true
+      skipTypeName: true
       reactApolloVersion: 3
-      withHooks: false
-      withHOC: false
-      withComponent: false
-      exportFragmentSpreadSubTypes: true
+      withHooks: true
       documentMode: graphQLTag
   src/generated/graphql/next.tsx:
     config:
-      skipTypeNameForRoot: true
       documentMode: external
       importDocumentNodeExternallyFrom: ./base
       reactApolloVersion: 3
-      withHooks: true
       apolloClientInstanceImport: "utilities/client"
     preset: import-types
     presetConfig:
