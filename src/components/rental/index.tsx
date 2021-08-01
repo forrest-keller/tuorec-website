@@ -1,32 +1,44 @@
-import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Grid,
+  Heading,
+  Icon,
+  Stat,
+  StatHelpText,
+  StatNumber,
+} from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import { RichText } from "components/rich-text";
 import { RentalFragment } from "../../../generated/graphql/base";
+import { GiQuill } from "react-icons/gi";
+import RouterLink from "next/link";
+import { constants } from "utilities/constants";
 
 export const Rental: FunctionComponent<RentalFragment> = ({
   name,
   description,
   photo,
   content,
+  price,
 }) => {
   return (
-    <Grid gap={10}>
+    <Grid gap={5}>
       <Grid
         gap={10}
         autoFlow={{ lg: "column" }}
         autoColumns={{ lg: "2fr 3fr" }}
+        alignItems="center"
       >
-        <Box>
-          <Image
-            src={photo.url}
-            alt={name}
-            width={500}
-            height={500}
-            layout="responsive"
-            objectFit="cover"
-          />
-        </Box>
+        <Image
+          src={photo.url}
+          alt={name}
+          width={500}
+          height={500}
+          layout="responsive"
+          objectFit="cover"
+        />
         <Grid height="min-content" gap={5}>
           <Heading as="h1" variant="h1">
             {name}
@@ -34,9 +46,27 @@ export const Rental: FunctionComponent<RentalFragment> = ({
           <Heading as="h2" variant="h6">
             {description}
           </Heading>
+          <Grid
+            justifyItems="center"
+            alignItems="center"
+            autoFlow="column"
+            gap={5}
+          >
+            <Grid autoFlow="column" alignItems="center" gap={5}>
+              <Stat>
+                <StatNumber>{`$${price}`}</StatNumber>
+                <StatHelpText>Per Day</StatHelpText>
+              </Stat>
+              <RouterLink href={constants.rentalFormUrl}>
+                <Button leftIcon={<Icon as={GiQuill} />}>Request</Button>
+              </RouterLink>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
-      <RichText content={content.json} />
+      <Container>
+        <RichText content={content.json} />
+      </Container>
     </Grid>
   );
 };

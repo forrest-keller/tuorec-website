@@ -31,16 +31,14 @@ export const Post: FunctionComponent<PostFragment> = ({
         autoFlow={{ md: "column" }}
         autoColumns={{ md: "1fr 2fr" }}
       >
-        <Box>
-          <Image
-            src={photo.url}
-            alt={title}
-            width={500}
-            height={500}
-            layout="responsive"
-            objectFit="cover"
-          />
-        </Box>
+        <Image
+          src={photo.url}
+          alt={title}
+          width={500}
+          height={500}
+          layout="responsive"
+          objectFit="cover"
+        />
         <Grid height="min-content" gap={5}>
           <Box>
             <Wrap spacing={5}>
