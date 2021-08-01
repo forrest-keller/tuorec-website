@@ -1,4 +1,4 @@
-fragment Event on Event {
+fragment EventCard on Event {
   id
   name
   description
@@ -7,9 +7,6 @@ fragment Event on Event {
   endTime
   photo {
     url
-  }
-  pricing {
-    ...Pricing
   }
   place {
     name

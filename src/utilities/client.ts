@@ -1,5 +1,6 @@
 import { ApolloClient, FieldPolicy, InMemoryCache } from "@apollo/client";
 import { Aggregate, Maybe, PageInfo } from "generated/graphql";
+import { TypedTypePolicies } from "generated/graphql/apollo";
 
 export interface ConnectionResult<T = unknown> {
   pageInfo: PageInfo;
@@ -7,7 +8,7 @@ export interface ConnectionResult<T = unknown> {
   aggregate: Aggregate;
 }
 
-export const mergeConnection = (keyArgs?: string[]): FieldPolicy => ({
+export const mergeConnection = (keyArgs = ["id"]): FieldPolicy => ({
   keyArgs: keyArgs ?? false,
   merge: (existing: Maybe<ConnectionResult>, incoming: ConnectionResult) => {
     return {
@@ -17,17 +18,21 @@ export const mergeConnection = (keyArgs?: string[]): FieldPolicy => ({
   },
 });
 
+const typePolicies: TypedTypePolicies = {
+  Query: {
+    fields: {
+      eventsConnection: mergeConnection(),
+      postsConnection: mergeConnection(),
+      productsConnection: mergeConnection(),
+    },
+  },
+};
+
 export const client = new ApolloClient({
   cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          productsConnection: mergeConnection(),
-          postsConnection: mergeConnection(),
-          eventsConnection: mergeConnection(),
-        },
-      },
-    },
+    typePolicies,
   }),
   uri: process.env.NEXT_PUBLIC_GRAPH_CMS_ENDPOINT_URL,
 });
+
+export const getApolloClient = (ctx: any) => client;

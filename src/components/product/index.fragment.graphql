@@ -2,10 +2,10 @@ fragment Product on Product {
   id
   name
   description
-  pricings {
-    ...Pricing
-  }
   photo {
     url
+  }
+  content {
+    json
   }
 }

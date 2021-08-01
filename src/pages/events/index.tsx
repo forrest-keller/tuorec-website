@@ -1,17 +1,21 @@
-import { Container, Grid, Heading } from "@chakra-ui/react";
-import { PostsList } from "components";
+import {
+  Alert,
+  Box,
+  Container,
+  Grid,
+  Heading,
+  Spinner,
+} from "@chakra-ui/react";
 import { EventsList } from "components/events-list";
 import dayjs from "dayjs";
-import {
-  ActivityTypes,
-  EventOrderByInput,
-  PostOrderByInput,
-  useEventsListQuery,
-} from "generated";
 import useInfiniteScroll from "react-infinite-scroll-hook";
+import {
+  EventOrderByInput,
+  useEventsListQuery,
+} from "../../../generated/graphql/base";
 
 const EventsPage = () => {
-  const eventsListQueryResult = useEventsListQuery({
+  const { data, loading, error, fetchMore } = useEventsListQuery({
     variables: {
       orderBy: EventOrderByInput.CreatedAtDesc,
       first: 10,
@@ -20,9 +24,7 @@ const EventsPage = () => {
     },
   });
 
-  const { data, loading, error, fetchMore } = eventsListQueryResult;
-
-  const useInfiniteScrollHookResult = useInfiniteScroll({
+  const [loaderRef] = useInfiniteScroll({
     loading: loading,
     disabled: error !== undefined,
     hasNextPage: !!data?.eventsConnection.pageInfo.hasNextPage,
@@ -40,10 +42,16 @@ const EventsPage = () => {
         <Heading variant="h1" as="h1">
           Events
         </Heading>
-        <EventsList
-          eventsListQueryHookResult={eventsListQueryResult}
-          useInfiniteScrollHookResult={useInfiniteScrollHookResult}
-        />
+        {error && <Alert status="error">Error retrieving events.</Alert>}
+        {data?.eventsConnection.edges.length === 0 && (
+          <Alert status="info">No events.</Alert>
+        )}
+        {data && <EventsList {...data.eventsConnection} />}
+        <Box justifySelf="center">
+          {(data?.eventsConnection.pageInfo.hasNextPage || loading) && (
+            <Spinner ref={loaderRef} />
+          )}
+        </Box>
       </Grid>
     </Container>
   );

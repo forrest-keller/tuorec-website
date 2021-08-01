@@ -10,14 +10,6 @@ query EventsList(
     orderBy: $orderBy
     where: { startTime_gt: $startTimeAfter }
   ) {
-    edges {
-      cursor
-      node {
-        ...Event
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
+    ...EventsList
   }
 }

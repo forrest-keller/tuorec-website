@@ -1,0 +1,8 @@
+fragment ProductCard on Product {
+  id
+  name
+  description
+  photo {
+    url
+  }
+}

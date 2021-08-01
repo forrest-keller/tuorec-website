@@ -1,20 +1,18 @@
 import { Tag, Text } from "@chakra-ui/react";
 import { capitalCase } from "change-case";
 import { Card } from "components/card";
-import { Pricing } from "components/pricing";
 import dayjs from "dayjs";
-import { EventFragment } from "generated";
 import Image from "next/image";
 import { FunctionComponent } from "react";
+import { EventCardFragment } from "../../../generated/graphql/base";
 
-export const Event: FunctionComponent<EventFragment> = ({
+export const EventCard: FunctionComponent<EventCardFragment> = ({
   id,
   name,
   description,
   activities,
   startTime,
   endTime,
-  pricing,
   place,
   photo,
 }) => {
@@ -23,7 +21,9 @@ export const Event: FunctionComponent<EventFragment> = ({
   ).format("MMM D h:ma")}`;
 
   const activityTags = activities.map((activity) => (
-    <Tag colorScheme="gray">{activity}</Tag>
+    <Tag key={activity} colorScheme="gray">
+      {activity}
+    </Tag>
   ));
 
   const computedPhotoUrl = photo?.url || place?.photos?.[0].url;
@@ -39,14 +39,18 @@ export const Event: FunctionComponent<EventFragment> = ({
   return (
     <Card
       href={`/events/${id}`}
-      topRightElements={pricing ? [<Pricing {...pricing} />] : undefined}
-      overTitleElements={[<Text variant="subtle">{timeRangeText}</Text>]}
+      overTitleElements={[
+        <Text key="time-range" variant="subtle">
+          {timeRangeText}
+        </Text>,
+      ]}
       underTitleElements={activityTags}
       title={computedTitle}
       description={computedDescription}
       photo={
         computedPhotoUrl ? (
           <Image
+            alt={computedTitle}
             src={computedPhotoUrl}
             width={200}
             height={200}
