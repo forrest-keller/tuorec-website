@@ -1,9 +1,11 @@
-import { Tag, Text } from "@chakra-ui/react";
-import { capitalCase } from "change-case";
+import { Grid, Icon, Tag, Text } from "@chakra-ui/react";
+import { headerCase } from "change-case";
+import { ActivityIcon } from "components/activity-icon";
 import { Card } from "components/card";
 import dayjs from "dayjs";
 import Image from "next/image";
 import { FunctionComponent } from "react";
+import { GiPin } from "react-icons/gi";
 import { EventCardFragment } from "../../../generated/graphql/base";
 
 export const EventCard: FunctionComponent<EventCardFragment> = ({
@@ -13,53 +15,46 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
   activities,
   startTime,
   endTime,
-  place,
   photo,
+  place,
 }) => {
-  const timeRangeText = `${dayjs(startTime).format("MMM D h:ma")} - ${dayjs(
-    endTime
-  ).format("MMM D h:ma")}`;
-
-  const activityTags = activities.map((activity) => (
-    <Tag key={activity} colorScheme="gray">
-      {activity}
-    </Tag>
-  ));
-
-  const computedPhotoUrl = photo?.url || place?.photos?.[0].url;
-
-  const computedTitle =
-    name ||
-    `${activities.map((activity) => capitalCase(activity)).join(", ")} in ${
-      place?.name
-    }`;
-
-  const computedDescription = description || place?.description || "";
-
   return (
     <Card
       href={`/events/${id}`}
       overTitleElements={[
         <Text key="time-range" variant="subtle">
-          {timeRangeText}
+          {`${dayjs(startTime).format("MMM D h:ma")} - ${dayjs(endTime).format(
+            "MMM D h:ma"
+          )}`}
         </Text>,
       ]}
-      underTitleElements={activityTags}
-      title={computedTitle}
-      description={computedDescription}
+      underTitleElements={activities.map((activity) => (
+        <Tag key={activity} colorScheme="gray">
+          <Grid autoFlow="column" alignItems="center" gap={1}>
+            <ActivityIcon activity={activity} />
+            <Text fontWeight="semibold">{headerCase(activity)}</Text>
+          </Grid>
+        </Tag>
+      ))}
+      title={name}
+      description={description}
+      topRightElements={[
+        <Tag height="min-content" key="place" colorScheme="gray">
+          <Grid autoFlow="column" alignItems="center" gap={1}>
+            <Icon as={GiPin} />
+            <Text fontWeight="semibold">{place?.name}</Text>
+          </Grid>
+        </Tag>,
+      ]}
       photo={
-        computedPhotoUrl ? (
-          <Image
-            alt={computedTitle}
-            src={computedPhotoUrl}
-            width={200}
-            height={200}
-            objectFit="cover"
-            layout="responsive"
-          />
-        ) : (
-          <></>
-        )
+        <Image
+          alt={name}
+          src={photo.url}
+          width={200}
+          height={200}
+          objectFit="cover"
+          layout="responsive"
+        />
       }
     />
   );
