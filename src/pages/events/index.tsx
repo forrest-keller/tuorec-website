@@ -61,18 +61,19 @@ const EventsPage: NextPage<Props> = ({ posts }) => {
           <Post key={post.id} {...post} />
         ))}
       </Container>
-
       <Container>
-        {error && <Alert status="error">Error retrieving events.</Alert>}
-        {data?.eventsConnection.edges.length === 0 && (
-          <Alert status="info">No events.</Alert>
-        )}
-        {data && <EventsList {...data.eventsConnection} />}
-        <Box justifySelf="center">
-          {(data?.eventsConnection.pageInfo.hasNextPage || loading) && (
-            <Spinner ref={loaderRef} />
+        <Grid gap={10}>
+          {error && <Alert status="error">Error retrieving events.</Alert>}
+          {data?.eventsConnection.edges.length === 0 && (
+            <Alert status="info">No events.</Alert>
           )}
-        </Box>
+          {data && <EventsList {...data.eventsConnection} />}
+          <Box justifySelf="center">
+            {(data?.eventsConnection.pageInfo.hasNextPage || loading) && (
+              <Spinner ref={loaderRef} />
+            )}
+          </Box>
+        </Grid>
       </Container>
     </Grid>
   );

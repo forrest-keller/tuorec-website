@@ -61,16 +61,18 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
         </Grid>
       </Container>
       <Container>
-        {error && <Alert status="error">Error retrieving posts.</Alert>}
-        {data?.postsConnection.edges.length === 0 && (
-          <Alert status="info">No posts.</Alert>
-        )}
-        {data && <PostsList {...data?.postsConnection} />}
-        <Box justifySelf="center">
-          {(data?.postsConnection.pageInfo.hasNextPage || loading) && (
-            <Spinner ref={loaderRef} />
+        <Grid gap={10}>
+          {error && <Alert status="error">Error retrieving posts.</Alert>}
+          {data?.postsConnection.edges.length === 0 && (
+            <Alert status="info">No posts.</Alert>
           )}
-        </Box>
+          {data && <PostsList {...data?.postsConnection} />}
+          <Box justifySelf="center">
+            {(data?.postsConnection.pageInfo.hasNextPage || loading) && (
+              <Spinner ref={loaderRef} />
+            )}
+          </Box>
+        </Grid>
       </Container>
     </Grid>
   );
