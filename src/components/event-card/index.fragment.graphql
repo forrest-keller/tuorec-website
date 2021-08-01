@@ -5,6 +5,7 @@ fragment EventCard on Event {
   activities
   startTime
   endTime
+  price
   photo {
     url
   }

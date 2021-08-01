@@ -7,6 +7,8 @@ import {
   LinkOverlay,
   Stack,
   Text,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import RoutingLink from "next/link";
 import { FunctionComponent, ReactElement } from "react";
@@ -35,30 +37,31 @@ export const Card: FunctionComponent<CardProps> = ({
       <LinkBox layerStyle="card">
         <Grid
           gap={5}
-          autoFlow={{ sm: "column" }}
-          templateColumns={{ sm: "1fr 3fr" }}
+          autoFlow={{ md: "column" }}
+          templateColumns={{ md: "1fr 3fr" }}
         >
           <GridItem>{photo}</GridItem>
-          <Stack>
-            <Grid autoFlow={{ md: "column" }} gap={{ md: 5 }}>
-              <Stack>
+          <Grid gap={2}>
+            <Grid autoFlow={{ md: "column" }} gap={5}>
+              <Grid gap={2}>
                 <Stack direction="row">{overTitleElements}</Stack>
                 <Heading variant="h4" as="h2">
                   <LinkOverlay href={href}>{title}</LinkOverlay>
                 </Heading>
-                <Stack direction="row">{underTitleElements}</Stack>
-              </Stack>
-              <Grid
-                justifySelf={{ md: "right" }}
-                autoFlow="column"
-                width="max"
-                gap={10}
-              >
-                {topRightElements}
+                <Wrap>
+                  {underTitleElements?.map((element) => (
+                    <WrapItem key={element.key}>{element}</WrapItem>
+                  ))}
+                </Wrap>
               </Grid>
+              <Wrap justifySelf={{ md: "right" }}>
+                {topRightElements?.map((element) => (
+                  <WrapItem key={element.key}>{element}</WrapItem>
+                ))}
+              </Wrap>
             </Grid>
             <Text>{description}</Text>
-          </Stack>
+          </Grid>
         </Grid>
       </LinkBox>
     </RoutingLink>

@@ -1,4 +1,12 @@
-import { Grid, Icon, Tag, Text } from "@chakra-ui/react";
+import {
+  Grid,
+  Icon,
+  Stat,
+  StatHelpText,
+  StatNumber,
+  Tag,
+  Text,
+} from "@chakra-ui/react";
 import { headerCase } from "change-case";
 import { ActivityIcon } from "components/activity-icon";
 import { Card } from "components/card";
@@ -17,6 +25,7 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
   endTime,
   photo,
   place,
+  price,
 }) => {
   return (
     <Card
@@ -28,23 +37,29 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
           )}`}
         </Text>,
       ]}
-      underTitleElements={activities.map((activity) => (
-        <Tag key={activity} colorScheme="gray">
-          <Grid autoFlow="column" alignItems="center" gap={1}>
-            <ActivityIcon activity={activity} />
-            <Text fontWeight="semibold">{headerCase(activity)}</Text>
-          </Grid>
-        </Tag>
-      ))}
-      title={name}
-      description={description}
-      topRightElements={[
+      underTitleElements={[
         <Tag height="min-content" key="place" colorScheme="gray">
           <Grid autoFlow="column" alignItems="center" gap={1}>
             <Icon as={GiPin} />
             <Text fontWeight="semibold">{place?.name}</Text>
           </Grid>
         </Tag>,
+        ...activities.map((activity) => (
+          <Tag key={activity} colorScheme="gray">
+            <Grid autoFlow="column" alignItems="center" gap={1}>
+              <ActivityIcon activity={activity} />
+              <Text fontWeight="semibold">{headerCase(activity)}</Text>
+            </Grid>
+          </Tag>
+        )),
+      ]}
+      title={name}
+      description={description}
+      topRightElements={[
+        <Stat key="price">
+          <StatNumber>{`$${price}`}</StatNumber>
+          <StatHelpText>Per Person</StatHelpText>
+        </Stat>,
       ]}
       photo={
         <Image
