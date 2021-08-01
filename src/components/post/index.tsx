@@ -46,13 +46,13 @@ export const Post: FunctionComponent<PostFragment> = ({
             <Wrap spacing={5}>
               <WrapItem>
                 <Text variant="subtle" width="max-content">
-                  {`Created: ${dayjs(createdAt).format("MMM D, YYYY h:ma")}`}
+                  {`Created: ${dayjs(createdAt).format("MMM D, YYYY h:m a")}`}
                 </Text>
               </WrapItem>
               {updatedAt !== createdAt && (
                 <WrapItem>
                   <Text variant="subtle" width="max-content">
-                    {`Updated: ${dayjs(updatedAt).format("MMM D, YYYY h:ma")}`}
+                    {`Updated: ${dayjs(updatedAt).format("MMM D, YYYY h:m a")}`}
                   </Text>
                 </WrapItem>
               )}

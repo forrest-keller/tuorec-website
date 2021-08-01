@@ -32,8 +32,8 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
       href={`/events/${id}`}
       overTitleElements={[
         <Text key="time-range" variant="subtle">
-          {`${dayjs(startTime).format("MMM D h:ma")} - ${dayjs(endTime).format(
-            "MMM D h:ma"
+          {`${dayjs(startTime).format("MMM D h:m a")} - ${dayjs(endTime).format(
+            "MMM D h:m a"
           )}`}
         </Text>,
       ]}
