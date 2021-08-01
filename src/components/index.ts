@@ -7,3 +7,4 @@ export * from "./rich-text";
 export * from "./post-card";
 export * from "./posts-list";
 export * from "./product";
+export * from "./post";

@@ -1,6 +1,6 @@
 import { ApolloClient, FieldPolicy, InMemoryCache } from "@apollo/client";
-import { Aggregate, Maybe, PageInfo } from "generated/graphql";
-import { TypedTypePolicies } from "generated/graphql/apollo";
+import { TypedTypePolicies } from "../../generated/graphql/apollo";
+import { Aggregate, Maybe, PageInfo } from "../../generated/graphql/base";
 
 export interface ConnectionResult<T = unknown> {
   pageInfo: PageInfo;

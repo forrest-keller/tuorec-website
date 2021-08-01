@@ -2,18 +2,36 @@ import {
   Alert,
   Box,
   Container,
+  Divider,
   Grid,
   Heading,
   Spinner,
 } from "@chakra-ui/react";
-import { ProductList } from "components";
+import { Post, ProductList } from "components";
+import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
+  PostFragment,
   ProductOrderByInput,
   useProductsQuery,
 } from "../../../generated/graphql/base";
+import { getServerPageProductsPosts } from "../../../generated/graphql/next";
 
-const ProductsPage = () => {
+export interface Props {
+  posts: PostFragment[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const res = await getServerPageProductsPosts({});
+
+  return {
+    props: {
+      posts: res.props.data.posts,
+    },
+  };
+};
+
+const ProductsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = useProductsQuery({
     variables: {
       orderBy: ProductOrderByInput.UpdatedAtDesc,
@@ -37,21 +55,25 @@ const ProductsPage = () => {
   return (
     <Grid gap={10}>
       <Container variant="xl">
-        <Heading variant="h1" as="h1">
-          Products
-        </Heading>
+        <Grid gap={10}>
+          {posts.map((post) => (
+            <Post key={post.id} {...post} />
+          ))}
+        </Grid>
       </Container>
       <Container>
-        {error && <Alert status="error">Error retrieving products.</Alert>}
-        {data?.productsConnection.edges.length === 0 && (
-          <Alert status="info">No products.</Alert>
-        )}
-        {data && <ProductList {...data.productsConnection} />}
-        <Box justifySelf="center">
-          {(data?.productsConnection.pageInfo.hasNextPage || loading) && (
-            <Spinner ref={loaderRef} />
+        <Grid gap={10}>
+          {error && <Alert status="error">Error retrieving products.</Alert>}
+          {data?.productsConnection.edges.length === 0 && (
+            <Alert status="info">No products.</Alert>
           )}
-        </Box>
+          {data && <ProductList {...data.productsConnection} />}
+          <Box justifySelf="center">
+            {(data?.productsConnection.pageInfo.hasNextPage || loading) && (
+              <Spinner ref={loaderRef} />
+            )}
+          </Box>
+        </Grid>
       </Container>
     </Grid>
   );

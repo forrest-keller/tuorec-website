@@ -18,7 +18,7 @@ export const PostCard: FunctionComponent<PostCardFragment> = ({
 }) => {
   const createdAtText = `${sentenceCase(dayjs().to(createdAt))}, ${dayjs(
     createdAt
-  ).format("MMM D YYYY")}`;
+  ).format("MMM D, YYYY")}`;
 
   return (
     <Card

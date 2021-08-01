@@ -15,7 +15,7 @@ export const Product: FunctionComponent<ProductFragment> = ({
       <Grid
         gap={10}
         autoFlow={{ lg: "column" }}
-        autoColumns={{ lg: "1fr 2fr" }}
+        autoColumns={{ lg: "2fr 3fr" }}
       >
         <Box>
           <Image
@@ -31,7 +31,9 @@ export const Product: FunctionComponent<ProductFragment> = ({
           <Heading as="h1" variant="h1">
             {name}
           </Heading>
-          <Text variant="subtle">{description}</Text>
+          <Heading as="h2" variant="h6">
+            {description}
+          </Heading>
         </Grid>
       </Grid>
       <RichText content={content.json} />

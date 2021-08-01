@@ -6,6 +6,7 @@ export const Heading: ComponentStyleConfig = {
       bgGradient: `linear(to-br, ${colorScheme}.700, ${colorScheme}.400)`,
       bgClip: "text",
       fontSize: "6xl",
+      lineHeight: "normal",
     }),
     h2: {
       color: "blackAlpha.900",

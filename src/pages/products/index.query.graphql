@@ -3,3 +3,9 @@ query Products($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
     ...ProductList
   }
 }
+
+query ProductsPosts {
+  posts(where: { displayLocations: products }) {
+    ...Post
+  }
+}
