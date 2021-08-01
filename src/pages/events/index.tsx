@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { EventsList } from "components/events-list";
 import dayjs from "dayjs";
-import { EventOrderByInput, useEventsListQuery } from "generated";
+import { EventOrderByInput, useEventsListQuery } from "generated/graphql/base";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const EventsPage = () => {

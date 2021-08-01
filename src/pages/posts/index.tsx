@@ -7,7 +7,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { PostsList } from "components";
-import { PostOrderByInput, usePostsListQuery } from "generated";
+import { PostOrderByInput, usePostsListQuery } from "generated/graphql/base";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 const PostsPage = () => {
