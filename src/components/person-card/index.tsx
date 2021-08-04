@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Grid,
-  Heading,
-  LinkBox,
-  LinkOverlay,
-  Text,
-} from "@chakra-ui/react";
+import { Avatar, Grid, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { PersonCardFragment } from "../../../generated/graphql/base";
 import RoutingLink from "next/link";
@@ -18,15 +11,24 @@ export const PersonCard: FunctionComponent<PersonCardFragment> = ({
 }) => {
   return (
     <LinkBox>
-      <Grid layerStyle="card" autoFlow="column" gap={5} alignItems="center">
-        <Avatar src={photo.url} />
-        <Heading as="h2" variant="h5" width="max-content">
-          <RoutingLink href={`/people/${id}`}>
-            <LinkOverlay
-              href={`/people/${id}`}
-            >{`${firstName} ${lastName}`}</LinkOverlay>
-          </RoutingLink>
-        </Heading>
+      <Grid
+        layerStyle="card"
+        padding={2}
+        paddingRight={4}
+        rounded="full"
+        autoFlow="column"
+        gap={2}
+        alignItems="center"
+      >
+        <Avatar size="sm" src={photo.url} />
+        <RoutingLink href={`/people/${id}`}>
+          <LinkOverlay href={`/people/${id}`}>
+            <Text
+              fontWeight="bold"
+              width="max-content"
+            >{`${firstName} ${lastName}`}</Text>{" "}
+          </LinkOverlay>
+        </RoutingLink>
       </Grid>
     </LinkBox>
   );
