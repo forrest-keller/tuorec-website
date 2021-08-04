@@ -16,8 +16,8 @@ import { FunctionComponent, ReactElement } from "react";
 export interface CardProps {
   href: string;
   title: string;
-  description: string;
   photo: ReactElement;
+  description?: string;
   topRightElements?: ReactElement[];
   overTitleElements?: ReactElement[];
   underTitleElements?: ReactElement[];
@@ -33,37 +33,41 @@ export const Card: FunctionComponent<CardProps> = ({
   href,
 }) => {
   return (
-    <RoutingLink href={href}>
-      <LinkBox layerStyle="card">
-        <Grid
-          gap={5}
-          autoFlow={{ md: "column" }}
-          templateColumns={{ md: "1fr 3fr" }}
-        >
-          <GridItem>{photo}</GridItem>
-          <Grid gap={2}>
-            <Grid autoFlow={{ md: "column" }} gap={5}>
-              <Grid gap={2}>
-                <Stack direction="row">{overTitleElements}</Stack>
-                <Heading variant="h4" as="h2">
+    <LinkBox layerStyle="card">
+      <Grid
+        gap={5}
+        autoFlow={{ md: "column" }}
+        templateColumns={{ md: "1fr 3fr" }}
+      >
+        <GridItem minWidth={100}>{photo}</GridItem>
+        <Grid gap={2}>
+          <Grid autoFlow={{ md: "column" }} gap={5}>
+            <Grid gap={2}>
+              <Wrap direction="row">
+                {overTitleElements?.map((element) => (
+                  <WrapItem key={element.key}>{element}</WrapItem>
+                ))}
+              </Wrap>
+              <Heading variant="h4" as="h2">
+                <RoutingLink href={href}>
                   <LinkOverlay href={href}>{title}</LinkOverlay>
-                </Heading>
-                <Wrap>
-                  {underTitleElements?.map((element) => (
-                    <WrapItem key={element.key}>{element}</WrapItem>
-                  ))}
-                </Wrap>
-              </Grid>
-              <Wrap justifySelf={{ md: "right" }}>
-                {topRightElements?.map((element) => (
+                </RoutingLink>
+              </Heading>
+              <Wrap>
+                {underTitleElements?.map((element) => (
                   <WrapItem key={element.key}>{element}</WrapItem>
                 ))}
               </Wrap>
             </Grid>
-            <Text>{description}</Text>
+            <Wrap justifySelf={{ md: "right" }}>
+              {topRightElements?.map((element) => (
+                <WrapItem key={element.key}>{element}</WrapItem>
+              ))}
+            </Wrap>
           </Grid>
+          {description && <Text>{description}</Text>}
         </Grid>
-      </LinkBox>
-    </RoutingLink>
+      </Grid>
+    </LinkBox>
   );
 };

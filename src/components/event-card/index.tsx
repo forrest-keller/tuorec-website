@@ -1,6 +1,9 @@
 import {
+  Divider,
   Grid,
   Icon,
+  LinkBox,
+  LinkOverlay,
   Stat,
   StatHelpText,
   StatNumber,
@@ -15,6 +18,8 @@ import Image from "next/image";
 import { FunctionComponent } from "react";
 import { GiPin } from "react-icons/gi";
 import { EventCardFragment } from "../../../generated/graphql/base";
+import RouterLink from "next/link";
+import { Link } from "components/link";
 
 export const EventCard: FunctionComponent<EventCardFragment> = ({
   id,
@@ -31,28 +36,35 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
     <Card
       href={`/events/${id}`}
       overTitleElements={[
+        ...(place
+          ? [
+              <Link fontSize="sm" key="place" href={`/places/${place.id}`}>
+                <Grid autoFlow="column" alignItems="center" gap={2}>
+                  <Icon as={GiPin} />
+                  {place?.name}
+                </Grid>
+              </Link>,
+            ]
+          : []),
+        <Divider
+          orientation="vertical"
+          key="divider"
+          display={{ base: "none", md: "initial" }}
+        />,
         <Text key="time-range" variant="subtle">
           {`${dayjs(startTime).format("MMM D h:m a")} - ${dayjs(endTime).format(
             "MMM D h:m a"
           )}`}
         </Text>,
       ]}
-      underTitleElements={[
-        <Tag height="min-content" key="place" colorScheme="gray">
+      underTitleElements={activities.map((activity) => (
+        <Tag key={activity} colorScheme="blackAlpha">
           <Grid autoFlow="column" alignItems="center" gap={1}>
-            <Icon as={GiPin} />
-            <Text fontWeight="semibold">{place?.name}</Text>
+            <ActivityIcon activity={activity} />
+            <Text>{headerCase(activity)}</Text>
           </Grid>
-        </Tag>,
-        ...activities.map((activity) => (
-          <Tag key={activity} colorScheme="gray">
-            <Grid autoFlow="column" alignItems="center" gap={1}>
-              <ActivityIcon activity={activity} />
-              <Text fontWeight="semibold">{headerCase(activity)}</Text>
-            </Grid>
-          </Tag>
-        )),
-      ]}
+        </Tag>
+      ))}
       title={name}
       description={description}
       topRightElements={[

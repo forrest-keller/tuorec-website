@@ -8,3 +8,6 @@ export * from "./post-card";
 export * from "./posts-list";
 export * from "./rental";
 export * from "./post";
+export * from "./event";
+export * from "./person-card";
+export * from "./place-card";

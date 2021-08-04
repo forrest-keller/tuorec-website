@@ -22,7 +22,6 @@ export const Post: FunctionComponent<PostFragment> = ({
   createdAt,
   updatedAt,
 }) => {
-  console.log(createdAt, updatedAt);
   return (
     <Grid gap={5}>
       <Grid

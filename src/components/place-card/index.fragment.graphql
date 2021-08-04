@@ -1,0 +1,15 @@
+fragment PlaceCard on Place {
+  name
+  description
+  address
+  location {
+    latitude
+    longitude
+  }
+  photos {
+    url
+  }
+  content {
+    json
+  }
+}
