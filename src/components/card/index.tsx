@@ -41,23 +41,27 @@ export const Card: FunctionComponent<CardProps> = ({
       >
         <GridItem minWidth={100}>{photo}</GridItem>
         <Grid gap={2}>
-          <Grid autoFlow={{ md: "column" }} gap={5}>
-            <Grid gap={2}>
-              <Wrap direction="row">
-                {overTitleElements?.map((element) => (
-                  <WrapItem key={element.key}>{element}</WrapItem>
-                ))}
-              </Wrap>
+          <Grid autoFlow={{ md: "column" }} alignItems="center" gap={5}>
+            <Grid gap={4}>
+              {overTitleElements && (
+                <Wrap>
+                  {overTitleElements?.map((element) => (
+                    <WrapItem key={element.key}>{element}</WrapItem>
+                  ))}
+                </Wrap>
+              )}
               <Heading variant="h4" as="h2">
                 <RoutingLink href={href}>
                   <LinkOverlay href={href}>{title}</LinkOverlay>
                 </RoutingLink>
               </Heading>
-              <Wrap>
-                {underTitleElements?.map((element) => (
-                  <WrapItem key={element.key}>{element}</WrapItem>
-                ))}
-              </Wrap>
+              {underTitleElements && (
+                <Wrap>
+                  {underTitleElements?.map((element) => (
+                    <WrapItem key={element.key}>{element}</WrapItem>
+                  ))}
+                </Wrap>
+              )}
             </Grid>
             <Wrap justifySelf={{ md: "right" }}>
               {topRightElements?.map((element) => (

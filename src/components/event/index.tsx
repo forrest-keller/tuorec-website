@@ -22,6 +22,7 @@ import { ActivityIcon } from "components/activity-icon";
 import { capitalCase } from "change-case";
 import dayjs from "dayjs";
 import { PersonCard } from "components/person-card";
+import { PlaceCard } from "components/place-card";
 
 export const Event: FunctionComponent<EventFragment> = ({
   name,
@@ -89,23 +90,24 @@ export const Event: FunctionComponent<EventFragment> = ({
                 <StatNumber>{`$${price}`}</StatNumber>
               </Stat>
               <RouterLink href="http://google.com">
-                <Button size="lg" leftIcon={<Icon as={GiPencil} />}>
-                  Sign Up
-                </Button>
+                <Button leftIcon={<Icon as={GiPencil} />}>Sign Up</Button>
               </RouterLink>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <Container>
-        <Wrap>
-          {people.map((person) => (
-            <WrapItem width="min" key={person.id}>
-              <PersonCard {...person} />
-            </WrapItem>
-          ))}
-        </Wrap>
-        <RichText content={content.json} />
+        <Grid gap={5}>
+          <Wrap>
+            {people.map((person) => (
+              <WrapItem width="min" key={person.id}>
+                <PersonCard {...person} />
+              </WrapItem>
+            ))}
+          </Wrap>
+          {place && <PlaceCard {...place} />}
+          <RichText content={content.json} />
+        </Grid>
       </Container>
     </Grid>
   );

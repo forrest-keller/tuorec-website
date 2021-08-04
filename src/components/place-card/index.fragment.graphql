@@ -1,15 +1,9 @@
 fragment PlaceCard on Place {
+  id
   name
   description
   address
-  location {
-    latitude
-    longitude
-  }
   photos {
     url
-  }
-  content {
-    json
   }
 }
