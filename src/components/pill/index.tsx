@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Grid,
-  Link,
-  LinkBox,
-  LinkOverlay,
-  Text,
-} from "@chakra-ui/react";
+import { Avatar, Grid, Text } from "@chakra-ui/react";
 import React, { FunctionComponent } from "react";
 import RoutingLink from "next/link";
 
