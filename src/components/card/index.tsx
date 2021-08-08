@@ -5,6 +5,7 @@ import {
   Heading,
   LinkBox,
   LinkOverlay,
+  SlideFade,
   Stack,
   Text,
   Wrap,
@@ -12,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import RoutingLink from "next/link";
 import { FunctionComponent, ReactElement } from "react";
+import { useInView } from "react-intersection-observer";
 
 export interface CardProps {
   href: string;
@@ -32,48 +34,52 @@ export const Card: FunctionComponent<CardProps> = ({
   underTitleElements,
   href,
 }) => {
+  const { ref, inView } = useInView({ triggerOnce: true });
+
   return (
-    <LinkBox layerStyle="card">
-      <Grid
-        gap={5}
-        autoFlow={{ md: "column" }}
-        templateColumns={{ md: "1fr 3fr" }}
-      >
-        <GridItem minWidth={100}>{photo}</GridItem>
-        <Grid gap={2}>
-          <Grid autoFlow={{ md: "column" }} alignItems="center" gap={5}>
-            <Grid gap={4}>
-              {overTitleElements && (
-                <Wrap spacing={5}>
-                  {overTitleElements?.map((element) => (
-                    <WrapItem alignItems="center" key={element.key}>
-                      {element}
-                    </WrapItem>
-                  ))}
-                </Wrap>
-              )}
-              <Heading variant="h4" as="h2">
-                <RoutingLink href={href} passHref>
-                  <LinkOverlay>{title}</LinkOverlay>
-                </RoutingLink>
-              </Heading>
-              {underTitleElements && (
-                <Wrap>
-                  {underTitleElements?.map((element) => (
-                    <WrapItem key={element.key}>{element}</WrapItem>
-                  ))}
-                </Wrap>
-              )}
+    <SlideFade ref={ref} in={inView}>
+      <LinkBox layerStyle="card">
+        <Grid
+          gap={5}
+          autoFlow={{ md: "column" }}
+          templateColumns={{ md: "1fr 3fr" }}
+        >
+          <GridItem minWidth={100}>{photo}</GridItem>
+          <Grid gap={2}>
+            <Grid autoFlow={{ md: "column" }} alignItems="center" gap={5}>
+              <Grid gap={4}>
+                {overTitleElements && (
+                  <Wrap spacing={5}>
+                    {overTitleElements?.map((element) => (
+                      <WrapItem alignItems="center" key={element.key}>
+                        {element}
+                      </WrapItem>
+                    ))}
+                  </Wrap>
+                )}
+                <Heading variant="h4" as="h2">
+                  <RoutingLink href={href} passHref>
+                    <LinkOverlay>{title}</LinkOverlay>
+                  </RoutingLink>
+                </Heading>
+                {underTitleElements && (
+                  <Wrap>
+                    {underTitleElements?.map((element) => (
+                      <WrapItem key={element.key}>{element}</WrapItem>
+                    ))}
+                  </Wrap>
+                )}
+              </Grid>
+              <Wrap justifySelf={{ md: "right" }}>
+                {topRightElements?.map((element) => (
+                  <WrapItem key={element.key}>{element}</WrapItem>
+                ))}
+              </Wrap>
             </Grid>
-            <Wrap justifySelf={{ md: "right" }}>
-              {topRightElements?.map((element) => (
-                <WrapItem key={element.key}>{element}</WrapItem>
-              ))}
-            </Wrap>
+            {description && <Text>{description}</Text>}
           </Grid>
-          {description && <Text>{description}</Text>}
         </Grid>
-      </Grid>
-    </LinkBox>
+      </LinkBox>
+    </SlideFade>
   );
 };

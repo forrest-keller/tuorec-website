@@ -14,7 +14,7 @@ fragment Event on Event {
     ...PlaceCard
   }
   meetingPlace {
-    ...PlaceCard
+    ...PlacePill
   }
   content {
     json

@@ -24,6 +24,7 @@ export const Pill: FunctionComponent<PillProps> = ({
         autoFlow="column"
         gap={2}
         alignItems="center"
+        width="min-content"
       >
         <Avatar size="sm" src={photoUrl} />
         <Text fontWeight="semibold" width="max-content">
