@@ -1,8 +1,7 @@
 import { Container } from "@chakra-ui/react";
-import { Post } from "components";
 import { Person } from "components/person";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { PersonFragment, PostFragment } from "../../../generated/graphql/base";
+import { PersonFragment } from "../../../generated/graphql/base";
 import {
   getServerPagePerson,
   getServerPagePersonIds,
