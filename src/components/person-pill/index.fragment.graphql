@@ -1,4 +1,4 @@
-fragment PersonCard on Person {
+fragment PersonPill on Person {
   id
   firstName
   lastName

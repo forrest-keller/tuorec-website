@@ -47,7 +47,7 @@ export const Rental: FunctionComponent<RentalFragment> = ({
             {description}
           </Heading>
           <Grid
-            justifyItems="center"
+            justifyItems="end"
             alignItems="center"
             autoFlow="column"
             gap={5}

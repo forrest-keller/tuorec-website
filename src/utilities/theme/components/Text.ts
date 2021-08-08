@@ -4,7 +4,7 @@ export const Text: ComponentStyleConfig = {
   variants: {
     primary: {},
     subtle: {
-      textColor: "blackAlpha.600",
+      textColor: "blackAlpha.700",
       fontSize: "sm",
     },
   },

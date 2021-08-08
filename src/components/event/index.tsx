@@ -21,7 +21,7 @@ import { RichText } from "components/rich-text";
 import { ActivityIcon } from "components/activity-icon";
 import { capitalCase } from "change-case";
 import dayjs from "dayjs";
-import { PersonCard } from "components/person-card";
+import { PersonPill } from "components/person-pill";
 import { PlaceCard } from "components/place-card";
 
 export const Event: FunctionComponent<EventFragment> = ({
@@ -101,7 +101,7 @@ export const Event: FunctionComponent<EventFragment> = ({
           <Wrap>
             {people.map((person) => (
               <WrapItem width="min" key={person.id}>
-                <PersonCard {...person} />
+                <PersonPill {...person} />
               </WrapItem>
             ))}
           </Wrap>

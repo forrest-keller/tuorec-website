@@ -9,5 +9,5 @@ export * from "./posts-list";
 export * from "./rental";
 export * from "./post";
 export * from "./event";
-export * from "./person-card";
+export * from "./person-pill";
 export * from "./place-card";

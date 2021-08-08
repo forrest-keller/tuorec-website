@@ -44,15 +44,17 @@ export const Card: FunctionComponent<CardProps> = ({
           <Grid autoFlow={{ md: "column" }} alignItems="center" gap={5}>
             <Grid gap={4}>
               {overTitleElements && (
-                <Wrap>
+                <Wrap spacing={5}>
                   {overTitleElements?.map((element) => (
-                    <WrapItem key={element.key}>{element}</WrapItem>
+                    <WrapItem alignItems="center" key={element.key}>
+                      {element}
+                    </WrapItem>
                   ))}
                 </Wrap>
               )}
               <Heading variant="h4" as="h2">
-                <RoutingLink href={href}>
-                  <LinkOverlay href={href}>{title}</LinkOverlay>
+                <RoutingLink href={href} passHref>
+                  <LinkOverlay>{title}</LinkOverlay>
                 </RoutingLink>
               </Heading>
               {underTitleElements && (

@@ -20,6 +20,7 @@ import { GiPin } from "react-icons/gi";
 import { EventCardFragment } from "../../../generated/graphql/base";
 import RouterLink from "next/link";
 import { Link } from "components/link";
+import { PlacePill } from "components/place-pill";
 
 export const EventCard: FunctionComponent<EventCardFragment> = ({
   id,
@@ -36,21 +37,7 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
     <Card
       href={`/events/${id}`}
       overTitleElements={[
-        ...(place
-          ? [
-              <Link fontSize="sm" key="place" href={`/places/${place.id}`}>
-                <Grid autoFlow="column" alignItems="center" gap={2}>
-                  <Icon as={GiPin} />
-                  {place?.name}
-                </Grid>
-              </Link>,
-            ]
-          : []),
-        <Divider
-          orientation="vertical"
-          key="divider"
-          display={{ base: "none", md: "initial" }}
-        />,
+        ...(place ? [<PlacePill key={place.id} {...place} />] : []),
         <Text key="time-range" variant="subtle">
           {`${dayjs(startTime).format("MMM D h:m a")} - ${dayjs(endTime).format(
             "MMM D h:m a"
