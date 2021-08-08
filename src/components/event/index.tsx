@@ -5,6 +5,7 @@ import {
   Grid,
   Heading,
   Icon,
+  Link,
   Stat,
   StatNumber,
   Tag,
@@ -34,6 +35,7 @@ export const Event: FunctionComponent<EventFragment> = ({
   people,
   place,
   meetingPlace,
+  signUpUrl,
   content,
   photo,
 }) => {
@@ -89,8 +91,10 @@ export const Event: FunctionComponent<EventFragment> = ({
               <Stat>
                 <StatNumber>{`$${price}`}</StatNumber>
               </Stat>
-              <RouterLink href="http://google.com">
-                <Button leftIcon={<Icon as={GiPencil} />}>Sign Up</Button>
+              <RouterLink href={signUpUrl} passHref>
+                <Link isExternal>
+                  <Button leftIcon={<Icon as={GiPencil} />}>Sign Up</Button>
+                </Link>
               </RouterLink>
             </Grid>
           </Grid>

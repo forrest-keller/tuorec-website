@@ -6,6 +6,7 @@ fragment Event on Event {
   price
   startTime
   endTime
+  signUpUrl
   people {
     ...PersonPill
   }
