@@ -79,7 +79,7 @@ export const Event: FunctionComponent<EventFragment> = ({
           </Link>
         </Grid>
       </Grid>
-      <Box opacity={scrollY !== 0 ? 1 : 0.5} transitionDuration=".2s">
+      <Box opacity={scrollY ? 1 : 0.5} transitionDuration=".2s">
         <Grid
           gap={10}
           autoFlow={{ lg: "column" }}

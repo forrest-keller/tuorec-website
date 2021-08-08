@@ -1,0 +1,11 @@
+fragment PeopleList on PersonConnection {
+  edges {
+    cursor
+    node {
+      ...PersonCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}

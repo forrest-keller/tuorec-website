@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   });
 
   if (!res.props.data.post) {
-    throw new Error("Rental not found.");
+    throw new Error("Post not found.");
   }
 
   return { props: { post: res.props.data.post } };

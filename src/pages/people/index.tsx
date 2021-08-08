@@ -1,20 +1,21 @@
 import { Alert, Box, Container, Grid, Spinner } from "@chakra-ui/react";
-import { Post, PostsList } from "components";
+import { Post } from "components";
+import { PeopleList } from "components/people-list";
 import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
+  PersonOrderByInput,
   PostFragment,
-  PostOrderByInput,
-  usePostsQuery,
+  usePeopleQuery,
 } from "../../../generated/graphql/base";
-import { getServerPagePostsPosts } from "../../../generated/graphql/next";
+import { getServerPagePeoplePosts } from "../../../generated/graphql/next";
 
 export interface Props {
   posts: PostFragment[];
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const res = await getServerPagePostsPosts({});
+  const res = await getServerPagePeoplePosts({});
 
   return {
     props: {
@@ -23,10 +24,10 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
-const PostsPage: NextPage<Props> = ({ posts }) => {
-  const { data, loading, error, fetchMore } = usePostsQuery({
+const PeoplePage: NextPage<Props> = ({ posts }) => {
+  const { data, loading, error, fetchMore } = usePeopleQuery({
     variables: {
-      orderBy: PostOrderByInput.CreatedAtDesc,
+      orderBy: PersonOrderByInput.CreatedAtDesc,
       first: 10,
       skip: 0,
     },
@@ -35,11 +36,11 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
   const [loaderRef] = useInfiniteScroll({
     loading: loading,
     disabled: error !== undefined,
-    hasNextPage: !!data?.postsConnection.pageInfo.hasNextPage,
+    hasNextPage: !!data?.peopleConnection.pageInfo.hasNextPage,
     onLoadMore: () =>
       fetchMore({
         variables: {
-          skip: data?.postsConnection.edges.length || 0,
+          skip: data?.peopleConnection.edges.length || 0,
         },
       }),
   });
@@ -55,13 +56,13 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
       </Container>
       <Container>
         <Grid gap={10}>
-          {error && <Alert status="error">Error retrieving posts.</Alert>}
-          {data?.postsConnection.edges.length === 0 && (
-            <Alert status="info">No posts.</Alert>
+          {error && <Alert status="error">Error retrieving people.</Alert>}
+          {data?.peopleConnection.edges.length === 0 && (
+            <Alert status="info">No people.</Alert>
           )}
-          {data && <PostsList {...data?.postsConnection} />}
+          {data && <PeopleList {...data?.peopleConnection} />}
           <Box justifySelf="center">
-            {(data?.postsConnection.pageInfo.hasNextPage || loading) && (
+            {(data?.peopleConnection.pageInfo.hasNextPage || loading) && (
               <Spinner ref={loaderRef} />
             )}
           </Box>
@@ -71,4 +72,4 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
   );
 };
 
-export default PostsPage;
+export default PeoplePage;

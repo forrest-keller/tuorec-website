@@ -1,0 +1,9 @@
+fragment PersonCard on Person {
+  id
+  firstName
+  lastName
+  description
+  photo {
+    url
+  }
+}
