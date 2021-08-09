@@ -5,7 +5,7 @@ export const Heading: ComponentStyleConfig = {
     h1: ({ colorScheme }) => ({
       bgGradient: `linear(to-br, ${colorScheme}.700, ${colorScheme}.400)`,
       bgClip: "text",
-      fontSize: "6xl",
+      fontSize: "5xl",
       lineHeight: "initial", // Overrides the bgClip style
     }),
     h2: {

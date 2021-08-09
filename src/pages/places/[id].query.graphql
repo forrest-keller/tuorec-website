@@ -1,0 +1,11 @@
+query Place($id: ID) {
+  place(where: { id: $id }) {
+    ...Place
+  }
+}
+
+query PlaceIds {
+  places {
+    id
+  }
+}

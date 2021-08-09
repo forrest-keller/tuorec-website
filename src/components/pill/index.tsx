@@ -27,7 +27,7 @@ export const Pill: FunctionComponent<PillProps> = ({
         width="min-content"
       >
         <Avatar size="sm" src={photoUrl} />
-        <Text fontWeight="semibold" width="max-content">
+        <Text fontWeight="semibold" color="blackAlpha.700" width="max-content">
           {title}
         </Text>
       </Grid>

@@ -4,6 +4,7 @@ import {
   Grid,
   Heading,
   Icon,
+  Link,
   Stat,
   StatHelpText,
   StatNumber,
@@ -57,9 +58,9 @@ export const Rental: FunctionComponent<RentalFragment> = ({
                 <StatNumber>{`$${price}`}</StatNumber>
                 <StatHelpText>Per Day</StatHelpText>
               </Stat>
-              <RouterLink href={constants.rentalFormUrl}>
+              <Link href={constants.rentalFormUrl} isExternal>
                 <Button leftIcon={<Icon as={GiQuill} />}>Request</Button>
-              </RouterLink>
+              </Link>
             </Grid>
           </Grid>
         </Grid>

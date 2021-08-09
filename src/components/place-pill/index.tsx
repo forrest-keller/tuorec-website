@@ -7,5 +7,7 @@ export const PlacePill: FunctionComponent<PlacePillFragment> = ({
   name,
   photos,
 }) => {
-  return <Pill href={`/place/${id}`} title={name} photoUrl={photos?.[0].url} />;
+  return (
+    <Pill href={`/places/${id}`} title={name} photoUrl={photos?.[0].url} />
+  );
 };
