@@ -44,7 +44,7 @@ const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
       <Container variant="xl">
         <Grid gap={10}>
           {pagePosts.map((post) => (
-            <Post key={post.id} {...post} />
+            <Post hideTimestamp key={post.id} {...post} />
           ))}
           <Grid gap={5}>
             <Grid autoFlow="column" gap={5} alignItems="center">

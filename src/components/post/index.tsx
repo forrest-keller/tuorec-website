@@ -14,13 +14,18 @@ import Image from "next/image";
 import { RichText } from "components";
 import dayjs from "dayjs";
 
-export const Post: FunctionComponent<PostFragment> = ({
+export interface PostProps extends PostFragment {
+  hideTimestamp?: boolean;
+}
+
+export const Post: FunctionComponent<PostProps> = ({
   title,
   description,
   content,
   photo,
   createdAt,
   updatedAt,
+  hideTimestamp = false,
 }) => {
   return (
     <Grid gap={5}>
@@ -40,20 +45,24 @@ export const Post: FunctionComponent<PostFragment> = ({
         />
         <Grid height="min-content" gap={5}>
           <Box>
-            <Wrap spacing={5}>
-              <WrapItem>
-                <Text variant="subtle" width="max-content">
-                  {`Created: ${dayjs(createdAt).format("MMM D, YYYY h:m a")}`}
-                </Text>
-              </WrapItem>
-              {updatedAt !== createdAt && (
+            {!hideTimestamp && (
+              <Wrap spacing={5}>
                 <WrapItem>
                   <Text variant="subtle" width="max-content">
-                    {`Updated: ${dayjs(updatedAt).format("MMM D, YYYY h:m a")}`}
+                    {`Created: ${dayjs(createdAt).format("MMM D, YYYY h:m a")}`}
                   </Text>
                 </WrapItem>
-              )}
-            </Wrap>
+                {updatedAt !== createdAt && (
+                  <WrapItem>
+                    <Text variant="subtle" width="max-content">
+                      {`Updated: ${dayjs(updatedAt).format(
+                        "MMM D, YYYY h:m a"
+                      )}`}
+                    </Text>
+                  </WrapItem>
+                )}
+              </Wrap>
+            )}
             <Heading as="h1" variant="h1">
               {title}
             </Heading>
