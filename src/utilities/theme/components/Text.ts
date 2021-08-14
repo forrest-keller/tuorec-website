@@ -7,6 +7,12 @@ export const Text: ComponentStyleConfig = {
       textColor: "blackAlpha.700",
       fontSize: "sm",
     },
+    quote: ({ colorScheme }) => ({
+      borderLeftWidth: 4,
+      paddingLeft: 4,
+      marginY: 4,
+      borderLeftColor: `${colorScheme}.500`,
+    }),
   },
   defaultProps: {
     variant: "primary",

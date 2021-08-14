@@ -2,11 +2,6 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 
 export const Link: ComponentStyleConfig = {
   baseStyle: ({ colorScheme }) => ({
-    display: "grid",
-    gridAutoFlow: "column",
-    justifyItems: "center",
-    alignItems: "center",
-    gap: 5,
     color: `${colorScheme}.500`,
     _hover: {
       color: `${colorScheme}.400`,
@@ -18,6 +13,11 @@ export const Link: ComponentStyleConfig = {
   variants: {
     primary: {},
     navigation: ({ colorScheme }) => ({
+      display: "grid",
+      gridAutoFlow: "column",
+      justifyItems: "center",
+      alignItems: "center",
+      gap: 5,
       padding: 5,
       fontSize: "xl",
       fontWeight: "bold",

@@ -11,7 +11,8 @@ import Image from "next/image";
 import { IconType } from "react-icons";
 import { Link, LinkProps } from "../link";
 
-export interface LayoutLink extends LinkProps {
+export interface LayoutLink
+  extends Omit<LinkProps, "isExternal" | "hideExternalIcon"> {
   text: string;
   icon: IconType;
 }
@@ -64,7 +65,13 @@ export const Layout: FunctionComponent<LayoutProps> = ({
           </Grid>
           <Grid autoFlow="column" justifySelf="end">
             {rightLinks.map(({ key, text, icon, ...rest }) => (
-              <Link key={key} variant="navigation" isExternal {...rest}>
+              <Link
+                key={key}
+                variant="navigation"
+                isExternal
+                hideExternalIcon
+                {...rest}
+              >
                 <VisuallyHidden>{text}</VisuallyHidden>
                 <Icon as={icon} />
               </Link>
