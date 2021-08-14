@@ -2,7 +2,7 @@ query HomePage {
   pagePosts: posts(where: { displayLocations_contains_all: home }) {
     ...Post
   }
-  posts(first: 3, orderBy: createdAt_DESC) {
+  posts(first: 3, orderBy: createdAt_DESC, where: { hide: false }) {
     ...PostCard
   }
   events(first: 3, orderBy: startTime_DESC) {

@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import { Rental } from "components";
+import { Metadata } from "components/metadata";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { RentalFragment } from "../../../generated/graphql/base";
 import {
@@ -36,9 +37,12 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
 const RentalPage: NextPage<Props> = ({ rental }) => {
   return (
-    <Container variant="xl">
-      <Rental {...rental} />
-    </Container>
+    <>
+      <Metadata title={rental.name} />
+      <Container variant="xl">
+        <Rental {...rental} />
+      </Container>
+    </>
   );
 };
 

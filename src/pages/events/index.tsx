@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { Post } from "components";
 import { EventsList } from "components/events-list";
+import { Metadata } from "components/metadata";
 import dayjs from "dayjs";
 import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
@@ -55,27 +56,30 @@ const EventsPage: NextPage<Props> = ({ posts }) => {
   });
 
   return (
-    <Grid gap={10}>
-      <Container variant="xl">
-        {posts.map((post) => (
-          <Post key={post.id} {...post} />
-        ))}
-      </Container>
-      <Container>
-        <Grid gap={10}>
-          {error && <Alert status="error">Error retrieving events.</Alert>}
-          {data?.eventsConnection.edges.length === 0 && (
-            <Alert>No events.</Alert>
-          )}
-          {data && <EventsList {...data.eventsConnection} />}
-          <Box justifySelf="center">
-            {(data?.eventsConnection.pageInfo.hasNextPage || loading) && (
-              <Spinner ref={loaderRef} />
+    <>
+      <Metadata title="Events" />
+      <Grid gap={10}>
+        <Container variant="xl">
+          {posts.map((post) => (
+            <Post key={post.id} {...post} />
+          ))}
+        </Container>
+        <Container>
+          <Grid gap={10}>
+            {error && <Alert status="error">Error retrieving events.</Alert>}
+            {data?.eventsConnection.edges.length === 0 && (
+              <Alert>No events.</Alert>
             )}
-          </Box>
-        </Grid>
-      </Container>
-    </Grid>
+            {data && <EventsList {...data.eventsConnection} />}
+            <Box justifySelf="center">
+              {(data?.eventsConnection.pageInfo.hasNextPage || loading) && (
+                <Spinner ref={loaderRef} />
+              )}
+            </Box>
+          </Grid>
+        </Container>
+      </Grid>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import { Post } from "components";
+import { Metadata } from "components/metadata";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { PostFragment } from "../../../generated/graphql/base";
 import {
@@ -36,9 +37,12 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
 const PostPage: NextPage<Props> = ({ post }) => {
   return (
-    <Container variant="xl">
-      <Post {...post} />
-    </Container>
+    <>
+      <Metadata title={post.title} />
+      <Container variant="xl">
+        <Post {...post} />
+      </Container>
+    </>
   );
 };
 

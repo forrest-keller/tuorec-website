@@ -1,4 +1,5 @@
 import { Container } from "@chakra-ui/react";
+import { Metadata } from "components/metadata";
 import { Place } from "components/place";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { PlaceFragment } from "../../../generated/graphql/base";
@@ -36,9 +37,12 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
 const PlacePage: NextPage<Props> = ({ place }) => {
   return (
-    <Container variant="xl">
-      <Place {...place} />
-    </Container>
+    <>
+      <Metadata title={place.name} />
+      <Container variant="xl">
+        <Place {...place} />
+      </Container>
+    </>
   );
 };
 

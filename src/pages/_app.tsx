@@ -1,31 +1,44 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
-import { GiCalendar, GiCampingTent, GiMailbox } from "react-icons/gi";
+import {
+  GiCalendar,
+  GiCampingTent,
+  GiFaceToFace,
+  GiMailbox,
+} from "react-icons/gi";
 import { AiFillFacebook, AiFillInstagram, AiFillMail } from "react-icons/ai";
 import { ApolloProvider } from "@apollo/client";
 import { Layout } from "components";
 import { client, theme } from "utilities";
+import { Metadata } from "components/metadata";
 
 const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <ApolloProvider client={client}>
       <ChakraProvider theme={theme}>
+        <Metadata />
         <Layout
           logoLink={{ imageSrc: "/logo.webp", href: "/" }}
           centerLinks={[
             {
               key: "gear",
               text: "Gear",
-              icon: GiCampingTent,
               href: "/rentals",
+              icon: GiCampingTent,
             },
             {
-              key: "events",
-              text: "Events",
-              icon: GiCalendar,
+              key: "trips",
+              text: "Trips",
               href: "/events",
+              icon: GiCalendar,
             },
-            { key: "posts", text: "Posts", icon: GiMailbox, href: "/posts" },
+            { key: "posts", text: "Posts", href: "/posts", icon: GiMailbox },
+            {
+              key: "leaders",
+              text: "Leaders",
+              href: "/people",
+              icon: GiFaceToFace,
+            },
           ]}
           rightLinks={[
             {

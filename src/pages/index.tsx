@@ -21,6 +21,7 @@ import {
 import { getServerPageHome } from "../../generated/graphql/next";
 import RouterLink from "next/link";
 import { ButtonLink } from "components/button-link";
+import { Metadata } from "components/metadata";
 
 export interface Props {
   pagePosts: PostFragment[];
@@ -38,53 +39,56 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 
 const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
   return (
-    <Container variant="xl">
-      <Grid gap={10}>
-        {pagePosts.map((post) => (
-          <Post key={post.id} {...post} />
-        ))}
-        <Grid gap={5}>
-          <Grid autoFlow="column" gap={5} alignItems="center">
-            <Heading as="h2" variant="h2">
-              Events
-            </Heading>
-            <ButtonLink
-              justifySelf="end"
-              href="/events"
-              leftIcon={<Icon as={GiDirectionSign} />}
-            >
-              See More
-            </ButtonLink>
+    <>
+      <Metadata />
+      <Container variant="xl">
+        <Grid gap={10}>
+          {pagePosts.map((post) => (
+            <Post key={post.id} {...post} />
+          ))}
+          <Grid gap={5}>
+            <Grid autoFlow="column" gap={5} alignItems="center">
+              <Heading as="h2" variant="h2">
+                Events
+              </Heading>
+              <ButtonLink
+                justifySelf="end"
+                href="/events"
+                leftIcon={<Icon as={GiDirectionSign} />}
+              >
+                See More
+              </ButtonLink>
+            </Grid>
+            <Grid gap={5}>
+              {events.map((event) => (
+                <EventCard key={event.id} {...event} />
+              ))}
+              {!events.length && <Alert>No events.</Alert>}
+            </Grid>
           </Grid>
           <Grid gap={5}>
-            {events.map((event) => (
-              <EventCard key={event.id} {...event} />
-            ))}
-            {!events.length && <Alert>No events.</Alert>}
+            <Grid autoFlow="column" gap={5} alignItems="center">
+              <Heading as="h2" variant="h2">
+                Posts
+              </Heading>
+              <ButtonLink
+                justifySelf="end"
+                href="/posts"
+                leftIcon={<Icon as={GiDirectionSign} />}
+              >
+                See More
+              </ButtonLink>
+            </Grid>
+            <Grid gap={5}>
+              {posts.map((post) => (
+                <PostCard key={post.id} {...post} />
+              ))}
+              {!posts.length && <Alert>No posts.</Alert>}
+            </Grid>
           </Grid>
         </Grid>
-        <Grid gap={5}>
-          <Grid autoFlow="column" gap={5} alignItems="center">
-            <Heading as="h2" variant="h2">
-              Posts
-            </Heading>
-            <ButtonLink
-              justifySelf="end"
-              href="/posts"
-              leftIcon={<Icon as={GiDirectionSign} />}
-            >
-              See More
-            </ButtonLink>
-          </Grid>
-          <Grid gap={5}>
-            {posts.map((post) => (
-              <PostCard key={post.id} {...post} />
-            ))}
-            {!posts.length && <Alert>No posts.</Alert>}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 

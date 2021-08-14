@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import { Event } from "components";
+import { Metadata } from "components/metadata";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { EventFragment } from "../../../generated/graphql/base";
 import {
@@ -36,9 +37,12 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
 const EventPage: NextPage<Props> = ({ event }) => {
   return (
-    <Container variant="xl">
-      <Event {...event} />
-    </Container>
+    <>
+      <Metadata title={event.name} />
+      <Container variant="xl">
+        <Event {...event} />
+      </Container>
+    </>
   );
 };
 

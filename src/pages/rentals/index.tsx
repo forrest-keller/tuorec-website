@@ -8,6 +8,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { Post, RentalsList } from "components";
+import { Metadata } from "components/metadata";
 import { GetStaticProps, NextPage } from "next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import {
@@ -53,29 +54,32 @@ const RentalsPage: NextPage<Props> = ({ posts }) => {
   });
 
   return (
-    <Grid gap={10}>
-      <Container variant="xl">
-        <Grid gap={10}>
-          {posts.map((post) => (
-            <Post key={post.id} {...post} />
-          ))}
-        </Grid>
-      </Container>
-      <Container>
-        <Grid gap={10}>
-          {error && <Alert status="error">Error retrieving rentals.</Alert>}
-          {data?.rentalsConnection.edges.length === 0 && (
-            <Alert>No rentals.</Alert>
-          )}
-          {data && <RentalsList {...data.rentalsConnection} />}
-          <Box justifySelf="center">
-            {(data?.rentalsConnection.pageInfo.hasNextPage || loading) && (
-              <Spinner ref={loaderRef} />
+    <>
+      <Metadata title="Rentals" />
+      <Grid gap={10}>
+        <Container variant="xl">
+          <Grid gap={10}>
+            {posts.map((post) => (
+              <Post key={post.id} {...post} />
+            ))}
+          </Grid>
+        </Container>
+        <Container>
+          <Grid gap={10}>
+            {error && <Alert status="error">Error retrieving rentals.</Alert>}
+            {data?.rentalsConnection.edges.length === 0 && (
+              <Alert>No rentals.</Alert>
             )}
-          </Box>
-        </Grid>
-      </Container>
-    </Grid>
+            {data && <RentalsList {...data.rentalsConnection} />}
+            <Box justifySelf="center">
+              {(data?.rentalsConnection.pageInfo.hasNextPage || loading) && (
+                <Spinner ref={loaderRef} />
+              )}
+            </Box>
+          </Grid>
+        </Container>
+      </Grid>
+    </>
   );
 };
 
