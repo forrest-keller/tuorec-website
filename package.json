@@ -10,7 +10,7 @@
     "start": "next start",
     "start:dev": "next dev",
     "gen": "npm run gen:graphql && npm run gen:chakraui",
-    "gen:graphql": "cross-env DOTENV_CONFIG_PATH=.env.local graphql-codegen -r dotenv/config --config codegen.yml",
+    "gen:graphql": "cross-env DOTENV_CONFIG_PATH=.env graphql-codegen -r dotenv/config --config codegen.yml",
     "gen:chakraui": "chakra-cli tokens ./src/utilities/theme"
   },
   "dependencies": {
