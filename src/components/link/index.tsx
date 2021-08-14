@@ -23,7 +23,7 @@ export const Link: FunctionComponent<LinkProps> = ({
 }) => {
   return (
     <NextLink href={href} as={as} passHref {...rest}>
-      <ChakraLink {...rest}>
+      <ChakraLink isExternal={isExternal} {...rest}>
         {children}
         {isExternal && !hideExternalIcon && (
           <Icon as={GiDirectionSign} marginX={2} />
