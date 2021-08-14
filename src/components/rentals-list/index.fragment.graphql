@@ -1,0 +1,11 @@
+fragment RentalsList on RentalConnection {
+  edges {
+    cursor
+    node {
+      ...RentalCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}

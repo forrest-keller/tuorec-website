@@ -1,0 +1,11 @@
+fragment EventsList on EventConnection {
+  edges {
+    cursor
+    node {
+      ...EventCard
+    }
+  }
+  pageInfo {
+    hasNextPage
+  }
+}

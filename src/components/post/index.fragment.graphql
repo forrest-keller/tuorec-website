@@ -1,0 +1,13 @@
+fragment Post on Post {
+  id
+  title
+  description
+  createdAt
+  updatedAt
+  content {
+    json
+  }
+  photo {
+    url
+  }
+}

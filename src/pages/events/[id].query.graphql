@@ -1,0 +1,11 @@
+query Event($id: ID) {
+  event(where: { id: $id }) {
+    ...Event
+  }
+}
+
+query EventIds {
+  events {
+    id
+  }
+}

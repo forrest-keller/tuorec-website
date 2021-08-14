@@ -1,0 +1,29 @@
+overwrite: true
+schema:
+  - ${NEXT_PUBLIC_GRAPH_CMS_ENDPOINT_URL}
+documents: "src/**/*.graphql"
+generates:
+  generated/graphql/apollo.ts:
+    plugins:
+      - typescript-apollo-client-helpers
+  generated/graphql/base.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      skipTypeName: true
+      reactApolloVersion: 3
+      withHooks: true
+      documentMode: graphQLTag
+  generated/graphql/next.tsx:
+    config:
+      documentMode: external
+      importDocumentNodeExternallyFrom: ./base
+      reactApolloVersion: 3
+      apolloClientInstanceImport: "utilities/client"
+    preset: import-types
+    presetConfig:
+      typesPath: ./base
+    plugins:
+      - "graphql-codegen-apollo-next-ssr"

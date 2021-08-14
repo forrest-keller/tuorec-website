@@ -1,0 +1,11 @@
+query People($first: Int!, $skip: Int!, $orderBy: PersonOrderByInput!) {
+  peopleConnection(first: $first, skip: $skip, orderBy: $orderBy) {
+    ...PeopleList
+  }
+}
+
+query PeoplePosts {
+  posts(where: { displayLocations_contains_all: people }) {
+    ...Post
+  }
+}

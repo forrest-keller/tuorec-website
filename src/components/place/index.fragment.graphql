@@ -1,0 +1,19 @@
+fragment Place on Place {
+  id
+  name
+  description
+  address
+  location {
+    latitude
+    longitude
+  }
+  content {
+    json
+  }
+  photos {
+    id
+    url
+    width
+    height
+  }
+}

@@ -1,0 +1,25 @@
+fragment Event on Event {
+  id
+  name
+  description
+  activities
+  price
+  startTime
+  endTime
+  signUpUrl
+  people {
+    ...PersonPill
+  }
+  place {
+    ...PlaceCard
+  }
+  meetingPlace {
+    ...PlacePill
+  }
+  content {
+    json
+  }
+  photo {
+    url
+  }
+}

@@ -1,0 +1,11 @@
+query Post($id: ID) {
+  post(where: { id: $id }) {
+    ...Post
+  }
+}
+
+query PostIds {
+  posts {
+    id
+  }
+}

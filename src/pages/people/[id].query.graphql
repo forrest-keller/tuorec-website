@@ -1,0 +1,11 @@
+query Person($id: ID) {
+  person(where: { id: $id }) {
+    ...Person
+  }
+}
+
+query PersonIds {
+  people {
+    id
+  }
+}

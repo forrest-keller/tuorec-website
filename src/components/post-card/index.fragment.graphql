@@ -1,0 +1,9 @@
+fragment PostCard on Post {
+  id
+  title
+  description
+  createdAt
+  photo {
+    url
+  }
+}

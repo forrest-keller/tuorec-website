@@ -1,0 +1,7 @@
+fragment PlacePill on Place {
+  id
+  name
+  photos {
+    url
+  }
+}

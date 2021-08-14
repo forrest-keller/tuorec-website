@@ -1,0 +1,15 @@
+fragment EventCard on Event {
+  id
+  name
+  description
+  activities
+  startTime
+  endTime
+  price
+  photo {
+    url
+  }
+  place {
+    ...PlacePill
+  }
+}

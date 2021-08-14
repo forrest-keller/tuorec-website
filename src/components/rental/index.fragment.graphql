@@ -1,0 +1,12 @@
+fragment Rental on Rental {
+  id
+  name
+  description
+  price
+  photo {
+    url
+  }
+  content {
+    json
+  }
+}
