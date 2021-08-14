@@ -58,7 +58,7 @@ const EventsPage: NextPage<Props> = ({ posts }) => {
   return (
     <>
       <Metadata title="Events" />
-      <Grid gap={10}>
+      <Grid gap={5}>
         <Container variant="xl">
           {posts.map((post) => (
             <Post hideTimestamp key={post.id} {...post} />

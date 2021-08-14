@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  Divider,
   Grid,
   Heading,
   Text,
@@ -27,6 +26,7 @@ export const Post: FunctionComponent<PostProps> = ({
   updatedAt,
   hideTimestamp = false,
 }) => {
+  console.log(content);
   return (
     <Grid gap={5}>
       <Grid
@@ -72,9 +72,11 @@ export const Post: FunctionComponent<PostProps> = ({
           </Heading>
         </Grid>
       </Grid>
-      <Container>
-        <RichText content={content.json} />
-      </Container>
+      {content && (
+        <Container>
+          <RichText content={content.json} />
+        </Container>
+      )}
     </Grid>
   );
 };
