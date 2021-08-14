@@ -9,21 +9,21 @@ export const Metadata: FunctionComponent<MetadataProps> = ({ title }) => {
   return (
     <Head>
       <link
+        href="/apple-touch-icon.png"
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/apple-touch-icon.png"
       />
       <link
+        href="/favicon-32x32.png"
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicon-32x32.png"
       />
       <link
+        href="/favicon-16x16.png"
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicon-16x16.png"
       />
       <link rel="manifest" href="/site.webmanifest" />
       <title>{title ? `${title} - OREC` : "OREC"}</title>
