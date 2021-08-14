@@ -58,7 +58,7 @@ const PeoplePage: NextPage<Props> = ({ posts }) => {
         <Grid gap={10}>
           {error && <Alert status="error">Error retrieving people.</Alert>}
           {data?.peopleConnection.edges.length === 0 && (
-            <Alert status="info">No people.</Alert>
+            <Alert>No people.</Alert>
           )}
           {data && <PeopleList {...data?.peopleConnection} />}
           <Box justifySelf="center">

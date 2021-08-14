@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Container,
   Grid,
@@ -59,6 +60,7 @@ const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
             {events.map((event) => (
               <EventCard key={event.id} {...event} />
             ))}
+            {!events.length && <Alert>No events.</Alert>}
           </Grid>
         </Grid>
         <Grid gap={5}>
@@ -78,6 +80,7 @@ const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
             {posts.map((post) => (
               <PostCard key={post.id} {...post} />
             ))}
+            {!posts.length && <Alert>No posts.</Alert>}
           </Grid>
         </Grid>
       </Grid>

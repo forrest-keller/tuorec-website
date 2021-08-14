@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
-import { GiBoots, GiCalendar, GiCampingTent, GiMailbox } from "react-icons/gi";
+import { GiCalendar, GiCampingTent, GiMailbox } from "react-icons/gi";
 import { AiFillFacebook, AiFillInstagram, AiFillMail } from "react-icons/ai";
 import { ApolloProvider } from "@apollo/client";
 import { Layout } from "components";

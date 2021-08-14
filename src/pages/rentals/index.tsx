@@ -65,7 +65,7 @@ const RentalsPage: NextPage<Props> = ({ posts }) => {
         <Grid gap={10}>
           {error && <Alert status="error">Error retrieving rentals.</Alert>}
           {data?.rentalsConnection.edges.length === 0 && (
-            <Alert status="info">No rentals.</Alert>
+            <Alert>No rentals.</Alert>
           )}
           {data && <RentalsList {...data.rentalsConnection} />}
           <Box justifySelf="center">

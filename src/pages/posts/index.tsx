@@ -56,9 +56,7 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
       <Container>
         <Grid gap={10}>
           {error && <Alert status="error">Error retrieving posts.</Alert>}
-          {data?.postsConnection.edges.length === 0 && (
-            <Alert status="info">No posts.</Alert>
-          )}
+          {data?.postsConnection.edges.length === 0 && <Alert>No posts.</Alert>}
           {data && <PostsList {...data?.postsConnection} />}
           <Box justifySelf="center">
             {(data?.postsConnection.pageInfo.hasNextPage || loading) && (

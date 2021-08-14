@@ -1,12 +1,5 @@
 import { FunctionComponent } from "react";
-import {
-  Box,
-  Container,
-  Grid,
-  GridItem,
-  Icon,
-  VisuallyHidden,
-} from "@chakra-ui/react";
+import { Box, Grid, Icon, VisuallyHidden } from "@chakra-ui/react";
 import Image from "next/image";
 import { IconType } from "react-icons";
 import { Link, LinkProps } from "../link";

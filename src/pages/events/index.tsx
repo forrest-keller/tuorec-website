@@ -65,7 +65,7 @@ const EventsPage: NextPage<Props> = ({ posts }) => {
         <Grid gap={10}>
           {error && <Alert status="error">Error retrieving events.</Alert>}
           {data?.eventsConnection.edges.length === 0 && (
-            <Alert status="info">No events.</Alert>
+            <Alert>No events.</Alert>
           )}
           {data && <EventsList {...data.eventsConnection} />}
           <Box justifySelf="center">
