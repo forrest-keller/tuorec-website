@@ -72,9 +72,11 @@ export const Post: FunctionComponent<PostProps> = ({
           </Heading>
         </Grid>
       </Grid>
-      <Container>
-        <RichText content={content.json} />
-      </Container>
+      {content && (
+        <Container>
+          <RichText content={content.json} />
+        </Container>
+      )}
     </Grid>
   );
 };

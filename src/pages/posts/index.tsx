@@ -48,7 +48,7 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
   return (
     <>
       <Metadata title="Posts" />
-      <Grid gap={10}>
+      <Grid gap={5}>
         <Container variant="xl">
           <Grid gap={10}>
             {posts.map((post) => (
