@@ -4,6 +4,6 @@ fragment PersonCard on Person {
   lastName
   description
   photo {
-    ...BlurAsset
+    url
   }
 }

@@ -33,7 +33,6 @@ export const PostCard: FunctionComponent<PostCardFragment> = ({
       photo={
         <Image
           src={photo.url}
-          blurDataURL={photo.blurUrl}
           alt={title}
           width={200}
           height={200}

@@ -68,7 +68,6 @@ export const Place: FunctionComponent<PlaceFragment> = ({
               priority
               layout="responsive"
               src={photo.url}
-              blurDataURL={photo.blurUrl}
               alt={name}
               width={500}
               height={400}

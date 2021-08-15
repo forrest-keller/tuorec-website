@@ -20,6 +20,6 @@ fragment Event on Event {
     json
   }
   photo {
-    ...BlurAsset
+    url
   }
 }

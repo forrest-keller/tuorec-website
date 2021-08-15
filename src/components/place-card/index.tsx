@@ -22,13 +22,7 @@ export const PlaceCard: FunctionComponent<PlaceCardFragment> = ({
         </Text>,
       ]}
       photo={
-        <Image
-          alt={name}
-          src={photos?.[0].url}
-          blurDataURL={photos?.[0].blurUrl}
-          width={500}
-          height={500}
-        />
+        <Image alt={name} src={photos?.[0].url} width={500} height={500} />
       }
     />
   );

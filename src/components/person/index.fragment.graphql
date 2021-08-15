@@ -7,6 +7,6 @@ fragment Person on Person {
     json
   }
   photo {
-    ...BlurAsset
+    url
   }
 }

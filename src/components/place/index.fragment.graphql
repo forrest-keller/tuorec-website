@@ -11,8 +11,8 @@ fragment Place on Place {
     json
   }
   photos {
-    ...BlurAsset
     id
+    url
     width
     height
   }

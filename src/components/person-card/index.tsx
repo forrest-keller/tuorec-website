@@ -19,7 +19,6 @@ export const PersonCard: FunctionComponent<PersonCardFragment> = ({
         <Image
           alt={`${firstName} ${lastName}`}
           src={photo.url}
-          blurDataURL={photo.blurUrl}
           width={200}
           height={200}
           objectFit="cover"

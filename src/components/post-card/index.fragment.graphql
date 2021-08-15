@@ -4,6 +4,6 @@ fragment PostCard on Post {
   description
   createdAt
   photo {
-    ...BlurAsset
+    url
   }
 }

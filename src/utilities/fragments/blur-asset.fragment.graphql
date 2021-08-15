@@ -1,4 +1,0 @@
-fragment BlurAsset on Asset {
-  url
-  blurUrl: url(transformation: { image: { resize: { height: 50, width: 50 } } })
-}

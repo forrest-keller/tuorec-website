@@ -7,7 +7,7 @@ fragment EventCard on Event {
   endTime
   price
   photo {
-    ...BlurAsset
+    url
   }
   place {
     ...PlacePill
