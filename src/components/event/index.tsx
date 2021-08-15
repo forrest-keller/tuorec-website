@@ -87,6 +87,7 @@ export const Event: FunctionComponent<EventFragment> = ({
           alignItems="center"
         >
           <Image
+            priority
             src={photo.url}
             alt={name}
             width={500}

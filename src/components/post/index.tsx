@@ -36,6 +36,7 @@ export const Post: FunctionComponent<PostProps> = ({
         autoColumns={{ md: "1fr 2fr" }}
       >
         <Image
+          priority
           src={photo.url}
           alt={title}
           width={500}
