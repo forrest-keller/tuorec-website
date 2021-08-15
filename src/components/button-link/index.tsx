@@ -15,9 +15,9 @@ export const ButtonLink: FunctionComponent<ButtonLinkProps> = ({
 }) => {
   return (
     <RouterLink href={href} as={as} passHref {...rest}>
-      <a style={{ display: "inherit" }}>
-        <Button {...rest}>{children}</Button>
-      </a>
+      <Button as="a" {...rest}>
+        {children}
+      </Button>
     </RouterLink>
   );
 };
