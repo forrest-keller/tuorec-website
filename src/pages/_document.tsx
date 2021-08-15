@@ -19,7 +19,7 @@ class CustomDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <meta name="application-name" content={this.NAME} />
           <meta name="apple-mobile-web-app-capable" content="yes" />
