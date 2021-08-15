@@ -27,7 +27,7 @@ export const Layout: FunctionComponent<LayoutProps> = ({
   children,
 }) => {
   return (
-    <Box>
+    <Box overflow="hidden">
       <Grid
         shadow="sm"
         autoFlow="column"
