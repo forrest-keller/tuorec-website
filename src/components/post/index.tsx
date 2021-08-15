@@ -26,7 +26,6 @@ export const Post: FunctionComponent<PostProps> = ({
   updatedAt,
   hideTimestamp = false,
 }) => {
-  console.log(content);
   return (
     <Grid gap={5}>
       <Grid
