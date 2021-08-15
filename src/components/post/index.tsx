@@ -26,7 +26,6 @@ export const Post: FunctionComponent<PostProps> = ({
   updatedAt,
   hideTimestamp = false,
 }) => {
-  console.log(content);
   return (
     <Grid gap={5}>
       <Grid
@@ -38,6 +37,7 @@ export const Post: FunctionComponent<PostProps> = ({
         <Image
           priority
           src={photo.url}
+          blurDataURL={photo.blurUrl}
           alt={title}
           width={500}
           height={500}

@@ -1,18 +1,8 @@
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  Heading,
-  Text,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
+import { Box, Container, Grid, Heading } from "@chakra-ui/react";
 import React, { FunctionComponent } from "react";
 import { PersonFragment, PostFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
-import dayjs from "dayjs";
 
 export const Person: FunctionComponent<PersonFragment> = ({
   firstName,
@@ -32,6 +22,7 @@ export const Person: FunctionComponent<PersonFragment> = ({
         <Image
           priority
           src={photo.url}
+          blurDataURL={photo.blurUrl}
           alt={`${firstName} ${lastName}`}
           width={500}
           height={500}

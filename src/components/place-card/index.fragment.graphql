@@ -4,6 +4,6 @@ fragment PlaceCard on Place {
   description
   address
   photos {
-    url
+    ...BlurAsset
   }
 }

@@ -4,7 +4,7 @@ fragment Rental on Rental {
   description
   price
   photo {
-    url
+    ...BlurAsset
   }
   content {
     json

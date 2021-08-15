@@ -64,6 +64,7 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
         <Image
           alt={name}
           src={photo.url}
+          blurDataURL={photo.blurUrl}
           width={200}
           height={200}
           objectFit="cover"

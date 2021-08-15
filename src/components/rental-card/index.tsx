@@ -25,6 +25,7 @@ export const RentalCard: FunctionComponent<RentalCardFragment> = ({
       photo={
         <Image
           src={photo.url}
+          blurDataURL={photo.blurUrl}
           alt={name}
           width={200}
           height={200}

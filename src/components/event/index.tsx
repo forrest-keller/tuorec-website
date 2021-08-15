@@ -89,6 +89,7 @@ export const Event: FunctionComponent<EventFragment> = ({
           <Image
             priority
             src={photo.url}
+            blurDataURL={photo.blurUrl}
             alt={name}
             width={500}
             height={500}

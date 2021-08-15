@@ -4,6 +4,6 @@ fragment RentalCard on Rental {
   description
   price
   photo {
-    url
+    ...BlurAsset
   }
 }
