@@ -1,9 +1,10 @@
 import { Center, Container, Grid, Heading, Icon } from "@chakra-ui/react";
 import { ButtonLink } from "components/button-link";
 import { Metadata } from "components/metadata";
+import { NextPage } from "next";
 import { GiHouse, GiTrail, GiTreasureMap } from "react-icons/gi";
 
-const CustomNotFoundPage = () => {
+const CustomNotFoundPage: NextPage = () => {
   return (
     <>
       <Metadata title="Page Not Found" />

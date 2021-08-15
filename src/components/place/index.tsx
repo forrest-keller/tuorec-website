@@ -65,6 +65,7 @@ export const Place: FunctionComponent<PlaceFragment> = ({
         {photos.map((photo) => (
           <GridItem key={photo.id}>
             <Image
+              priority
               layout="responsive"
               src={photo.url}
               alt={name}

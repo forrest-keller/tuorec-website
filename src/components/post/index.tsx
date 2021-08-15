@@ -26,7 +26,6 @@ export const Post: FunctionComponent<PostProps> = ({
   updatedAt,
   hideTimestamp = false,
 }) => {
-  console.log(content);
   return (
     <Grid gap={5}>
       <Grid
@@ -36,6 +35,7 @@ export const Post: FunctionComponent<PostProps> = ({
         autoColumns={{ md: "1fr 2fr" }}
       >
         <Image
+          priority
           src={photo.url}
           alt={title}
           width={500}

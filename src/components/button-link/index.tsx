@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@chakra-ui/react";
+import { Button, ButtonProps, Link } from "@chakra-ui/react";
 import { LinkProps } from "next/link";
 import { FunctionComponent } from "react";
 import RouterLink from "next/link";
@@ -14,7 +14,7 @@ export const ButtonLink: FunctionComponent<ButtonLinkProps> = ({
   ...rest
 }) => {
   return (
-    <RouterLink href={href} as={as} {...rest} passHref>
+    <RouterLink href={href} as={as} passHref {...rest}>
       <Button as="a" {...rest}>
         {children}
       </Button>

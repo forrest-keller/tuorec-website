@@ -56,7 +56,7 @@ const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
                 href="/events"
                 leftIcon={<Icon as={GiDirectionSign} />}
               >
-                See More
+                More Events
               </ButtonLink>
             </Grid>
             <Grid gap={5}>
@@ -76,7 +76,7 @@ const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
                 href="/posts"
                 leftIcon={<Icon as={GiDirectionSign} />}
               >
-                See More
+                More Posts
               </ButtonLink>
             </Grid>
             <Grid gap={5}>
