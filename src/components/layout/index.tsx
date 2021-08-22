@@ -1,8 +1,17 @@
 import { FunctionComponent } from "react";
-import { Box, Grid, Icon, VisuallyHidden } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Grid,
+  Icon,
+  Text,
+  VisuallyHidden,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { IconType } from "react-icons";
 import { Link, LinkProps } from "../link";
+import { GiHearts } from "react-icons/gi";
+import { FaHandPeace } from "react-icons/fa";
 
 export interface LayoutLink
   extends Omit<LinkProps, "isExternal" | "hideExternalIcon"> {
@@ -29,6 +38,7 @@ export const Layout: FunctionComponent<LayoutProps> = ({
   return (
     <Box overflow="hidden">
       <Grid
+        as="header"
         shadow="sm"
         autoFlow="column"
         paddingX={{ base: "initial", md: 10 }}
@@ -72,7 +82,19 @@ export const Layout: FunctionComponent<LayoutProps> = ({
           </Grid>
         </Grid>
       </Grid>
-      <Box>{children}</Box>
+      <Box as="body" display="initial">
+        {children}
+      </Box>
+      <Center padding={10} as="footer">
+        <Text as="small" color="blackAlpha.600">
+          <Grid autoFlow="column" alignItems="center" gap={1}>
+            With
+            <Icon as={FaHandPeace} color="cyan.300" />
+            <Icon as={GiHearts} color="red.200" />
+            from OREC
+          </Grid>
+        </Text>
+      </Center>
     </Box>
   );
 };
