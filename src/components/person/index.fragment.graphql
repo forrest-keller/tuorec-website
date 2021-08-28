@@ -2,8 +2,8 @@ fragment Person on Person {
   id
   firstName
   lastName
-  description
   content {
+    text
     json
   }
   photo {

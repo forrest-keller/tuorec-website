@@ -1,7 +1,6 @@
 fragment Event on Event {
   id
   name
-  description
   activities
   price
   startTime
@@ -17,6 +16,7 @@ fragment Event on Event {
     ...PlacePill
   }
   content {
+    text
     json
   }
   photo {

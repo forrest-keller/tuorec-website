@@ -1,13 +1,13 @@
 fragment Place on Place {
   id
   name
-  description
   address
   location {
     latitude
     longitude
   }
   content {
+    text
     json
   }
   photos {

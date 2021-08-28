@@ -25,10 +25,10 @@ import { PersonPill } from "components/person-pill";
 import { PlaceCard } from "components/place-card";
 import { PlacePill } from "components/place-pill";
 import useScrollPosition from "@react-hook/window-scroll";
+import truncate from "truncate";
 
 export const Event: FunctionComponent<EventFragment> = ({
   name,
-  description,
   activities,
   price,
   startTime,
@@ -120,7 +120,7 @@ export const Event: FunctionComponent<EventFragment> = ({
                 {name}
               </Heading>
               <Heading as="h2" variant="h6">
-                {description}
+                {truncate(content.text, 100)}
               </Heading>
             </Box>
             <Wrap>

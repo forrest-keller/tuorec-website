@@ -1,8 +1,10 @@
 fragment PlaceCard on Place {
   id
   name
-  description
   address
+  content {
+    text
+  }
   photos {
     url
   }

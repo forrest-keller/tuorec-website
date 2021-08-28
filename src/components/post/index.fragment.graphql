@@ -1,10 +1,10 @@
 fragment Post on Post {
   id
   title
-  description
   createdAt
   updatedAt
   content {
+    text
     json
   }
   photo {

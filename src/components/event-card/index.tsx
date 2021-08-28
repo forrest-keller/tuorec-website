@@ -1,9 +1,5 @@
 import {
-  Divider,
   Grid,
-  Icon,
-  LinkBox,
-  LinkOverlay,
   Stat,
   StatHelpText,
   StatNumber,
@@ -16,22 +12,20 @@ import { Card } from "components/card";
 import dayjs from "dayjs";
 import Image from "next/image";
 import { FunctionComponent } from "react";
-import { GiPin } from "react-icons/gi";
 import { EventCardFragment } from "../../../generated/graphql/base";
-import RouterLink from "next/link";
-import { Link } from "components/link";
 import { PlacePill } from "components/place-pill";
+import truncate from "truncate";
 
 export const EventCard: FunctionComponent<EventCardFragment> = ({
   id,
   name,
-  description,
   activities,
   startTime,
   endTime,
   photo,
   place,
   price,
+  content,
 }) => {
   return (
     <Card
@@ -53,7 +47,7 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
         </Tag>
       ))}
       title={name}
-      description={description}
+      description={content.text}
       topRightElements={
         price !== null
           ? [
