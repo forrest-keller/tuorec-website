@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Container,
-  Fade,
   Grid,
   Heading,
   Icon,
@@ -26,7 +25,6 @@ import { PersonPill } from "components/person-pill";
 import { PlaceCard } from "components/place-card";
 import { PlacePill } from "components/place-pill";
 import useScrollPosition from "@react-hook/window-scroll";
-import { useMotionValue, useTransform } from "framer-motion";
 
 export const Event: FunctionComponent<EventFragment> = ({
   name,
@@ -43,7 +41,6 @@ export const Event: FunctionComponent<EventFragment> = ({
   photo,
 }) => {
   const scrollY = useScrollPosition(30);
-
   const shouldShowEventHeader =
     people.length > 0 &&
     meetingPlace !== null &&
