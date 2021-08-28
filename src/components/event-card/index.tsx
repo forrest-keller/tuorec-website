@@ -54,12 +54,16 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
       ))}
       title={name}
       description={description}
-      topRightElements={[
-        <Stat key="price">
-          <StatNumber>{`$${price}`}</StatNumber>
-          <StatHelpText>Per Person</StatHelpText>
-        </Stat>,
-      ]}
+      topRightElements={
+        price !== null
+          ? [
+              <Stat key="price">
+                <StatNumber>{`$${price}`}</StatNumber>
+                <StatHelpText>Per Person</StatHelpText>
+              </Stat>,
+            ]
+          : []
+      }
       photo={
         <Image
           alt={name}

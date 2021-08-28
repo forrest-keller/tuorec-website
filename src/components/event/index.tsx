@@ -44,42 +44,59 @@ export const Event: FunctionComponent<EventFragment> = ({
 }) => {
   const scrollY = useScrollPosition(30);
 
-  return (
-    <Grid gap={5}>
-      <Grid marginY={32} justifyItems="center" gap={10}>
-        <Wrap align="center" justify="center" spacing={2}>
-          <Heading as="h4" variant="h4">
-            Meet
-          </Heading>
-          <WrapItem>
-            <Wrap>
-              {people.map((person) => (
-                <WrapItem width="min" key={person.id}>
-                  <PersonPill {...person} />
-                </WrapItem>
-              ))}
-            </Wrap>
-          </WrapItem>
-          <Heading as="h4" variant="h4">
-            in
-          </Heading>
-          {meetingPlace && <PlacePill {...meetingPlace} />}
-          <Heading as="h4" variant="h4">
-            {`at ${dayjs(startTime).format("h:m a")} on ${dayjs(
-              startTime
-            ).format("MMM D")}.`}
-          </Heading>
-        </Wrap>
-        <Grid autoFlow="column" alignItems="center" gap={5}>
+  const shouldShowEventHeader =
+    people.length > 0 &&
+    meetingPlace !== null &&
+    startTime !== null &&
+    price !== null &&
+    signUpUrl !== null;
+  const eventHeader = (
+    <Grid marginY={32} justifyItems="center" gap={10}>
+      <Wrap align="center" justify="center" spacing={2}>
+        <Heading as="h4" variant="h4">
+          Meet
+        </Heading>
+        <WrapItem>
+          <Wrap>
+            {people.map((person) => (
+              <WrapItem width="min" key={person.id}>
+                <PersonPill {...person} />
+              </WrapItem>
+            ))}
+          </Wrap>
+        </WrapItem>
+        <Heading as="h4" variant="h4">
+          in
+        </Heading>
+        {meetingPlace && <PlacePill {...meetingPlace} />}
+        <Heading as="h4" variant="h4">
+          {`at ${dayjs(startTime).format("h:m a")} on ${dayjs(startTime).format(
+            "MMM D"
+          )}.`}
+        </Heading>
+      </Wrap>
+      <Grid autoFlow="column" alignItems="center" gap={5}>
+        {price !== null && (
           <Stat>
             <StatNumber>{`$${price}`}</StatNumber>
           </Stat>
+        )}
+        {signUpUrl !== null && (
           <Link href={signUpUrl} isExternal>
             <Button leftIcon={<Icon as={GiPencil} />}>Sign Up</Button>
           </Link>
-        </Grid>
+        )}
       </Grid>
-      <Box opacity={scrollY ? 1 : 0.5} transitionDuration=".2s">
+    </Grid>
+  );
+
+  return (
+    <Grid gap={5}>
+      {shouldShowEventHeader && eventHeader}
+      <Box
+        opacity={scrollY || !shouldShowEventHeader ? 1 : 0.5}
+        transitionDuration=".2s"
+      >
         <Grid
           gap={10}
           autoFlow={{ lg: "column" }}
