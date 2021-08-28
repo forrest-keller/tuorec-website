@@ -14,6 +14,7 @@ import {
 import RoutingLink from "next/link";
 import { FunctionComponent, ReactElement } from "react";
 import { useInView } from "react-intersection-observer";
+import truncate from "truncate";
 
 export interface CardProps {
   href: string;
@@ -76,7 +77,7 @@ export const Card: FunctionComponent<CardProps> = ({
                 ))}
               </Wrap>
             </Grid>
-            {description && <Text>{description}</Text>}
+            {description && <Text>{truncate(description, 150)}</Text>}
           </Grid>
         </Grid>
       </LinkBox>

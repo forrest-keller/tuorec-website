@@ -16,10 +16,10 @@ import { RentalFragment } from "../../../generated/graphql/base";
 import { GiQuill } from "react-icons/gi";
 import RouterLink from "next/link";
 import { constants } from "utilities/constants";
+import truncate from "truncate";
 
 export const Rental: FunctionComponent<RentalFragment> = ({
   name,
-  description,
   photo,
   content,
   price,
@@ -46,7 +46,7 @@ export const Rental: FunctionComponent<RentalFragment> = ({
             {name}
           </Heading>
           <Heading as="h2" variant="h6">
-            {description}
+            {truncate(content.text, 100)}
           </Heading>
           <Grid
             justifyItems="end"

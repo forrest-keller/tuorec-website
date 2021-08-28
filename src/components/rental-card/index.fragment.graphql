@@ -1,8 +1,10 @@
 fragment RentalCard on Rental {
   id
   name
-  description
   price
+  content {
+    text
+  }
   photo {
     url
   }

@@ -1,11 +1,13 @@
 fragment EventCard on Event {
   id
   name
-  description
   activities
   startTime
   endTime
   price
+  content {
+    text
+  }
   photo {
     url
   }

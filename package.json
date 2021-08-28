@@ -35,7 +35,8 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-infinite-scroll-hook": "^4.0.1",
-    "react-intersection-observer": "^8.32.0"
+    "react-intersection-observer": "^8.32.0",
+    "truncate": "^2.1.0"
   },
   "devDependencies": {
     "@chakra-ui/cli": "^1.5.0",

@@ -2,12 +2,13 @@ import { Stat, StatHelpText, StatNumber } from "@chakra-ui/react";
 import { Card } from "components/card";
 import Image from "next/image";
 import { FunctionComponent } from "react";
+import truncate from "truncate";
 import { RentalCardFragment } from "../../../generated/graphql/base";
 
 export const RentalCard: FunctionComponent<RentalCardFragment> = ({
   id,
   name,
-  description,
+  content,
   photo,
   price,
 }) => {
@@ -15,7 +16,7 @@ export const RentalCard: FunctionComponent<RentalCardFragment> = ({
     <Card
       href={`/rentals/${id}`}
       title={name}
-      description={description}
+      description={content.text}
       topRightElements={[
         <Stat key="price">
           <StatNumber>{`$${price}`}</StatNumber>

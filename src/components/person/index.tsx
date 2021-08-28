@@ -13,11 +13,11 @@ import { PersonFragment, PostFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import dayjs from "dayjs";
+import truncate from "truncate";
 
 export const Person: FunctionComponent<PersonFragment> = ({
   firstName,
   lastName,
-  description,
   content,
   photo,
 }) => {
@@ -45,7 +45,7 @@ export const Person: FunctionComponent<PersonFragment> = ({
             </Heading>
           </Box>
           <Heading as="h2" variant="h6">
-            {description}
+            {truncate(content.text, 100)}
           </Heading>
         </Grid>
       </Grid>
