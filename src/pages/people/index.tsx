@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const PeoplePage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = usePeopleQuery({
     variables: {
-      orderBy: PersonOrderByInput.CreatedAtDesc,
+      orderBy: PersonOrderByInput.GraduationTimeAsc,
       first: 10,
       skip: 0,
     },

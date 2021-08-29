@@ -2,6 +2,7 @@ fragment Person on Person {
   id
   firstName
   lastName
+  graduationTime
   content {
     text
     json

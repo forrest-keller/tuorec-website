@@ -1,26 +1,28 @@
 import {
   Box,
   Container,
-  Divider,
   Grid,
   Heading,
+  Icon,
+  Tag,
   Text,
-  Wrap,
-  WrapItem,
 } from "@chakra-ui/react";
 import React, { FunctionComponent } from "react";
-import { PersonFragment, PostFragment } from "../../../generated/graphql/base";
+import { PersonFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
-import dayjs from "dayjs";
 import truncate from "truncate";
+import { GiGraduateCap } from "react-icons/gi";
 
 export const Person: FunctionComponent<PersonFragment> = ({
   firstName,
   lastName,
   content,
   photo,
+  graduationTime,
 }) => {
+  const graduationYear = new Date(graduationTime).getFullYear();
+
   return (
     <Grid gap={5}>
       <Grid
@@ -44,6 +46,15 @@ export const Person: FunctionComponent<PersonFragment> = ({
               {`${firstName} ${lastName}`}
             </Heading>
           </Box>
+          <Tag width="min-content" colorScheme="gray">
+            <Grid autoFlow="column" alignItems="center" gap={1}>
+              <Icon as={GiGraduateCap} />
+              <Text
+                width="max-content"
+                fontWeight="semibold"
+              >{`Class of ${graduationYear}`}</Text>
+            </Grid>
+          </Tag>
           <Heading as="h2" variant="h6">
             {truncate(content.text, 100)}
           </Heading>
