@@ -1,5 +1,6 @@
 import {
   Box,
+  Alert,
   Button,
   Container,
   Grid,
@@ -66,9 +67,9 @@ export const Event: FunctionComponent<EventFragment> = ({
         </Heading>
         {meetingPlace && <PlacePill {...meetingPlace} />}
         <Heading as="h4" variant="h4">
-          {`at ${dayjs(startTime).format("h:m a")} on ${dayjs(startTime).format(
-            "MMM D"
-          )}.`}
+          {`at ${dayjs(startTime).format("h:mm a")} on ${dayjs(
+            startTime
+          ).format("MMM D")}.`}
         </Heading>
       </Wrap>
       <Grid autoFlow="column" alignItems="center" gap={5}>
@@ -77,10 +78,12 @@ export const Event: FunctionComponent<EventFragment> = ({
             <StatNumber>{`$${price}`}</StatNumber>
           </Stat>
         )}
-        {signUpUrl !== null && (
+        {signUpUrl !== null ? (
           <Link href={signUpUrl} isExternal>
             <Button leftIcon={<Icon as={GiPencil} />}>Sign Up</Button>
           </Link>
+        ) : (
+          <Alert status="warning">Signups are closed right now...</Alert>
         )}
       </Grid>
     </Grid>
