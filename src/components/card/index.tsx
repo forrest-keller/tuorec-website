@@ -1,12 +1,10 @@
 import {
-  Box,
   Grid,
   GridItem,
   Heading,
   LinkBox,
   LinkOverlay,
   SlideFade,
-  Stack,
   Text,
   Wrap,
   WrapItem,
