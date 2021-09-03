@@ -45,8 +45,7 @@ export const Event: FunctionComponent<EventFragment> = ({
     people.length > 0 &&
     meetingPlace !== null &&
     startTime !== null &&
-    price !== null &&
-    signUpUrl !== null;
+    price !== null;
   const eventHeader = (
     <Grid marginY={32} justifyItems="center" gap={10}>
       <Wrap align="center" justify="center" spacing={2}>
