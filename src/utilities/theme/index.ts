@@ -1,8 +1,4 @@
-import {
-  extendTheme,
-  ThemeTypings,
-  withDefaultColorScheme,
-} from "@chakra-ui/react";
+import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
 import components from "./components";
 import { layerStyles } from "./layerStyles";
 

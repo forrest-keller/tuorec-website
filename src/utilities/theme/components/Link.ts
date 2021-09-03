@@ -12,7 +12,7 @@ export const Link: ComponentStyleConfig = {
   }),
   variants: {
     primary: {},
-    navigation: ({ colorScheme }) => ({
+    navigation: {
       display: "grid",
       gridAutoFlow: "column",
       justifyItems: "center",
@@ -25,7 +25,7 @@ export const Link: ComponentStyleConfig = {
       _hover: {
         textDecoration: "none",
       },
-    }),
+    },
   },
   defaultProps: {
     variant: "primary",

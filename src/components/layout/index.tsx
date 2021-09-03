@@ -1,16 +1,27 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import {
   Box,
+  Modal,
   Center,
+  Wrap,
   Grid,
   Icon,
   Text,
   VisuallyHidden,
+  IconButton,
+  GridItem,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { IconType } from "react-icons";
 import { Link, LinkProps } from "../link";
-import { GiHearts } from "react-icons/gi";
+import { GiDirectionSigns, GiHamburgerMenu, GiHearts } from "react-icons/gi";
+import { GrClose } from "react-icons/gr";
 import { FaHandPeace } from "react-icons/fa";
 
 export interface LayoutLink
@@ -35,14 +46,23 @@ export const Layout: FunctionComponent<LayoutProps> = ({
   rightLinks,
   children,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <Box overflow="hidden">
-      <Grid
+    <Box>
+      <Wrap
+        justify={{ lg: "center" }}
         as="header"
         shadow="sm"
-        autoFlow="column"
-        paddingX={{ base: "initial", md: 10 }}
+        align="center"
+        paddingX={10}
       >
+        <IconButton
+          display={{ lg: "none" }}
+          aria-label="Menu"
+          onClick={() => setIsMenuOpen(true)}
+          icon={<Icon as={GiHamburgerMenu} />}
+        />
         <Link justifySelf="start" variant="navigation" {...logoLinkRest}>
           <Image
             src={logoLinkImageSrc}
@@ -51,37 +71,73 @@ export const Layout: FunctionComponent<LayoutProps> = ({
             height={50}
           />
         </Link>
-        <Grid
-          gap={10}
-          autoFlow="column"
-          justifySelf="stretch"
-          justifyContent="space-between"
-          overflowX="auto"
-        >
-          <Grid as="nav" autoFlow="column" gap={{ base: 2, md: 10 }}>
-            {centerLinks.map(({ key, icon, text, ...rest }) => (
-              <Link key={key} variant="navigation" {...rest}>
-                <Icon as={icon} />
-                {text}
-              </Link>
-            ))}
+        <Box display={{ base: "none", lg: "initial" }}>
+          <Grid gap={10} autoFlow="column" justifyContent="space-between">
+            <Grid autoFlow="column" gap={{ base: 2, md: 10 }}>
+              {centerLinks.map(({ key, icon, text, ...rest }) => (
+                <Link key={key} variant="navigation" {...rest}>
+                  <Icon as={icon} />
+                  {text}
+                </Link>
+              ))}
+            </Grid>
+            <Grid autoFlow="column" justifySelf="end">
+              {rightLinks.map(({ key, text, icon, ...rest }) => (
+                <Link
+                  key={key}
+                  variant="navigation"
+                  isExternal
+                  hideExternalIcon
+                  {...rest}
+                >
+                  <VisuallyHidden>{text}</VisuallyHidden>
+                  <Icon as={icon} />
+                </Link>
+              ))}
+            </Grid>
           </Grid>
-          <Grid autoFlow="column" justifySelf="end">
-            {rightLinks.map(({ key, text, icon, ...rest }) => (
-              <Link
-                key={key}
-                variant="navigation"
-                isExternal
-                hideExternalIcon
-                {...rest}
-              >
-                <VisuallyHidden>{text}</VisuallyHidden>
-                <Icon as={icon} />
-              </Link>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
+        </Box>
+        <Modal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalHeader>Menu</ModalHeader>
+            <ModalBody>
+              <Center>
+                <Box>
+                  <Grid>
+                    {centerLinks.map(({ key, icon, text, ...rest }) => (
+                      <Link
+                        onClick={() => setIsMenuOpen(false)}
+                        key={key}
+                        variant="navigation"
+                        {...rest}
+                      >
+                        <Icon as={icon} />
+                        {text}
+                      </Link>
+                    ))}
+                  </Grid>
+                  <Grid paddingTop={10} autoFlow="column" justifySelf="end">
+                    {rightLinks.map(({ key, text, icon, ...rest }) => (
+                      <Link
+                        key={key}
+                        variant="navigation"
+                        isExternal
+                        hideExternalIcon
+                        {...rest}
+                      >
+                        <VisuallyHidden>{text}</VisuallyHidden>
+                        <Icon as={icon} />
+                      </Link>
+                    ))}
+                  </Grid>
+                </Box>
+              </Center>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Wrap>
       <Box as="body" display="initial">
         {children}
       </Box>
