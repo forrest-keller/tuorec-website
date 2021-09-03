@@ -1,6 +1,7 @@
-import { Avatar, Grid, Text } from "@chakra-ui/react";
+import { Grid, Text, Box } from "@chakra-ui/react";
 import React, { FunctionComponent } from "react";
 import RoutingLink from "next/link";
+import Image from "next/image";
 
 export interface PillProps {
   href: string;
@@ -13,6 +14,8 @@ export const Pill: FunctionComponent<PillProps> = ({
   photoUrl,
   href,
 }) => {
+  const imageSize = 30;
+
   return (
     <RoutingLink href={href} passHref>
       <Grid
@@ -26,7 +29,20 @@ export const Pill: FunctionComponent<PillProps> = ({
         alignItems="center"
         width="min-content"
       >
-        <Avatar size="sm" src={photoUrl} />
+        <Box
+          width={imageSize}
+          height={imageSize}
+          rounded="full"
+          overflow="hidden"
+        >
+          <Image
+            src={photoUrl}
+            layout="fixed"
+            alt={title}
+            width={imageSize}
+            height={imageSize}
+          />
+        </Box>
         <Text fontWeight="semibold" color="blackAlpha.700" width="max-content">
           {title}
         </Text>
