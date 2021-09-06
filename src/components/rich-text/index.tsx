@@ -8,8 +8,10 @@ import {
   Table,
   Tbody,
   Td,
+  Stack,
   Text,
   Thead,
+  Grid,
   Tr,
   UnorderedList,
 } from "@chakra-ui/react";
@@ -143,5 +145,5 @@ export const RichText: FunctionComponent<RichTextProps> = ({ content }) => {
     table_cell,
   };
 
-  return <GraphCmsRichText content={content} renderers={renderers} />;
+  return <Grid gap={5}><GraphCmsRichText content={content} renderers={renderers} /></Grid>
 };
