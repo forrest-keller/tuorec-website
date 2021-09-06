@@ -36,4 +36,7 @@ export const client = new ApolloClient({
   uri: constants.graphCmsEndpointUrl,
 });
 
+// TODO: Remove this once the codegen package versions are updated to remove the bug.
+export const any = null;
+
 export const getApolloClient = (ctx: any) => client;
