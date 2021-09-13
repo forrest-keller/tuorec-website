@@ -3,6 +3,7 @@ import { FunctionComponent } from "react";
 import {
   GiBackpack,
   GiCampingTent,
+  GiPaddles,
   GiWalkingBoot,
   GiWaterSplash,
 } from "react-icons/gi";
@@ -26,6 +27,8 @@ export const ActivityIcon: FunctionComponent<ActivityIconProps> = ({
         return GiWalkingBoot;
       case ActivityTypes.Swimming:
         return GiWaterSplash;
+      case ActivityTypes.Canoeing:
+        return GiPaddles;
       default:
         break;
     }
