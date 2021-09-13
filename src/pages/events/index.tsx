@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const EventsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = useEventsQuery({
     variables: {
-      orderBy: EventOrderByInput.StartTimeDesc,
+      orderBy: EventOrderByInput.StartTimeAsc,
       first: 10,
       skip: 0,
       startTimeAfter: dayjs(),
