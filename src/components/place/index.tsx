@@ -16,7 +16,7 @@ import { PlaceFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import { GiDirectionSigns } from "react-icons/gi";
-import truncate from "truncate";
+import { getDescription } from "utilities/text";
 
 export const Place: FunctionComponent<PlaceFragment> = ({
   name,
@@ -34,7 +34,7 @@ export const Place: FunctionComponent<PlaceFragment> = ({
           </Heading>
         </Box>
         <Heading as="h2" variant="h6">
-          {truncate(content.text, 100)}
+          {getDescription(content.text)}
         </Heading>
         <Wrap align="center" spacing={5} justifySelf="end">
           <WrapItem>

@@ -12,7 +12,7 @@ import { PostFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import dayjs from "dayjs";
-import truncate from "truncate";
+import { getDescription } from "utilities/text";
 
 export interface PostProps extends PostFragment {
   hideTimestamp?: boolean;
@@ -68,7 +68,7 @@ export const Post: FunctionComponent<PostProps> = ({
             </Heading>
           </Box>
           <Heading as="h2" variant="h6">
-            {truncate(content.text, 100)}
+            {getDescription(content.text)}
           </Heading>
         </Grid>
       </Grid>
