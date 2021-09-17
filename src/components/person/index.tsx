@@ -11,8 +11,8 @@ import React, { FunctionComponent } from "react";
 import { PersonFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
-import truncate from "truncate";
 import { GiGraduateCap } from "react-icons/gi";
+import { getDescription } from "utilities/text";
 
 export const Person: FunctionComponent<PersonFragment> = ({
   firstName,
@@ -56,7 +56,7 @@ export const Person: FunctionComponent<PersonFragment> = ({
             </Grid>
           </Tag>
           <Heading as="h2" variant="h6">
-            {truncate(content.text, 100)}
+            {getDescription(content.text)}
           </Heading>
         </Grid>
       </Grid>
