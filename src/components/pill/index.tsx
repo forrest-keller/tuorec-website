@@ -42,7 +42,7 @@ export const Pill: FunctionComponent<PillProps> = ({
             height={imageSize}
           />
         </Box>
-        <Text fontWeight="semibold" color="blackAlpha.700">
+        <Text fontWeight="semibold" color="blackAlpha.700" width="max-content">
           {title}
         </Text>
       </Grid>
