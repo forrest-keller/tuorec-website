@@ -22,12 +22,11 @@ export const Pill: FunctionComponent<PillProps> = ({
         as="a"
         layerStyle="card"
         padding={2}
+        gap={2}
         paddingRight={4}
         rounded="full"
         autoFlow="column"
-        gap={2}
         alignItems="center"
-        width="min-content"
       >
         <Box
           width={imageSize}
@@ -43,7 +42,7 @@ export const Pill: FunctionComponent<PillProps> = ({
             height={imageSize}
           />
         </Box>
-        <Text fontWeight="semibold" color="blackAlpha.700" width="max-content">
+        <Text fontWeight="semibold" color="blackAlpha.700">
           {title}
         </Text>
       </Grid>
