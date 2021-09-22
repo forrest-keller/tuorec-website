@@ -36,7 +36,7 @@ const RentalsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = useRentalsQuery({
     variables: {
       orderBy: RentalOrderByInput.UpdatedAtDesc,
-      first: 3,
+      first: 20,
       skip: 0,
     },
   });

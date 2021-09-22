@@ -29,7 +29,7 @@ const PeoplePage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = usePeopleQuery({
     variables: {
       orderBy: PersonOrderByInput.GraduationTimeAsc,
-      first: 10,
+      first: 20,
       skip: 0,
     },
   });

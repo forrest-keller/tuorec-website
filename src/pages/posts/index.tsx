@@ -28,7 +28,7 @@ const PostsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = usePostsQuery({
     variables: {
       orderBy: PostOrderByInput.CreatedAtDesc,
-      first: 10,
+      first: 20,
       skip: 0,
     },
   });
