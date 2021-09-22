@@ -37,7 +37,7 @@ const EventsPage: NextPage<Props> = ({ posts }) => {
   const { data, loading, error, fetchMore } = useEventsQuery({
     variables: {
       orderBy: EventOrderByInput.StartTimeAsc,
-      first: 10,
+      first: 20,
       skip: 0,
       startTimeAfter: dayjs(),
     },
