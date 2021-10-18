@@ -6,7 +6,7 @@ import {
   Tag,
   Text,
 } from "@chakra-ui/react";
-import { headerCase } from "change-case";
+import { capitalCase } from "change-case";
 import { ActivityIcon } from "components/activity-icon";
 import { Card } from "components/card";
 import dayjs from "dayjs";
@@ -14,7 +14,6 @@ import Image from "next/image";
 import { FunctionComponent } from "react";
 import { EventCardFragment } from "../../../generated/graphql/base";
 import { PlacePill } from "components/place-pill";
-import truncate from "truncate";
 
 export const EventCard: FunctionComponent<EventCardFragment> = ({
   id,
@@ -42,7 +41,7 @@ export const EventCard: FunctionComponent<EventCardFragment> = ({
         <Tag key={activity} colorScheme="blackAlpha">
           <Grid autoFlow="column" alignItems="center" gap={1}>
             <ActivityIcon activity={activity} />
-            <Text>{headerCase(activity)}</Text>
+            <Text>{capitalCase(activity)}</Text>
           </Grid>
         </Tag>
       ))}
