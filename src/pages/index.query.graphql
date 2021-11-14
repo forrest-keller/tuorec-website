@@ -5,7 +5,4 @@ query HomePage {
   posts(first: 3, orderBy: createdAt_DESC, where: { hide: false }) {
     ...PostCard
   }
-  events(first: 3, orderBy: startTime_ASC, where: { startTime_gt: "now" }) {
-    ...EventCard
-  }
 }

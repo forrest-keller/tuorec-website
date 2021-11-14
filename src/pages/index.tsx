@@ -1,32 +1,15 @@
-import {
-  Alert,
-  Button,
-  Container,
-  Grid,
-  GridItem,
-  Heading,
-  Icon,
-  Wrap,
-} from "@chakra-ui/react";
-import { Event, Post, PostCard } from "components";
-import { EventCard } from "components/event-card";
-import { EventsList } from "components/events-list";
+import { Alert, Container, Grid, Heading, Icon } from "@chakra-ui/react";
+import { Post, PostCard } from "components";
 import { GetServerSideProps, NextPage } from "next";
 import { GiDirectionSign } from "react-icons/gi";
-import {
-  EventCardFragment,
-  PostCardFragment,
-  PostFragment,
-} from "../../generated/graphql/base";
+import { PostCardFragment, PostFragment } from "../../generated/graphql/base";
 import { getServerPageHome } from "../../generated/graphql/next";
-import RouterLink from "next/link";
 import { ButtonLink } from "components/button-link";
 import { Metadata } from "components/metadata";
 
 export interface Props {
   pagePosts: PostFragment[];
   posts: PostCardFragment[];
-  events: EventCardFragment[];
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
@@ -37,7 +20,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
   };
 };
 
-const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
+const HomePage: NextPage<Props> = ({ pagePosts, posts }) => {
   return (
     <>
       <Metadata />
@@ -46,26 +29,6 @@ const HomePage: NextPage<Props> = ({ pagePosts, posts, events }) => {
           {pagePosts.map((post) => (
             <Post hideTimestamp key={post.id} {...post} />
           ))}
-          <Grid gap={5}>
-            <Grid autoFlow="column" gap={5} alignItems="center">
-              <Heading as="h2" variant="h2">
-                Events
-              </Heading>
-              <ButtonLink
-                justifySelf="end"
-                href="/events"
-                leftIcon={<Icon as={GiDirectionSign} />}
-              >
-                More Events
-              </ButtonLink>
-            </Grid>
-            <Grid gap={5}>
-              {events.map((event) => (
-                <EventCard key={event.id} {...event} />
-              ))}
-              {!events.length && <Alert>No events.</Alert>}
-            </Grid>
-          </Grid>
           <Grid gap={5}>
             <Grid autoFlow="column" gap={5} alignItems="center">
               <Heading as="h2" variant="h2">
