@@ -22,7 +22,6 @@ export const mergeConnection = (keyArgs = ["id"]): FieldPolicy => ({
 const typePolicies: TypedTypePolicies = {
   Query: {
     fields: {
-      eventsConnection: mergeConnection(),
       postsConnection: mergeConnection(),
       rentalsConnection: mergeConnection(),
     },

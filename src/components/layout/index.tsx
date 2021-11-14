@@ -9,19 +9,16 @@ import {
   Text,
   VisuallyHidden,
   IconButton,
-  GridItem,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  ModalFooter,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { IconType } from "react-icons";
 import { Link, LinkProps } from "../link";
-import { GiDirectionSigns, GiHamburgerMenu, GiHearts } from "react-icons/gi";
-import { GrClose } from "react-icons/gr";
+import { GiHamburgerMenu, GiHearts } from "react-icons/gi";
 import { FaHandPeace } from "react-icons/fa";
 
 export interface LayoutLink
