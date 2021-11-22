@@ -15,7 +15,7 @@ import { RichText } from "components/rich-text";
 import { RentalFragment } from "../../../generated/graphql/base";
 import { GiQuill } from "react-icons/gi";
 import { constants } from "utilities/constants";
-import { getDescription } from "utilities/text";
+import { descriptionLength, getDescription } from "utilities/text";
 
 export const Rental: FunctionComponent<RentalFragment> = ({
   name,
@@ -65,9 +65,11 @@ export const Rental: FunctionComponent<RentalFragment> = ({
           </Grid>
         </Grid>
       </Grid>
-      <Container>
-        <RichText content={content.json} />
-      </Container>
+      {content.text.length > descriptionLength && (
+        <Container>
+          <RichText content={content.json} />
+        </Container>
+      )}
     </Grid>
   );
 };
