@@ -12,7 +12,7 @@ import { PostFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import dayjs from "dayjs";
-import { getDescription } from "utilities/text";
+import { descriptionLength, getDescription } from "utilities/text";
 
 export interface PostProps extends PostFragment {
   hideTimestamp?: boolean;
@@ -72,7 +72,7 @@ export const Post: FunctionComponent<PostProps> = ({
           </Heading>
         </Grid>
       </Grid>
-      {content.text.length > 100 && (
+      {content.text.length > descriptionLength && (
         <Container>
           <RichText content={content.json} />
         </Container>
