@@ -5,7 +5,7 @@ import {
   Link as ChakraLink,
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
-import { GiDirectionSign } from "react-icons/gi";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 export interface LinkProps
   extends Omit<ChakraLinkProps, "as" | "href">,
@@ -26,7 +26,7 @@ export const Link: FunctionComponent<LinkProps> = ({
       <ChakraLink isExternal={isExternal} {...rest}>
         {children}
         {isExternal && !hideExternalIcon && (
-          <Icon as={GiDirectionSign} marginX={2} />
+          <Icon as={FaExternalLinkAlt} marginX={1} width={3} height={3} />
         )}
       </ChakraLink>
     </NextLink>
