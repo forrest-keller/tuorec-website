@@ -12,7 +12,7 @@ import { PersonFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import { GiGraduateCap } from "react-icons/gi";
-import { getDescription } from "utilities/text";
+import { descriptionLength, getDescription } from "utilities/text";
 
 export const Person: FunctionComponent<PersonFragment> = ({
   firstName,
@@ -60,9 +60,11 @@ export const Person: FunctionComponent<PersonFragment> = ({
           </Heading>
         </Grid>
       </Grid>
-      <Container>
-        <RichText content={content.json} />
-      </Container>
+      {content.text.length > descriptionLength && (
+        <Container>
+          <RichText content={content.json} />
+        </Container>
+      )}
     </Grid>
   );
 };

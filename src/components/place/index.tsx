@@ -16,7 +16,7 @@ import { PlaceFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import { GiDirectionSigns } from "react-icons/gi";
-import { getDescription } from "utilities/text";
+import { descriptionLength, getDescription } from "utilities/text";
 
 export const Place: FunctionComponent<PlaceFragment> = ({
   name,
@@ -76,9 +76,11 @@ export const Place: FunctionComponent<PlaceFragment> = ({
           </GridItem>
         ))}
       </Grid>
-      <Container>
-        <RichText content={content.json} />
-      </Container>
+      {content.text.length > descriptionLength && (
+        <Container>
+          <RichText content={content.json} />
+        </Container>
+      )}
     </Grid>
   );
 };
