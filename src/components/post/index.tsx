@@ -72,7 +72,7 @@ export const Post: FunctionComponent<PostProps> = ({
           </Heading>
         </Grid>
       </Grid>
-      {content && (
+      {content.text.length > 100 && (
         <Container>
           <RichText content={content.json} />
         </Container>
