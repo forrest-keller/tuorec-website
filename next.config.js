@@ -1,6 +1,4 @@
-const withPWA = require("next-pwa");
-
-module.exports = withPWA({
+module.exports = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   images: {
@@ -32,4 +30,4 @@ module.exports = withPWA({
       },
     ];
   },
-});
+};

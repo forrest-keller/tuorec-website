@@ -76,11 +76,9 @@ export const Place: FunctionComponent<PlaceFragment> = ({
           </GridItem>
         ))}
       </Grid>
-      {content.text.length > descriptionLength && (
-        <Container>
-          <RichText content={content.json} />
-        </Container>
-      )}
+      <Container>
+        <RichText content={content.json} />
+      </Container>
     </Grid>
   );
 };
