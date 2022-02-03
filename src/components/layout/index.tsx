@@ -135,7 +135,7 @@ export const Layout: FunctionComponent<LayoutProps> = ({
           </ModalContent>
         </Modal>
       </Wrap>
-      <Box as="body" display="initial">
+      <Box as="main" display="initial">
         {children}
       </Box>
       <Center padding={10} as="footer">

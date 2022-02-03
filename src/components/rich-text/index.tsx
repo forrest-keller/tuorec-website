@@ -145,5 +145,9 @@ export const RichText: FunctionComponent<RichTextProps> = ({ content }) => {
     table_cell,
   };
 
-  return <Grid gap={5}><GraphCmsRichText content={content} renderers={renderers} /></Grid>
+  return (
+    <Grid gap={5}>
+      <GraphCmsRichText content={content} renderers={renderers} />
+    </Grid>
+  );
 };

@@ -65,11 +65,9 @@ export const Rental: FunctionComponent<RentalFragment> = ({
           </Grid>
         </Grid>
       </Grid>
-      {content.text.length > descriptionLength && (
-        <Container>
-          <RichText content={content.json} />
-        </Container>
-      )}
+      <Container>
+        <RichText content={content.json} />
+      </Container>
     </Grid>
   );
 };

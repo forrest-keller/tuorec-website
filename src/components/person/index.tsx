@@ -60,11 +60,9 @@ export const Person: FunctionComponent<PersonFragment> = ({
           </Heading>
         </Grid>
       </Grid>
-      {content.text.length > descriptionLength && (
-        <Container>
-          <RichText content={content.json} />
-        </Container>
-      )}
+      <Container>
+        <RichText content={content.json} />
+      </Container>
     </Grid>
   );
 };
