@@ -12,11 +12,11 @@ import { PersonFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import { GiGraduateCap } from "react-icons/gi";
-import { descriptionLength, getDescription } from "utilities/text";
 
 export const Person: FunctionComponent<PersonFragment> = ({
   firstName,
   lastName,
+  description,
   content,
   photo,
   graduationTime,
@@ -35,8 +35,8 @@ export const Person: FunctionComponent<PersonFragment> = ({
           priority
           src={photo.url}
           alt={`${firstName} ${lastName}`}
-          width={500}
-          height={500}
+          width={100}
+          height={100}
           layout="responsive"
           objectFit="cover"
         />
@@ -56,7 +56,7 @@ export const Person: FunctionComponent<PersonFragment> = ({
             </Grid>
           </Tag>
           <Heading as="h2" variant="h6">
-            {getDescription(content.text)}
+            {description}
           </Heading>
         </Grid>
       </Grid>

@@ -3,6 +3,7 @@ fragment Post on Post {
   title
   createdAt
   updatedAt
+  description
   content {
     text
     json

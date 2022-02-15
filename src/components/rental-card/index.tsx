@@ -2,21 +2,21 @@ import { Stat, StatHelpText, StatNumber } from "@chakra-ui/react";
 import { Card } from "components/card";
 import Image from "next/image";
 import { FunctionComponent } from "react";
-import truncate from "truncate";
 import { RentalCardFragment } from "../../../generated/graphql/base";
 
 export const RentalCard: FunctionComponent<RentalCardFragment> = ({
   id,
   name,
-  content,
+  description,
   photo,
   price,
 }) => {
+  console.log(photo.url);
   return (
     <Card
       href={`/rentals/${id}`}
       title={name}
-      description={content.text}
+      description={description}
       topRightElements={[
         <Stat key="price">
           <StatNumber>{`$${price}`}</StatNumber>
@@ -27,8 +27,8 @@ export const RentalCard: FunctionComponent<RentalCardFragment> = ({
         <Image
           src={photo.url}
           alt={name}
-          width={200}
-          height={200}
+          width={100}
+          height={100}
           objectFit="cover"
           layout="responsive"
         />

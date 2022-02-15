@@ -3,6 +3,7 @@ fragment Person on Person {
   firstName
   lastName
   graduationTime
+  description
   content {
     text
     json

@@ -4,9 +4,6 @@ module.exports = {
   images: {
     domains: ["media.graphcms.com"],
   },
-  pwa: {
-    dest: "public",
-  },
   async redirects() {
     return [
       {

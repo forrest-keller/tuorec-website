@@ -9,4 +9,3 @@ export * from "./posts-list";
 export * from "./rental";
 export * from "./post";
 export * from "./person-pill";
-export * from "./place-card";

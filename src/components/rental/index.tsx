@@ -14,13 +14,12 @@ import Image from "next/image";
 import { RichText } from "components/rich-text";
 import { RentalFragment } from "../../../generated/graphql/base";
 import { GiQuill } from "react-icons/gi";
-import { constants } from "utilities/constants";
-import { descriptionLength, getDescription } from "utilities/text";
 
 export const Rental: FunctionComponent<RentalFragment> = ({
   name,
   photo,
   content,
+  description,
   price,
 }) => {
   return (
@@ -35,8 +34,8 @@ export const Rental: FunctionComponent<RentalFragment> = ({
           priority
           src={photo.url}
           alt={name}
-          width={500}
-          height={500}
+          width={100}
+          height={100}
           layout="responsive"
           objectFit="cover"
         />
@@ -45,7 +44,7 @@ export const Rental: FunctionComponent<RentalFragment> = ({
             {name}
           </Heading>
           <Heading as="h2" variant="h6">
-            {getDescription(content.text)}
+            {description}
           </Heading>
           <Grid
             justifyItems="end"
@@ -58,7 +57,7 @@ export const Rental: FunctionComponent<RentalFragment> = ({
                 <StatNumber>{`$${price}`}</StatNumber>
                 <StatHelpText>Per Day</StatHelpText>
               </Stat>
-              <Link href={constants.rentalFormUrl} isExternal>
+              <Link href={process.env.NEXT_PUBLIC_RENTAL_FORM_URL} isExternal>
                 <Button leftIcon={<Icon as={GiQuill} />}>Request</Button>
               </Link>
             </Grid>

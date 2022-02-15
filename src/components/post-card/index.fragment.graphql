@@ -2,9 +2,7 @@ fragment PostCard on Post {
   id
   title
   createdAt
-  content {
-    text
-  }
+  description
   photo {
     url
   }
