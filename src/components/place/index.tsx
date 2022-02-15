@@ -16,7 +16,7 @@ import { PlaceFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import { GiDirectionSigns } from "react-icons/gi";
-import { descriptionLength, getDescription } from "utilities/text";
+import { getDescription } from "utilities/text";
 
 export const Place: FunctionComponent<PlaceFragment> = ({
   name,
@@ -69,8 +69,8 @@ export const Place: FunctionComponent<PlaceFragment> = ({
               layout="responsive"
               src={photo.url}
               alt={name}
-              width={500}
-              height={400}
+              width={100}
+              height={100}
               objectFit="cover"
             />
           </GridItem>

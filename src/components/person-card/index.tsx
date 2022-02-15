@@ -20,8 +20,8 @@ export const PersonCard: FunctionComponent<PersonCardFragment> = ({
         <Image
           alt={`${firstName} ${lastName}`}
           src={photo.url}
-          width={200}
-          height={200}
+          width={100}
+          height={100}
           objectFit="cover"
           layout="responsive"
         />

@@ -12,7 +12,7 @@ import { PostFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import dayjs from "dayjs";
-import { descriptionLength, getDescription } from "utilities/text";
+import { getDescription } from "utilities/text";
 
 export interface PostProps extends PostFragment {
   hideTimestamp?: boolean;
@@ -38,8 +38,8 @@ export const Post: FunctionComponent<PostProps> = ({
           priority
           src={photo.url}
           alt={title}
-          width={500}
-          height={500}
+          width={100}
+          height={100}
           layout="responsive"
           objectFit="cover"
         />

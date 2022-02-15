@@ -35,8 +35,8 @@ export const Person: FunctionComponent<PersonFragment> = ({
           priority
           src={photo.url}
           alt={`${firstName} ${lastName}`}
-          width={500}
-          height={500}
+          width={100}
+          height={100}
           layout="responsive"
           objectFit="cover"
         />
