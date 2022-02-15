@@ -12,10 +12,10 @@ import { PostFragment } from "../../../generated/graphql/base";
 import Image from "next/image";
 import { RichText } from "components";
 import dayjs from "dayjs";
-import { getDescription } from "utilities/text";
 
 export interface PostProps extends PostFragment {
   hideTimestamp?: boolean;
+  hideContent?: boolean;
 }
 
 export const Post: FunctionComponent<PostProps> = ({
@@ -23,8 +23,10 @@ export const Post: FunctionComponent<PostProps> = ({
   content,
   photo,
   createdAt,
+  description,
   updatedAt,
   hideTimestamp = false,
+  hideContent = false,
 }) => {
   return (
     <Grid gap={5}>
@@ -68,13 +70,15 @@ export const Post: FunctionComponent<PostProps> = ({
             </Heading>
           </Box>
           <Heading as="h2" variant="h6">
-            {getDescription(content.text)}
+            {description}
           </Heading>
         </Grid>
       </Grid>
-      <Container>
-        <RichText content={content.json} />
-      </Container>
+      {!hideContent && (
+        <Container>
+          <RichText content={content.json} />
+        </Container>
+      )}
     </Grid>
   );
 };

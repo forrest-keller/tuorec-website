@@ -7,15 +7,16 @@ import { RentalCardFragment } from "../../../generated/graphql/base";
 export const RentalCard: FunctionComponent<RentalCardFragment> = ({
   id,
   name,
-  content,
+  description,
   photo,
   price,
 }) => {
+  console.log(photo.url);
   return (
     <Card
       href={`/rentals/${id}`}
       title={name}
-      description={content.text}
+      description={description}
       topRightElements={[
         <Stat key="price">
           <StatNumber>{`$${price}`}</StatNumber>

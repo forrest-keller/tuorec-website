@@ -1,7 +1,6 @@
 import { ApolloClient, FieldPolicy, InMemoryCache } from "@apollo/client";
 import { TypedTypePolicies } from "../../generated/graphql/apollo";
 import { Aggregate, Maybe, PageInfo } from "../../generated/graphql/base";
-import { constants } from "./constants";
 
 export interface ConnectionResult<T = unknown> {
   pageInfo: PageInfo;
@@ -32,7 +31,7 @@ export const client = new ApolloClient({
   cache: new InMemoryCache({
     typePolicies,
   }),
-  uri: constants.graphCmsEndpointUrl,
+  uri: process.env.NEXT_PUBLIC_GRAPH_CMS_ENDPOINT_URL,
 });
 
 // TODO: Remove this once the codegen package versions are updated to remove the bug.

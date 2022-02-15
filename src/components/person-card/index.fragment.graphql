@@ -2,9 +2,7 @@ fragment PersonCard on Person {
   id
   firstName
   lastName
-  content {
-    text
-  }
+  description
   photo {
     url
   }

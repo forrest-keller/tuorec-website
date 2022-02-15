@@ -2,6 +2,7 @@ fragment Rental on Rental {
   id
   name
   price
+  description
   photo {
     url
   }
