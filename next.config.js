@@ -2,7 +2,7 @@ module.exports = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   images: {
-    domains: ["media.graphcms.com"],
+    domains: ["media.graphcms.com", "media.graphassets.com"],
   },
   async redirects() {
     return [
