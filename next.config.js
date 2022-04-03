@@ -8,7 +8,7 @@ module.exports = {
     return [
       {
         source: "/host",
-        destination: "https://vercel.com/tuorec/website",
+        destination: "https://vercel.com/forrest-keller/tuorec-website",
         basePath: false,
         permanent: true,
       },
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         source: "/repo",
-        destination: "https://github.com/tuorec/website",
+        destination: "https://github.com/forrest-keller/tuorec-website",
         basePath: false,
         permanent: true,
       },
